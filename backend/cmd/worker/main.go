@@ -17,8 +17,8 @@ import (
 	"syscall"
 	"time"
 
-	amqp "github.com/rabbitmq/amqp091-go"
 	"github.com/joho/godotenv"
+	amqp "github.com/rabbitmq/amqp091-go"
 	"gorm.io/gorm"
 )
 
@@ -115,6 +115,9 @@ func main() {
 		return err
 	})
 	defer db.CloseDB(sqlDB)
+	if err := sqlDB.AutoMigrate(&video.LikeCountEvent{}, &video.LikeCountFlushLock{}); err != nil {
+		log.Fatal(err)
+	}
 
 	// 连接 Redis（用于流行度更新）
 	cache, err := rediscache.NewFromEnv(&cfg.Redis)
@@ -122,14 +125,13 @@ func main() {
 		log.Printf("Redis config error (popularity worker disabled): %v", err)
 		cache = nil
 	} else {
+		defer cache.Close()
 		pingCtx, cancel := context.WithTimeout(context.Background(), 300*time.Millisecond)
 		defer cancel()
 		if err := cache.Ping(pingCtx); err != nil {
-			log.Printf("Redis not available (popularity worker disabled): %v", err)
-			_ = cache.Close()
-			cache = nil
+			log.Printf("Redis unavailable; count journal retained until recovery: %v", err)
+			// Keep the reconnecting client: pending counts retry after recovery.
 		} else {
-			defer cache.Close()
 			log.Printf("Redis connected (popularity worker enabled)")
 		}
 	}
@@ -185,12 +187,14 @@ func main() {
 		defer pprofServer.Close()
 	}
 
+	go worker.RunLikeCountFlusher(ctx, video.NewLikeCountStore(sqlDB, cache), 5*time.Second, 1000)
+
 	// 每个 Worker 独立 Channel + 自动重连
 	go runWorkerWithRetry(ctx, "SocialWorker", conn, func(ch *amqp.Channel) error {
 		return worker.NewSocialWorker(ch, socialRepo, socialQueue).Run(ctx)
 	})
 	go runWorkerWithRetry(ctx, "LikeWorker", conn, func(ch *amqp.Channel) error {
-		return worker.NewLikeWorker(ch, likeRepo, videoRepo, likeQueue).Run(ctx)
+		return worker.NewLikeWorker(ch, likeRepo, videoRepo, likeQueue, cache).Run(ctx)
 	})
 	go runWorkerWithRetry(ctx, "CommentWorker", conn, func(ch *amqp.Channel) error {
 		return worker.NewCommentWorker(ch, commentRepo, videoRepo, commentQueue).Run(ctx)

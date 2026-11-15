@@ -17,12 +17,12 @@ import (
 )
 
 type FeedService struct {
-	repo         *FeedRepository
-	likeRepo     *video.LikeRepository
-	rediscache   *rediscache.Client
-	localcache   *cache.Cache
-	cacheTTL     time.Duration
-	requestGroup singleflight.Group
+	repo              *FeedRepository
+	likeRepo          *video.LikeRepository
+	rediscache        *rediscache.Client
+	localcache        *cache.Cache
+	followingCacheTTL time.Duration
+	requestGroup      singleflight.Group
 }
 
 type CachedFeedData struct {
@@ -30,7 +30,7 @@ type CachedFeedData struct {
 }
 
 func NewFeedService(repo *FeedRepository, likeRepo *video.LikeRepository, rediscache *rediscache.Client) *FeedService {
-	return &FeedService{repo: repo, likeRepo: likeRepo, rediscache: rediscache, localcache: cache.New(3*time.Second, 5*time.Second), cacheTTL: 24 * time.Hour}
+	return &FeedService{repo: repo, likeRepo: likeRepo, rediscache: rediscache, localcache: cache.New(3*time.Second, 5*time.Second), followingCacheTTL: 30 * time.Second}
 }
 
 func (f *FeedService) GetVideoByIDs(ctx context.Context, videoIDs []uint) ([]*video.Video, error) {
@@ -335,93 +335,117 @@ func (f *FeedService) ListLikesCount(ctx context.Context, limit int, cursor *Lik
 }
 
 // 按照关注列表查询视频
-func (f *FeedService) ListByFollowing(ctx context.Context, limit int, latestBefore time.Time, viewerAccountID uint) (ListByFollowingResponse, error) {
-	doListByFollowingFromDB := func() (ListByFollowingResponse, error) {
-		videos, err := f.repo.ListByFollowing(ctx, limit, viewerAccountID, latestBefore)
+func (f *FeedService) ListByFollowing(ctx context.Context, limit int, latestBefore time.Time, viewerAccountID uint, refresh bool, cursor *FollowingCursor) (ListByFollowingResponse, error) {
+	versionKey := f.rediscache.FollowingFeedVersionKey(viewerAccountID)
+	var version string
+	if f.rediscache != nil && viewerAccountID != 0 {
+		opCtx, cancel := context.WithTimeout(ctx, 50*time.Millisecond)
+		var err error
+		version, err = f.rediscache.CacheVersion(opCtx, versionKey, refresh, 24*time.Hour)
+		cancel()
 		if err != nil {
-			return ListByFollowingResponse{}, err
+			log.Printf("following cache version failed: account=%d err=%v", viewerAccountID, err)
+			version = ""
 		}
-		var nextTime int64
-		if len(videos) > 0 {
-			nextTime = videos[len(videos)-1].CreateTime.Unix()
-		} else {
-			nextTime = 0
-		}
-		hasMore := len(videos) == limit
-		feedVideos, err := f.buildFeedVideos(ctx, videos, viewerAccountID)
-		if err != nil {
-			return ListByFollowingResponse{}, err
-		}
-		resp := ListByFollowingResponse{
-			VideoList: feedVideos,
-			NextTime:  nextTime,
-			HasMore:   hasMore,
-		}
-		return resp, nil
 	}
-	var cacheKey string
-	if viewerAccountID != 0 && f.rediscache != nil {
-		before := int64(0)
-		if !latestBefore.IsZero() {
-			before = latestBefore.Unix()
+
+	before := ""
+	var beforeID uint
+	if !latestBefore.IsZero() {
+		before = latestBefore.UTC().Format(time.RFC3339Nano)
+	}
+	if cursor != nil {
+		before = cursor.CreateTime.UTC().Format(time.RFC3339Nano)
+		beforeID = cursor.ID
+	}
+	cacheKey := f.rediscache.Key("feed:following:v3:account=%d:version=%s:limit=%d:before=%s:id=%d", viewerAccountID, version, limit, before, beforeID)
+	readCached := func() (ListByFollowingResponse, bool) {
+		if version == "" || refresh {
+			return ListByFollowingResponse{}, false
 		}
-		cacheKey = f.rediscache.Key("feed:listByFollowing:limit=%d:accountID=%d:before=%d", limit, viewerAccountID, before)
-		cacheCtx, cancel := context.WithTimeout(ctx, 50*time.Millisecond)
+		opCtx, cancel := context.WithTimeout(ctx, 50*time.Millisecond)
 		defer cancel()
-
-		b, err := f.rediscache.GetBytes(cacheCtx, cacheKey)
-		if err == nil {
-			var cached ListByFollowingResponse
-			if err := json.Unmarshal(b, &cached); err == nil {
-				return cached, nil
+		data, err := f.rediscache.GetVersionedBytes(opCtx, versionKey, cacheKey, version)
+		var response ListByFollowingResponse
+		if err != nil {
+			if !rediscache.IsMiss(err) {
+				log.Printf("following cache read failed: account=%d err=%v", viewerAccountID, err)
 			}
-		} else if rediscache.IsMiss(err) { // 缓存未命中
-			lockKey := "lock:" + cacheKey
-			// 缓存未命中，尝试加锁
-			token, locked, _ := f.rediscache.Lock(cacheCtx, lockKey, 500*time.Millisecond)
-			if locked {
-				defer func() { _ = f.rediscache.Unlock(context.Background(), lockKey, token) }()
-				if b, err := f.rediscache.GetBytes(cacheCtx, cacheKey); err == nil {
-					var cached ListByFollowingResponse
-					if err := json.Unmarshal(b, &cached); err == nil {
-						return cached, nil
-					}
-				} else { // 缓存未命中，从数据库中查询
-					resp, err := doListByFollowingFromDB()
-					if err != nil {
-						return ListByFollowingResponse{}, err
-					}
-					if b, err := json.Marshal(resp); err == nil {
-						_ = f.rediscache.SetBytes(cacheCtx, cacheKey, b, f.cacheTTL)
-					}
-					return resp, nil
-				}
-			} else {
-				for i := 0; i < 5; i++ {
-					time.Sleep(20 * time.Millisecond)
-					if b, err := f.rediscache.GetBytes(cacheCtx, cacheKey); err == nil {
-						var cached ListByFollowingResponse
-						if err := json.Unmarshal(b, &cached); err == nil {
-							return cached, nil
-						}
-					}
+			return response, false
+		}
+		if err := json.Unmarshal(data, &response); err != nil {
+			return response, false
+		}
+		return response, true
+	}
+	if response, ok := readCached(); ok {
+		return response, nil
+	}
+
+	queryParent := ctx
+	if !refresh && version != "" {
+		// One canceled waiter must not cancel the shared database read for everyone.
+		queryParent = context.WithoutCancel(ctx)
+	}
+	query := func() (interface{}, error) {
+		if response, ok := readCached(); ok {
+			return response, nil
+		}
+		started := time.Now()
+		queryCtx, cancel := context.WithTimeout(queryParent, 2*time.Second)
+		defer cancel()
+		videos, err := f.repo.ListByFollowing(queryCtx, limit+1, viewerAccountID, latestBefore, cursor)
+		if err != nil {
+			return nil, err
+		}
+		hasMore := len(videos) > limit
+		if hasMore {
+			videos = videos[:limit]
+		}
+		items, err := f.buildFeedVideos(queryCtx, videos, viewerAccountID)
+		if err != nil {
+			return nil, err
+		}
+		response := ListByFollowingResponse{VideoList: items, HasMore: hasMore}
+		if len(videos) > 0 {
+			last := videos[len(videos)-1]
+			response.NextTime = last.CreateTime.Unix()
+			if hasMore {
+				response.NextCursor = (FollowingCursor{CreateTime: last.CreateTime, ID: last.ID}).Encode()
+			}
+		}
+		remainingTTL := f.followingCacheTTL - time.Since(started)
+		if version != "" && remainingTTL >= time.Millisecond {
+			if data, err := json.Marshal(response); err == nil {
+				opCtx, opCancel := context.WithTimeout(ctx, 50*time.Millisecond)
+				err = f.rediscache.SetVersionedBytes(opCtx, versionKey, cacheKey, version, data, remainingTTL)
+				opCancel()
+				if err != nil {
+					log.Printf("following cache write failed: account=%d err=%v", viewerAccountID, err)
 				}
 			}
 		}
+		return response, nil
 	}
 
-	resp, err := doListByFollowingFromDB()
-	if err != nil {
-		return ListByFollowingResponse{}, err
-	}
-	if cacheKey != "" {
-		if b, err := json.Marshal(resp); err == nil {
-			cacheCtx, cancel := context.WithTimeout(ctx, 50*time.Millisecond)
-			defer cancel()
-			_ = f.rediscache.SetBytes(cacheCtx, cacheKey, b, f.cacheTTL)
+	// A refresh always starts a new database read, independently of older requests.
+	if refresh || version == "" {
+		value, err := query()
+		if err != nil {
+			return ListByFollowingResponse{}, err
 		}
+		return value.(ListByFollowingResponse), nil
 	}
-	return resp, nil
+	result := f.requestGroup.DoChan(cacheKey, query)
+	select {
+	case <-ctx.Done():
+		return ListByFollowingResponse{}, ctx.Err()
+	case value := <-result:
+		if value.Err != nil {
+			return ListByFollowingResponse{}, value.Err
+		}
+		return value.Val.(ListByFollowingResponse), nil
+	}
 }
 
 func (f *FeedService) ListByPopularity(ctx context.Context, limit int, reqAsOf int64, offset int, viewerAccountID uint, latestPopularity int64, latestBefore time.Time, latestIDBefore uint) (ListByPopularityResponse, error) {

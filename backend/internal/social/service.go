@@ -7,6 +7,7 @@ import (
 	"feedsystem_video_go/internal/middleware/rabbitmq"
 	rediscache "feedsystem_video_go/internal/middleware/redis"
 	"log"
+	"time"
 )
 
 type SocialService struct {
@@ -95,8 +96,9 @@ func (s *SocialService) invalidateFollowingFeedCache(ctx context.Context, accoun
 	if s.cache == nil {
 		return
 	}
-	pattern := s.cache.Key("feed:listByFollowing:*:accountID=%d:*", accountID)
-	if err := s.cache.DelByPattern(ctx, pattern); err != nil {
+	opCtx, cancel := context.WithTimeout(ctx, 50*time.Millisecond)
+	defer cancel()
+	if _, err := s.cache.CacheVersion(opCtx, s.cache.FollowingFeedVersionKey(accountID), true, 24*time.Hour); err != nil {
 		log.Printf("失效 Following 缓存失败: accountID=%d, err=%v", accountID, err)
 	}
 }

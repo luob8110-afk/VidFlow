@@ -38,13 +38,13 @@ const likesCount = reactive<ListState & { limit: number; next_likes_count_before
   next_id_before: undefined,
 })
 
-const following = reactive<ListState & { limit: number; next_time: number }>({
+const following = reactive<ListState & { limit: number; next_cursor: string }>({
   loading: false,
   error: '',
   items: [],
   has_more: false,
   limit: 10,
-  next_time: 0,
+  next_cursor: '',
 })
 
 const action = reactive<{ loading: boolean; error: string; payload: unknown; name: string }>({
@@ -111,10 +111,10 @@ async function loadFollowing(reset: boolean) {
   following.loading = true
   following.error = ''
   try {
-    const latest_time = reset ? 0 : following.next_time
-    const res = await feedApi.listByFollowing({ limit: following.limit, latest_time })
+    const cursor = reset ? '' : following.next_cursor
+    const res = await feedApi.listByFollowing({ limit: following.limit, cursor, refresh: reset })
     following.has_more = res.has_more
-    following.next_time = res.next_time
+    following.next_cursor = res.next_cursor
     following.items = reset ? res.video_list : following.items.concat(res.video_list)
   } catch (e) {
     following.error = e instanceof ApiError ? e.message : String(e)
@@ -223,7 +223,7 @@ watch(
             <div>
               <p class="title">关注流（listByFollowing，JWT）</p>
               <div class="subtle">
-                limit：{{ following.limit }} · next_time：{{ following.next_time }} · has_more：{{ following.has_more }}
+                limit：{{ following.limit }} · next_cursor：{{ following.next_cursor }} · has_more：{{ following.has_more }}
               </div>
             </div>
             <div class="row">

@@ -46,7 +46,7 @@ async function tryRefresh(): Promise<string | null> {
   return refreshPromise
 }
 
-export async function postJson<T>(path: string, body: unknown, options?: { authRequired?: boolean }): Promise<T> {
+export async function postJson<T>(path: string, body: unknown, options?: { authRequired?: boolean; signal?: AbortSignal }): Promise<T> {
   const auth = useAuthStore()
   const token = auth.token
 
@@ -61,14 +61,18 @@ export async function postJson<T>(path: string, body: unknown, options?: { authR
     method: 'POST',
     headers,
     body: JSON.stringify(body ?? {}),
+    signal: options?.signal,
   })
 
   if (res.status === 401 && path !== '/account/refresh') {
+    options?.signal?.throwIfAborted()
     const newToken = await tryRefresh()
+    options?.signal?.throwIfAborted()
     if (newToken) {
       headers.Authorization = `Bearer ${newToken}`
       const retryRes = await fetch(`${API_BASE}${path}`, {
         method: 'POST', headers, body: JSON.stringify(body ?? {}),
+        signal: options?.signal,
       })
       return handleResponse<T>(retryRes, path)
     }

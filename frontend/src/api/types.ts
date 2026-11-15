@@ -86,6 +86,7 @@ export type ListByPopularityResponse = {
 export type ListByFollowingResponse = {
   video_list: FeedVideoItem[]
   next_time: number
+  next_cursor: string
   has_more: boolean
 }
 

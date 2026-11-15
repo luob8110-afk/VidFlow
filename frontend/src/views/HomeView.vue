@@ -10,6 +10,7 @@ import { useAuthStore } from '../stores/auth'
 import { useSocialStore } from '../stores/social'
 import { useToastStore } from '../stores/toast'
 import { useVideoFeed } from '../composables/useVideoFeed'
+import type { TabKey } from '../composables/useVideoFeed'
 import { useVideoPlayer } from '../composables/useVideoPlayer'
 import { useLikeFollow } from '../composables/useLikeFollow'
 
@@ -19,7 +20,7 @@ const auth = useAuthStore()
 const social = useSocialStore()
 const toast = useToastStore()
 
-const { tab, following, currentState, loadFollowing, ensureTabLoaded, loadMoreIfNeeded } = useVideoFeed()
+const { tab, following, currentState, loadRecommend, loadFollowing, ensureTabLoaded, loadMoreIfNeeded } = useVideoFeed()
 const scroller = ref<HTMLDivElement | null>(null)
 const { muted, activeIndex, videoMap, setVideoRef, scrollToIndex, onScroll, playActive, toggleMute, togglePlayPause } = useVideoPlayer(scroller)
 
@@ -49,21 +50,43 @@ const visibleRange = computed(() => {
   return { start: Math.max(0, idx - 1), end: Math.min(len - 1, idx + 1) }
 })
 const myAccountId = computed(() => auth.claims?.account_id ?? 0)
+let tabAction = 0
+let tabRefreshPending = false
 
 watch(activeItem, async () => {
+  const action = tabAction
   await nextTick()
+  if (action !== tabAction || tabRefreshPending) return
   await playActive(activeItem.value?.id)
+  if (action !== tabAction || tabRefreshPending) return
   await loadMoreIfNeeded(activeIndex.value)
 })
 
-watch(() => tab.value, async () => {
-  activeIndex.value = 0
-  videoMap.clear()
-  if (scroller.value) scroller.value.scrollTop = 0
-  await ensureTabLoaded()
+async function selectTab(key: TabKey) {
+  const action = ++tabAction
+  tabRefreshPending = true
+  const switching = tab.value !== key
+  tab.value = key
+  closeDrawer()
+  if (switching) {
+    for (const video of videoMap.values()) video.pause()
+    activeIndex.value = 0
+    if (scroller.value) scroller.value.scrollTo({ top: 0, behavior: 'instant' })
+  }
+  let refreshed = false
+  if (key === 'recommend') refreshed = await loadRecommend(true)
+  else if (key === 'following') refreshed = await loadFollowing(true)
+  else await ensureTabLoaded()
+  if (action !== tabAction || tab.value !== key) return
+  if (refreshed) {
+    activeIndex.value = 0
+    if (scroller.value) scroller.value.scrollTo({ top: 0, behavior: 'instant' })
+  }
   await nextTick()
+  if (action !== tabAction || tab.value !== key) return
+  tabRefreshPending = false
   await playActive(activeItem.value?.id)
-})
+}
 
 watch(() => q.value, async () => {
   activeIndex.value = 0
@@ -78,7 +101,7 @@ watch(() => filteredItems.value.length, (len) => {
 })
 
 watch(() => auth.isLoggedIn, async (v) => {
-  if (tab.value === 'following' && v && following.items.length === 0) await loadFollowing(true)
+  if (tab.value === 'following' && v && following.items.length === 0) await selectTab('following')
 })
 
 async function onKeydown(e: KeyboardEvent) {
@@ -93,28 +116,32 @@ async function onKeydown(e: KeyboardEvent) {
 }
 
 onMounted(async () => {
-  await ensureTabLoaded()
-  await nextTick()
-  await playActive(activeItem.value?.id)
   window.addEventListener('keydown', onKeydown)
+  await selectTab('recommend')
 })
 
-onBeforeUnmount(() => window.removeEventListener('keydown', onKeydown))
+onBeforeUnmount(() => {
+  tabAction++
+  window.removeEventListener('keydown', onKeydown)
+})
 </script>
 
 <template>
   <AppShell full>
     <div class="page">
       <div class="tabs">
-        <button class="tab" :class="{ on: tab === 'recommend' }" type="button" @click="tab = 'recommend'">推荐</button>
-        <button class="tab" :class="{ on: tab === 'following' }" type="button" @click="tab = 'following'">关注</button>
-        <button class="tab" :class="{ on: tab === 'hot' }" type="button" @click="tab = 'hot'">点赞榜</button>
+        <button class="tab" :class="{ on: tab === 'recommend' }" type="button" @click="selectTab('recommend')">推荐</button>
+        <button class="tab" :class="{ on: tab === 'following' }" type="button" @click="selectTab('following')">关注</button>
+        <button class="tab" :class="{ on: tab === 'hot' }" type="button" @click="selectTab('hot')">点赞榜</button>
         <div class="tabs-right">
           <button class="chip" type="button" @click="toggleMute">{{ muted ? '静音' : '有声' }}</button>
           <RouterLink class="chip" :to="activeItem ? `/video/${activeItem.id}` : '/video'">详情</RouterLink>
         </div>
       </div>
 
+      <div v-if="currentState.loading && currentState.items.length > 0" class="feed-status" role="status">加载中…</div>
+      <div v-if="currentState.error && currentState.items.length > 0" class="feed-status bad" role="alert">{{ currentState.error }}</div>
+      <div v-if="tab === 'following' && following.items.length > 0 && !following.loading && !following.error && !following.hasMore" class="feed-status" role="status">已加载全部关注作品</div>
       <div ref="scroller" class="scroller" @scroll="onScroll">
         <div v-if="currentState.loading && currentState.items.length === 0" class="center-hint">加载中…</div>
         <div v-else-if="currentState.error && currentState.items.length === 0" class="center-hint bad">{{ currentState.error }}</div>
@@ -123,11 +150,10 @@ onBeforeUnmount(() => window.removeEventListener('keydown', onKeydown))
         <section
           v-for="(item, idx) in filteredItems"
           :key="`${tab}-${item.id}`"
-          v-show="idx >= visibleRange.start && idx <= visibleRange.end"
           class="slide"
           :class="{ active: idx === activeIndex }"
         >
-          <div class="stage" @click="togglePlayPause(activeItem?.id)" @dblclick.prevent="toggleLike(item)">
+          <div v-if="idx >= visibleRange.start && idx <= visibleRange.end" class="stage" @click="togglePlayPause(activeItem?.id)" @dblclick.prevent="toggleLike(item)">
             <video
               class="video"
               :ref="(el) => setVideoRef(item.id, el as HTMLVideoElement | null)"
@@ -187,6 +213,8 @@ onBeforeUnmount(() => window.removeEventListener('keydown', onKeydown))
 .tab { border: 1px solid rgba(255,255,255,0.14); background: rgba(255,255,255,0.06); color: rgba(255,255,255,0.88); border-radius: 999px; padding: 8px 14px; cursor: pointer; }
 .tab.on { border-color: rgba(254,44,85,0.5); background: rgba(254,44,85,0.16); }
 .tabs-right { margin-left: auto; display: flex; gap: 10px; align-items: center; }
+.feed-status { padding: 6px 14px; color: rgba(255,255,255,0.8); background: rgba(0,0,0,0.4); }
+.feed-status.bad { color: rgba(254,44,85,0.95); }
 .scroller { flex: 1; min-height: 0; overflow-y: auto; scroll-snap-type: y mandatory; scroll-behavior: smooth; scrollbar-width: none; -ms-overflow-style: none; }
 .scroller::-webkit-scrollbar { width: 0; height: 0; }
 .center-hint { height: calc(100% - 60px); display: grid; place-items: center; color: rgba(255,255,255,0.78); }

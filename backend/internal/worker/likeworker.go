@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"errors"
 	"feedsystem_video_go/internal/middleware/rabbitmq"
+	rediscache "feedsystem_video_go/internal/middleware/redis"
 	"feedsystem_video_go/internal/video"
 	"log"
 	"time"
@@ -16,11 +17,16 @@ type LikeWorker struct {
 	ch     *amqp.Channel
 	likes  *video.LikeRepository
 	videos *video.VideoRepository
+	cache  *rediscache.Client
 	queue  string
 }
 
-func NewLikeWorker(ch *amqp.Channel, likes *video.LikeRepository, videos *video.VideoRepository, queue string) *LikeWorker {
-	return &LikeWorker{ch: ch, likes: likes, videos: videos, queue: queue}
+func NewLikeWorker(ch *amqp.Channel, likes *video.LikeRepository, videos *video.VideoRepository, queue string, cache ...*rediscache.Client) *LikeWorker {
+	w := &LikeWorker{ch: ch, likes: likes, videos: videos, queue: queue}
+	if len(cache) > 0 {
+		w.cache = cache[0]
+	}
+	return w
 }
 
 func (w *LikeWorker) Run(ctx context.Context) error {
@@ -68,8 +74,8 @@ func (w *LikeWorker) handleDelivery(ctx context.Context, d amqp.Delivery) {
 		}
 		if err := w.process(ctx, d.Body); err != nil {
 			if i >= maxRetries {
-				log.Printf("like worker: 重试 %d 次后仍失败, 丢弃: %v", maxRetries, err)
-				_ = d.Ack(false)
+				log.Printf("like worker: 重试 %d 次后仍失败, 重新入队: %v", maxRetries, err)
+				_ = d.Nack(false, true)
 				return
 			}
 			wait := time.Duration(1<<uint(i)) * time.Second
@@ -88,7 +94,7 @@ func (w *LikeWorker) process(ctx context.Context, body []byte) error {
 		// 解析事件失败，直接丢弃
 		return nil
 	}
-	if evt.UserID == 0 || evt.VideoID == 0 {
+	if evt.NotificationOnly || evt.UserID == 0 || evt.VideoID == 0 {
 		return nil
 	}
 
@@ -102,52 +108,12 @@ func (w *LikeWorker) process(ctx context.Context, body []byte) error {
 	}
 }
 
+// Compatibility for queued events created before synchronous relationship writes.
 func (w *LikeWorker) applyLike(ctx context.Context, userID, videoID uint) error {
-	ok, err := w.videos.IsExist(ctx, videoID)
-	if err != nil {
-		return err
-	}
-	if !ok {
-		return nil
-	}
-
-	created, err := w.likes.LikeIgnoreDuplicate(ctx, &video.Like{
-		VideoID:   videoID,
-		AccountID: userID,
-		CreatedAt: time.Now(),
-	})
-	if err != nil {
-		return err
-	}
-	if !created {
-		return nil
-	}
-
-	if err := w.videos.ChangeLikesCount(ctx, videoID, 1); err != nil {
-		return err
-	}
-	return w.videos.ChangePopularity(ctx, videoID, 1)
+	service := video.NewLikeService(w.likes, w.videos, w.cache, nil, nil)
+	return service.Like(ctx, &video.Like{AccountID: userID, VideoID: videoID})
 }
-
 func (w *LikeWorker) applyUnlike(ctx context.Context, userID, videoID uint) error {
-	ok, err := w.videos.IsExist(ctx, videoID)
-	if err != nil {
-		return err
-	}
-	if !ok {
-		return nil
-	}
-
-	deleted, err := w.likes.DeleteByVideoAndAccount(ctx, videoID, userID)
-	if err != nil {
-		return err
-	}
-	if !deleted {
-		return nil
-	}
-
-	if err := w.videos.ChangeLikesCount(ctx, videoID, -1); err != nil {
-		return err
-	}
-	return w.videos.ChangePopularity(ctx, videoID, -1)
+	service := video.NewLikeService(w.likes, w.videos, w.cache, nil, nil)
+	return service.Unlike(ctx, &video.Like{AccountID: userID, VideoID: videoID})
 }

@@ -103,10 +103,20 @@ func (vs *VideoService) ListByAuthorID(ctx context.Context, authorID uint) ([]Vi
 	if err != nil {
 		return nil, err
 	}
+	ptrs := make([]*Video, len(videos))
+	for i := range videos {
+		ptrs[i] = &videos[i]
+	}
+	OverlayLikeCounts(ctx, vs.repo.db, vs.cache, ptrs)
 	return videos, nil
 }
 
-func (vs *VideoService) GetDetail(ctx context.Context, id uint) (*Video, error) {
+func (vs *VideoService) GetDetail(ctx context.Context, id uint) (result *Video, resultErr error) {
+	defer func() {
+		if result != nil && resultErr == nil {
+			OverlayLikeCounts(ctx, vs.repo.db, vs.cache, []*Video{result})
+		}
+	}()
 	cacheKey := vs.cache.Key("video:detail:id=%d", id)
 
 	getCached := func() (*Video, bool) {
