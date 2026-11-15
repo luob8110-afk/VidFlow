@@ -1,0 +1,2234 @@
+[
+  {
+    "variant": "baseline",
+    "distribution": "hot",
+    "requested_rps": 50,
+    "seconds": 6.0,
+    "repetition": 1,
+    "requests": 300,
+    "statuses": {
+      "200": 300
+    },
+    "successful": 300,
+    "successful_rps": 50.0,
+    "request_wall_s": 6.0,
+    "p95_ms": 3.217,
+    "p99_ms": 4.304,
+    "scheduled_p95_ms": 3.67,
+    "dispatch_p99_ms": 0.758,
+    "convergence_s": 0.263,
+    "consistent": true,
+    "duplicate_consistent": true,
+    "redis_count_bytes": 0,
+    "video_row_updates": 600,
+    "total_row_write_operations": 1200,
+    "text_protocol_statements_only": [],
+    "tables": {
+      "accounts": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 0
+      },
+      "videos": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 600,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 600
+      },
+      "likes": {
+        "COUNT_INSERT": 300,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 300
+      },
+      "comments": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 0
+      },
+      "socials": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 0
+      },
+      "outbox_msgs": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 0
+      },
+      "tags": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 0
+      },
+      "video_tags": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 0
+      },
+      "messages": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 0
+      },
+      "notifications": {
+        "COUNT_INSERT": 300,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 300
+      }
+    }
+  },
+  {
+    "variant": "candidate",
+    "distribution": "hot",
+    "requested_rps": 50,
+    "seconds": 6.0,
+    "repetition": 1,
+    "requests": 300,
+    "statuses": {
+      "200": 300
+    },
+    "successful": 300,
+    "successful_rps": 50.0,
+    "request_wall_s": 6.0,
+    "p95_ms": 8.267,
+    "p99_ms": 9.385,
+    "scheduled_p95_ms": 8.688,
+    "dispatch_p99_ms": 0.759,
+    "convergence_s": 3.199,
+    "consistent": true,
+    "duplicate_consistent": true,
+    "redis_count_bytes": 3136,
+    "video_row_updates": 2,
+    "total_row_write_operations": 1204,
+    "text_protocol_statements_only": [],
+    "tables": {
+      "accounts": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 0
+      },
+      "videos": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 2,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 2
+      },
+      "likes": {
+        "COUNT_INSERT": 300,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 300
+      },
+      "comments": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 0
+      },
+      "like_count_events": {
+        "COUNT_INSERT": 300,
+        "COUNT_UPDATE": 300,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 600
+      },
+      "like_count_flush_locks": {
+        "COUNT_INSERT": 2,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 2
+      },
+      "socials": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 0
+      },
+      "outbox_msgs": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 0
+      },
+      "tags": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 0
+      },
+      "video_tags": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 0
+      },
+      "messages": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 0
+      },
+      "notifications": {
+        "COUNT_INSERT": 300,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 300
+      }
+    }
+  },
+  {
+    "variant": "baseline",
+    "distribution": "hot",
+    "requested_rps": 150,
+    "seconds": 6.0,
+    "repetition": 1,
+    "requests": 900,
+    "statuses": {
+      "200": 900
+    },
+    "successful": 900,
+    "successful_rps": 150.0,
+    "request_wall_s": 6.0,
+    "p95_ms": 3.117,
+    "p99_ms": 3.818,
+    "scheduled_p95_ms": 3.529,
+    "dispatch_p99_ms": 0.641,
+    "convergence_s": 1.584,
+    "consistent": true,
+    "duplicate_consistent": true,
+    "redis_count_bytes": 0,
+    "video_row_updates": 1800,
+    "total_row_write_operations": 3600,
+    "text_protocol_statements_only": [],
+    "tables": {
+      "accounts": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 0
+      },
+      "videos": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 1800,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 1800
+      },
+      "likes": {
+        "COUNT_INSERT": 900,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 900
+      },
+      "comments": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 0
+      },
+      "socials": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 0
+      },
+      "outbox_msgs": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 0
+      },
+      "tags": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 0
+      },
+      "video_tags": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 0
+      },
+      "messages": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 0
+      },
+      "notifications": {
+        "COUNT_INSERT": 900,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 900
+      }
+    }
+  },
+  {
+    "variant": "candidate",
+    "distribution": "hot",
+    "requested_rps": 150,
+    "seconds": 6.0,
+    "repetition": 1,
+    "requests": 900,
+    "statuses": {
+      "200": 900
+    },
+    "successful": 900,
+    "successful_rps": 149.957,
+    "request_wall_s": 6.002,
+    "p95_ms": 7.502,
+    "p99_ms": 9.005,
+    "scheduled_p95_ms": 7.857,
+    "dispatch_p99_ms": 0.756,
+    "convergence_s": 1.862,
+    "consistent": true,
+    "duplicate_consistent": true,
+    "redis_count_bytes": 44352,
+    "video_row_updates": 2,
+    "total_row_write_operations": 3604,
+    "text_protocol_statements_only": [],
+    "tables": {
+      "accounts": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 0
+      },
+      "videos": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 2,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 2
+      },
+      "likes": {
+        "COUNT_INSERT": 900,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 900
+      },
+      "comments": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 0
+      },
+      "like_count_events": {
+        "COUNT_INSERT": 900,
+        "COUNT_UPDATE": 900,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 1800
+      },
+      "like_count_flush_locks": {
+        "COUNT_INSERT": 2,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 2
+      },
+      "socials": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 0
+      },
+      "outbox_msgs": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 0
+      },
+      "tags": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 0
+      },
+      "video_tags": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 0
+      },
+      "messages": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 0
+      },
+      "notifications": {
+        "COUNT_INSERT": 900,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 900
+      }
+    }
+  },
+  {
+    "variant": "baseline",
+    "distribution": "hot",
+    "requested_rps": 300,
+    "seconds": 6.0,
+    "repetition": 1,
+    "requests": 1800,
+    "statuses": {
+      "200": 1800
+    },
+    "successful": 1800,
+    "successful_rps": 299.99,
+    "request_wall_s": 6.0,
+    "p95_ms": 2.95,
+    "p99_ms": 3.529,
+    "scheduled_p95_ms": 3.376,
+    "dispatch_p99_ms": 0.677,
+    "convergence_s": 9.946,
+    "consistent": true,
+    "duplicate_consistent": true,
+    "redis_count_bytes": 0,
+    "video_row_updates": 3600,
+    "total_row_write_operations": 7200,
+    "text_protocol_statements_only": [],
+    "tables": {
+      "accounts": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 0
+      },
+      "videos": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 3600,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 3600
+      },
+      "likes": {
+        "COUNT_INSERT": 1800,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 1800
+      },
+      "comments": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 0
+      },
+      "socials": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 0
+      },
+      "outbox_msgs": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 0
+      },
+      "tags": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 0
+      },
+      "video_tags": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 0
+      },
+      "messages": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 0
+      },
+      "notifications": {
+        "COUNT_INSERT": 1800,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 1800
+      }
+    }
+  },
+  {
+    "variant": "candidate",
+    "distribution": "hot",
+    "requested_rps": 300,
+    "seconds": 6.0,
+    "repetition": 1,
+    "requests": 1800,
+    "statuses": {
+      "200": 1800
+    },
+    "successful": 1800,
+    "successful_rps": 299.884,
+    "request_wall_s": 6.002,
+    "p95_ms": 7.899,
+    "p99_ms": 9.299,
+    "scheduled_p95_ms": 8.341,
+    "dispatch_p99_ms": 0.798,
+    "convergence_s": 4.223,
+    "consistent": true,
+    "duplicate_consistent": true,
+    "redis_count_bytes": 88544,
+    "video_row_updates": 3,
+    "total_row_write_operations": 7207,
+    "text_protocol_statements_only": [],
+    "tables": {
+      "accounts": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 0
+      },
+      "videos": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 3,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 3
+      },
+      "likes": {
+        "COUNT_INSERT": 1800,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 1800
+      },
+      "comments": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 0
+      },
+      "like_count_events": {
+        "COUNT_INSERT": 1800,
+        "COUNT_UPDATE": 1800,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 3600
+      },
+      "like_count_flush_locks": {
+        "COUNT_INSERT": 4,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 4
+      },
+      "socials": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 0
+      },
+      "outbox_msgs": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 0
+      },
+      "tags": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 0
+      },
+      "video_tags": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 0
+      },
+      "messages": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 0
+      },
+      "notifications": {
+        "COUNT_INSERT": 1800,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 1800
+      }
+    }
+  },
+  {
+    "variant": "baseline",
+    "distribution": "spread",
+    "requested_rps": 50,
+    "seconds": 6.0,
+    "repetition": 1,
+    "requests": 300,
+    "statuses": {
+      "200": 300
+    },
+    "successful": 300,
+    "successful_rps": 50.0,
+    "request_wall_s": 6.0,
+    "p95_ms": 3.317,
+    "p99_ms": 3.876,
+    "scheduled_p95_ms": 3.845,
+    "dispatch_p99_ms": 0.707,
+    "convergence_s": 0.262,
+    "consistent": true,
+    "duplicate_consistent": true,
+    "redis_count_bytes": 0,
+    "video_row_updates": 600,
+    "total_row_write_operations": 1200,
+    "text_protocol_statements_only": [],
+    "tables": {
+      "accounts": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 0
+      },
+      "videos": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 600,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 600
+      },
+      "likes": {
+        "COUNT_INSERT": 300,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 300
+      },
+      "comments": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 0
+      },
+      "socials": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 0
+      },
+      "outbox_msgs": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 0
+      },
+      "tags": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 0
+      },
+      "video_tags": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 0
+      },
+      "messages": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 0
+      },
+      "notifications": {
+        "COUNT_INSERT": 300,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 300
+      }
+    }
+  },
+  {
+    "variant": "candidate",
+    "distribution": "spread",
+    "requested_rps": 50,
+    "seconds": 6.0,
+    "repetition": 1,
+    "requests": 300,
+    "statuses": {
+      "200": 300
+    },
+    "successful": 300,
+    "successful_rps": 50.0,
+    "request_wall_s": 6.0,
+    "p95_ms": 8.2,
+    "p99_ms": 9.161,
+    "scheduled_p95_ms": 8.681,
+    "dispatch_p99_ms": 0.719,
+    "convergence_s": 2.655,
+    "consistent": true,
+    "duplicate_consistent": true,
+    "redis_count_bytes": 8032,
+    "video_row_updates": 128,
+    "total_row_write_operations": 1330,
+    "text_protocol_statements_only": [],
+    "tables": {
+      "accounts": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 0
+      },
+      "videos": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 128,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 128
+      },
+      "likes": {
+        "COUNT_INSERT": 300,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 300
+      },
+      "comments": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 0
+      },
+      "like_count_events": {
+        "COUNT_INSERT": 300,
+        "COUNT_UPDATE": 300,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 600
+      },
+      "like_count_flush_locks": {
+        "COUNT_INSERT": 2,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 2
+      },
+      "socials": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 0
+      },
+      "outbox_msgs": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 0
+      },
+      "tags": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 0
+      },
+      "video_tags": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 0
+      },
+      "messages": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 0
+      },
+      "notifications": {
+        "COUNT_INSERT": 300,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 300
+      }
+    }
+  },
+  {
+    "variant": "baseline",
+    "distribution": "spread",
+    "requested_rps": 150,
+    "seconds": 6.0,
+    "repetition": 1,
+    "requests": 900,
+    "statuses": {
+      "200": 900
+    },
+    "successful": 900,
+    "successful_rps": 150.0,
+    "request_wall_s": 6.0,
+    "p95_ms": 3.669,
+    "p99_ms": 4.29,
+    "scheduled_p95_ms": 4.138,
+    "dispatch_p99_ms": 0.701,
+    "convergence_s": 1.832,
+    "consistent": true,
+    "duplicate_consistent": true,
+    "redis_count_bytes": 0,
+    "video_row_updates": 1800,
+    "total_row_write_operations": 3600,
+    "text_protocol_statements_only": [],
+    "tables": {
+      "accounts": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 0
+      },
+      "videos": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 1800,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 1800
+      },
+      "likes": {
+        "COUNT_INSERT": 900,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 900
+      },
+      "comments": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 0
+      },
+      "socials": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 0
+      },
+      "outbox_msgs": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 0
+      },
+      "tags": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 0
+      },
+      "video_tags": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 0
+      },
+      "messages": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 0
+      },
+      "notifications": {
+        "COUNT_INSERT": 900,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 900
+      }
+    }
+  },
+  {
+    "variant": "candidate",
+    "distribution": "spread",
+    "requested_rps": 150,
+    "seconds": 6.0,
+    "repetition": 1,
+    "requests": 900,
+    "statuses": {
+      "200": 900
+    },
+    "successful": 900,
+    "successful_rps": 149.92,
+    "request_wall_s": 6.003,
+    "p95_ms": 7.989,
+    "p99_ms": 10.393,
+    "scheduled_p95_ms": 8.407,
+    "dispatch_p99_ms": 0.708,
+    "convergence_s": 1.381,
+    "consistent": true,
+    "duplicate_consistent": true,
+    "redis_count_bytes": 14336,
+    "video_row_updates": 128,
+    "total_row_write_operations": 3730,
+    "text_protocol_statements_only": [],
+    "tables": {
+      "accounts": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 0
+      },
+      "videos": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 128,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 128
+      },
+      "likes": {
+        "COUNT_INSERT": 900,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 900
+      },
+      "comments": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 0
+      },
+      "like_count_events": {
+        "COUNT_INSERT": 900,
+        "COUNT_UPDATE": 900,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 1800
+      },
+      "like_count_flush_locks": {
+        "COUNT_INSERT": 2,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 2
+      },
+      "socials": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 0
+      },
+      "outbox_msgs": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 0
+      },
+      "tags": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 0
+      },
+      "video_tags": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 0
+      },
+      "messages": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 0
+      },
+      "notifications": {
+        "COUNT_INSERT": 900,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 900
+      }
+    }
+  },
+  {
+    "variant": "baseline",
+    "distribution": "spread",
+    "requested_rps": 300,
+    "seconds": 6.0,
+    "repetition": 1,
+    "requests": 1800,
+    "statuses": {
+      "200": 1800
+    },
+    "successful": 1800,
+    "successful_rps": 299.908,
+    "request_wall_s": 6.002,
+    "p95_ms": 2.975,
+    "p99_ms": 3.686,
+    "scheduled_p95_ms": 3.377,
+    "dispatch_p99_ms": 0.682,
+    "convergence_s": 8.423,
+    "consistent": true,
+    "duplicate_consistent": true,
+    "redis_count_bytes": 0,
+    "video_row_updates": 3600,
+    "total_row_write_operations": 7200,
+    "text_protocol_statements_only": [],
+    "tables": {
+      "accounts": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 0
+      },
+      "videos": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 3600,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 3600
+      },
+      "likes": {
+        "COUNT_INSERT": 1800,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 1800
+      },
+      "comments": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 0
+      },
+      "socials": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 0
+      },
+      "outbox_msgs": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 0
+      },
+      "tags": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 0
+      },
+      "video_tags": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 0
+      },
+      "messages": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 0
+      },
+      "notifications": {
+        "COUNT_INSERT": 1800,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 1800
+      }
+    }
+  },
+  {
+    "variant": "candidate",
+    "distribution": "spread",
+    "requested_rps": 300,
+    "seconds": 6.0,
+    "repetition": 1,
+    "requests": 1800,
+    "statuses": {
+      "200": 1800
+    },
+    "successful": 1800,
+    "successful_rps": 299.863,
+    "request_wall_s": 6.003,
+    "p95_ms": 7.224,
+    "p99_ms": 9.439,
+    "scheduled_p95_ms": 7.704,
+    "dispatch_p99_ms": 0.703,
+    "convergence_s": 4.294,
+    "consistent": true,
+    "duplicate_consistent": true,
+    "redis_count_bytes": 24576,
+    "video_row_updates": 192,
+    "total_row_write_operations": 7395,
+    "text_protocol_statements_only": [],
+    "tables": {
+      "accounts": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 0
+      },
+      "videos": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 192,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 192
+      },
+      "likes": {
+        "COUNT_INSERT": 1800,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 1800
+      },
+      "comments": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 0
+      },
+      "like_count_events": {
+        "COUNT_INSERT": 1800,
+        "COUNT_UPDATE": 1800,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 3600
+      },
+      "like_count_flush_locks": {
+        "COUNT_INSERT": 3,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 3
+      },
+      "socials": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 0
+      },
+      "outbox_msgs": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 0
+      },
+      "tags": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 0
+      },
+      "video_tags": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 0
+      },
+      "messages": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 0
+      },
+      "notifications": {
+        "COUNT_INSERT": 1800,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 1800
+      }
+    }
+  },
+  {
+    "variant": "candidate",
+    "distribution": "hot",
+    "requested_rps": 50,
+    "seconds": 6.0,
+    "repetition": 2,
+    "requests": 300,
+    "statuses": {
+      "200": 300
+    },
+    "successful": 300,
+    "successful_rps": 50.0,
+    "request_wall_s": 6.0,
+    "p95_ms": 7.822,
+    "p99_ms": 10.21,
+    "scheduled_p95_ms": 8.171,
+    "dispatch_p99_ms": 0.707,
+    "convergence_s": 3.452,
+    "consistent": true,
+    "duplicate_consistent": true,
+    "redis_count_bytes": 3136,
+    "video_row_updates": 2,
+    "total_row_write_operations": 1204,
+    "text_protocol_statements_only": [],
+    "tables": {
+      "accounts": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 0
+      },
+      "videos": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 2,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 2
+      },
+      "likes": {
+        "COUNT_INSERT": 300,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 300
+      },
+      "comments": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 0
+      },
+      "like_count_events": {
+        "COUNT_INSERT": 300,
+        "COUNT_UPDATE": 300,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 600
+      },
+      "like_count_flush_locks": {
+        "COUNT_INSERT": 2,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 2
+      },
+      "socials": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 0
+      },
+      "outbox_msgs": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 0
+      },
+      "tags": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 0
+      },
+      "video_tags": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 0
+      },
+      "messages": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 0
+      },
+      "notifications": {
+        "COUNT_INSERT": 300,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 300
+      }
+    }
+  },
+  {
+    "variant": "baseline",
+    "distribution": "hot",
+    "requested_rps": 50,
+    "seconds": 6.0,
+    "repetition": 2,
+    "requests": 300,
+    "statuses": {
+      "200": 300
+    },
+    "successful": 300,
+    "successful_rps": 50.0,
+    "request_wall_s": 6.0,
+    "p95_ms": 3.314,
+    "p99_ms": 3.738,
+    "scheduled_p95_ms": 3.799,
+    "dispatch_p99_ms": 0.751,
+    "convergence_s": 0.27,
+    "consistent": true,
+    "duplicate_consistent": true,
+    "redis_count_bytes": 0,
+    "video_row_updates": 600,
+    "total_row_write_operations": 1200,
+    "text_protocol_statements_only": [],
+    "tables": {
+      "accounts": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 0
+      },
+      "videos": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 600,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 600
+      },
+      "likes": {
+        "COUNT_INSERT": 300,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 300
+      },
+      "comments": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 0
+      },
+      "socials": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 0
+      },
+      "outbox_msgs": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 0
+      },
+      "tags": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 0
+      },
+      "video_tags": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 0
+      },
+      "messages": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 0
+      },
+      "notifications": {
+        "COUNT_INSERT": 300,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 300
+      }
+    }
+  },
+  {
+    "variant": "candidate",
+    "distribution": "hot",
+    "requested_rps": 150,
+    "seconds": 6.0,
+    "repetition": 2,
+    "requests": 900,
+    "statuses": {
+      "200": 900
+    },
+    "successful": 900,
+    "successful_rps": 150.0,
+    "request_wall_s": 6.0,
+    "p95_ms": 6.831,
+    "p99_ms": 9.207,
+    "scheduled_p95_ms": 7.201,
+    "dispatch_p99_ms": 0.677,
+    "convergence_s": 2.871,
+    "consistent": true,
+    "duplicate_consistent": true,
+    "redis_count_bytes": 44352,
+    "video_row_updates": 2,
+    "total_row_write_operations": 3604,
+    "text_protocol_statements_only": [],
+    "tables": {
+      "accounts": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 0
+      },
+      "videos": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 2,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 2
+      },
+      "likes": {
+        "COUNT_INSERT": 900,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 900
+      },
+      "comments": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 0
+      },
+      "like_count_events": {
+        "COUNT_INSERT": 900,
+        "COUNT_UPDATE": 900,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 1800
+      },
+      "like_count_flush_locks": {
+        "COUNT_INSERT": 2,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 2
+      },
+      "socials": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 0
+      },
+      "outbox_msgs": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 0
+      },
+      "tags": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 0
+      },
+      "video_tags": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 0
+      },
+      "messages": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 0
+      },
+      "notifications": {
+        "COUNT_INSERT": 900,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 900
+      }
+    }
+  },
+  {
+    "variant": "baseline",
+    "distribution": "hot",
+    "requested_rps": 150,
+    "seconds": 6.0,
+    "repetition": 2,
+    "requests": 900,
+    "statuses": {
+      "200": 900
+    },
+    "successful": 900,
+    "successful_rps": 150.0,
+    "request_wall_s": 6.0,
+    "p95_ms": 2.94,
+    "p99_ms": 3.501,
+    "scheduled_p95_ms": 3.353,
+    "dispatch_p99_ms": 0.641,
+    "convergence_s": 1.4,
+    "consistent": true,
+    "duplicate_consistent": true,
+    "redis_count_bytes": 0,
+    "video_row_updates": 1800,
+    "total_row_write_operations": 3600,
+    "text_protocol_statements_only": [],
+    "tables": {
+      "accounts": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 0
+      },
+      "videos": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 1800,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 1800
+      },
+      "likes": {
+        "COUNT_INSERT": 900,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 900
+      },
+      "comments": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 0
+      },
+      "socials": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 0
+      },
+      "outbox_msgs": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 0
+      },
+      "tags": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 0
+      },
+      "video_tags": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 0
+      },
+      "messages": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 0
+      },
+      "notifications": {
+        "COUNT_INSERT": 900,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 900
+      }
+    }
+  },
+  {
+    "variant": "candidate",
+    "distribution": "hot",
+    "requested_rps": 300,
+    "seconds": 6.0,
+    "repetition": 2,
+    "requests": 1800,
+    "statuses": {
+      "200": 1800
+    },
+    "successful": 1800,
+    "successful_rps": 299.803,
+    "request_wall_s": 6.004,
+    "p95_ms": 7.951,
+    "p99_ms": 9.574,
+    "scheduled_p95_ms": 8.355,
+    "dispatch_p99_ms": 0.735,
+    "convergence_s": 4.729,
+    "consistent": true,
+    "duplicate_consistent": true,
+    "redis_count_bytes": 88544,
+    "video_row_updates": 4,
+    "total_row_write_operations": 7208,
+    "text_protocol_statements_only": [],
+    "tables": {
+      "accounts": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 0
+      },
+      "videos": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 4,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 4
+      },
+      "likes": {
+        "COUNT_INSERT": 1800,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 1800
+      },
+      "comments": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 0
+      },
+      "like_count_events": {
+        "COUNT_INSERT": 1800,
+        "COUNT_UPDATE": 1800,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 3600
+      },
+      "like_count_flush_locks": {
+        "COUNT_INSERT": 4,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 4
+      },
+      "socials": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 0
+      },
+      "outbox_msgs": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 0
+      },
+      "tags": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 0
+      },
+      "video_tags": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 0
+      },
+      "messages": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 0
+      },
+      "notifications": {
+        "COUNT_INSERT": 1800,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 1800
+      }
+    }
+  },
+  {
+    "variant": "baseline",
+    "distribution": "hot",
+    "requested_rps": 300,
+    "seconds": 6.0,
+    "repetition": 2,
+    "requests": 1800,
+    "statuses": {
+      "200": 1800
+    },
+    "successful": 1800,
+    "successful_rps": 299.981,
+    "request_wall_s": 6.0,
+    "p95_ms": 2.918,
+    "p99_ms": 3.795,
+    "scheduled_p95_ms": 3.362,
+    "dispatch_p99_ms": 0.7,
+    "convergence_s": 8.317,
+    "consistent": true,
+    "duplicate_consistent": true,
+    "redis_count_bytes": 0,
+    "video_row_updates": 3600,
+    "total_row_write_operations": 7200,
+    "text_protocol_statements_only": [],
+    "tables": {
+      "accounts": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 0
+      },
+      "videos": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 3600,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 3600
+      },
+      "likes": {
+        "COUNT_INSERT": 1800,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 1800
+      },
+      "comments": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 0
+      },
+      "socials": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 0
+      },
+      "outbox_msgs": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 0
+      },
+      "tags": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 0
+      },
+      "video_tags": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 0
+      },
+      "messages": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 0
+      },
+      "notifications": {
+        "COUNT_INSERT": 1800,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 1800
+      }
+    }
+  },
+  {
+    "variant": "candidate",
+    "distribution": "spread",
+    "requested_rps": 50,
+    "seconds": 6.0,
+    "repetition": 2,
+    "requests": 300,
+    "statuses": {
+      "200": 300
+    },
+    "successful": 300,
+    "successful_rps": 50.0,
+    "request_wall_s": 6.0,
+    "p95_ms": 7.704,
+    "p99_ms": 9.459,
+    "scheduled_p95_ms": 8.369,
+    "dispatch_p99_ms": 0.966,
+    "convergence_s": 2.977,
+    "consistent": true,
+    "duplicate_consistent": true,
+    "redis_count_bytes": 8032,
+    "video_row_updates": 128,
+    "total_row_write_operations": 1330,
+    "text_protocol_statements_only": [],
+    "tables": {
+      "accounts": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 0
+      },
+      "videos": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 128,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 128
+      },
+      "likes": {
+        "COUNT_INSERT": 300,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 300
+      },
+      "comments": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 0
+      },
+      "like_count_events": {
+        "COUNT_INSERT": 300,
+        "COUNT_UPDATE": 300,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 600
+      },
+      "like_count_flush_locks": {
+        "COUNT_INSERT": 2,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 2
+      },
+      "socials": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 0
+      },
+      "outbox_msgs": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 0
+      },
+      "tags": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 0
+      },
+      "video_tags": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 0
+      },
+      "messages": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 0
+      },
+      "notifications": {
+        "COUNT_INSERT": 300,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 300
+      }
+    }
+  },
+  {
+    "variant": "baseline",
+    "distribution": "spread",
+    "requested_rps": 50,
+    "seconds": 6.0,
+    "repetition": 2,
+    "requests": 300,
+    "statuses": {
+      "200": 300
+    },
+    "successful": 300,
+    "successful_rps": 50.0,
+    "request_wall_s": 6.0,
+    "p95_ms": 3.722,
+    "p99_ms": 4.557,
+    "scheduled_p95_ms": 4.085,
+    "dispatch_p99_ms": 0.812,
+    "convergence_s": 0.262,
+    "consistent": true,
+    "duplicate_consistent": true,
+    "redis_count_bytes": 0,
+    "video_row_updates": 600,
+    "total_row_write_operations": 1200,
+    "text_protocol_statements_only": [],
+    "tables": {
+      "accounts": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 0
+      },
+      "videos": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 600,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 600
+      },
+      "likes": {
+        "COUNT_INSERT": 300,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 300
+      },
+      "comments": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 0
+      },
+      "socials": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 0
+      },
+      "outbox_msgs": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 0
+      },
+      "tags": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 0
+      },
+      "video_tags": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 0
+      },
+      "messages": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 0
+      },
+      "notifications": {
+        "COUNT_INSERT": 300,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 300
+      }
+    }
+  },
+  {
+    "variant": "candidate",
+    "distribution": "spread",
+    "requested_rps": 150,
+    "seconds": 6.0,
+    "repetition": 2,
+    "requests": 900,
+    "statuses": {
+      "200": 900
+    },
+    "successful": 900,
+    "successful_rps": 150.0,
+    "request_wall_s": 6.0,
+    "p95_ms": 7.03,
+    "p99_ms": 9.072,
+    "scheduled_p95_ms": 7.69,
+    "dispatch_p99_ms": 0.695,
+    "convergence_s": 1.353,
+    "consistent": true,
+    "duplicate_consistent": true,
+    "redis_count_bytes": 14336,
+    "video_row_updates": 128,
+    "total_row_write_operations": 3730,
+    "text_protocol_statements_only": [],
+    "tables": {
+      "accounts": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 0
+      },
+      "videos": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 128,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 128
+      },
+      "likes": {
+        "COUNT_INSERT": 900,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 900
+      },
+      "comments": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 0
+      },
+      "like_count_events": {
+        "COUNT_INSERT": 900,
+        "COUNT_UPDATE": 900,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 1800
+      },
+      "like_count_flush_locks": {
+        "COUNT_INSERT": 2,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 2
+      },
+      "socials": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 0
+      },
+      "outbox_msgs": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 0
+      },
+      "tags": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 0
+      },
+      "video_tags": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 0
+      },
+      "messages": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 0
+      },
+      "notifications": {
+        "COUNT_INSERT": 900,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 900
+      }
+    }
+  },
+  {
+    "variant": "baseline",
+    "distribution": "spread",
+    "requested_rps": 150,
+    "seconds": 6.0,
+    "repetition": 2,
+    "requests": 900,
+    "statuses": {
+      "200": 900
+    },
+    "successful": 900,
+    "successful_rps": 150.0,
+    "request_wall_s": 6.0,
+    "p95_ms": 2.851,
+    "p99_ms": 3.378,
+    "scheduled_p95_ms": 3.229,
+    "dispatch_p99_ms": 0.651,
+    "convergence_s": 1.162,
+    "consistent": true,
+    "duplicate_consistent": true,
+    "redis_count_bytes": 0,
+    "video_row_updates": 1800,
+    "total_row_write_operations": 3600,
+    "text_protocol_statements_only": [],
+    "tables": {
+      "accounts": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 0
+      },
+      "videos": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 1800,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 1800
+      },
+      "likes": {
+        "COUNT_INSERT": 900,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 900
+      },
+      "comments": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 0
+      },
+      "socials": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 0
+      },
+      "outbox_msgs": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 0
+      },
+      "tags": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 0
+      },
+      "video_tags": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 0
+      },
+      "messages": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 0
+      },
+      "notifications": {
+        "COUNT_INSERT": 900,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 900
+      }
+    }
+  },
+  {
+    "variant": "candidate",
+    "distribution": "spread",
+    "requested_rps": 300,
+    "seconds": 6.0,
+    "repetition": 2,
+    "requests": 1800,
+    "statuses": {
+      "200": 1800
+    },
+    "successful": 1800,
+    "successful_rps": 299.88,
+    "request_wall_s": 6.002,
+    "p95_ms": 7.658,
+    "p99_ms": 9.215,
+    "scheduled_p95_ms": 7.931,
+    "dispatch_p99_ms": 0.717,
+    "convergence_s": 3.929,
+    "consistent": true,
+    "duplicate_consistent": true,
+    "redis_count_bytes": 24576,
+    "video_row_updates": 192,
+    "total_row_write_operations": 7396,
+    "text_protocol_statements_only": [],
+    "tables": {
+      "accounts": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 0
+      },
+      "videos": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 192,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 192
+      },
+      "likes": {
+        "COUNT_INSERT": 1800,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 1800
+      },
+      "comments": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 0
+      },
+      "like_count_events": {
+        "COUNT_INSERT": 1800,
+        "COUNT_UPDATE": 1800,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 3600
+      },
+      "like_count_flush_locks": {
+        "COUNT_INSERT": 4,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 4
+      },
+      "socials": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 0
+      },
+      "outbox_msgs": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 0
+      },
+      "tags": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 0
+      },
+      "video_tags": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 0
+      },
+      "messages": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 0
+      },
+      "notifications": {
+        "COUNT_INSERT": 1800,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 1800
+      }
+    }
+  },
+  {
+    "variant": "baseline",
+    "distribution": "spread",
+    "requested_rps": 300,
+    "seconds": 6.0,
+    "repetition": 2,
+    "requests": 1800,
+    "statuses": {
+      "200": 1800
+    },
+    "successful": 1800,
+    "successful_rps": 299.95,
+    "request_wall_s": 6.001,
+    "p95_ms": 2.784,
+    "p99_ms": 3.303,
+    "scheduled_p95_ms": 3.221,
+    "dispatch_p99_ms": 0.627,
+    "convergence_s": 8.308,
+    "consistent": true,
+    "duplicate_consistent": true,
+    "redis_count_bytes": 0,
+    "video_row_updates": 3600,
+    "total_row_write_operations": 7200,
+    "text_protocol_statements_only": [],
+    "tables": {
+      "accounts": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 0
+      },
+      "videos": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 3600,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 3600
+      },
+      "likes": {
+        "COUNT_INSERT": 1800,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 1800
+      },
+      "comments": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 0
+      },
+      "socials": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 0
+      },
+      "outbox_msgs": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 0
+      },
+      "tags": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 0
+      },
+      "video_tags": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 0
+      },
+      "messages": {
+        "COUNT_INSERT": 0,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 0
+      },
+      "notifications": {
+        "COUNT_INSERT": 1800,
+        "COUNT_UPDATE": 0,
+        "COUNT_DELETE": 0,
+        "COUNT_WRITE": 1800
+      }
+    }
+  }
+]

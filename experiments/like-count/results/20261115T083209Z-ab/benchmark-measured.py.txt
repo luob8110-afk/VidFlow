@@ -1,0 +1,312 @@
+"""Isolated, open-loop HTTP A/B benchmark. See README.md for interpretation."""
+import argparse
+import base64
+import concurrent.futures
+import hashlib
+import hmac
+import io
+import json
+import math
+import os
+from pathlib import Path
+import shutil
+import subprocess
+import tarfile
+import threading
+import time
+from collections import Counter
+from datetime import datetime, timezone
+
+import pymysql
+import redis
+import requests
+
+ROOT = Path(__file__).resolve().parents[2]
+HERE = Path(__file__).resolve().parent
+PROJECT = "feedsystem-likebench"
+URL = "http://127.0.0.1:18089"
+SECRET = b"benchmark-only-secret"
+DB = dict(host="127.0.0.1", port=13317, user="root", password="benchmark-only", database="likebench", autocommit=True)
+local = threading.local()
+
+
+def command(args, **kwargs):
+    result = subprocess.run(args, capture_output=True, **kwargs)
+    if result.returncode:
+        raise RuntimeError(f"command failed: {args}\n{result.stdout.decode(errors='replace')}\n{result.stderr.decode(errors='replace')}")
+    return result.stdout
+
+
+def compose(*args, binary=None):
+    env = os.environ.copy()
+    env["BENCH_BIN_DIR"] = str(binary or ROOT / ".run" / "likebench" / "unused")
+    return command(["docker", "compose", "-p", PROJECT, "-f", str(HERE / "compose.yaml"), "--profile", "app", *args], env=env)
+
+
+def query(sql, args=None):
+    options = {**DB}
+    if sql.startswith("CREATE DATABASE"):
+        options["database"] = None
+    with pymysql.connect(**options) as db:
+        with db.cursor(pymysql.cursors.DictCursor) as cursor:
+            cursor.execute(sql, args)
+            return cursor.fetchall()
+
+
+def wait_for(fn, seconds=100):
+    deadline = time.monotonic() + seconds
+    error = None
+    while time.monotonic() < deadline:
+        try:
+            if fn():
+                return
+        except Exception as exc:
+            error = exc
+        time.sleep(.3)
+    raise RuntimeError(f"readiness timeout: {error}")
+
+
+def sources():
+    commit = command(["git", "rev-parse", "HEAD"], cwd=ROOT).decode().strip()
+    digest = hashlib.sha256()
+    files = sorted(p for p in (ROOT / "backend").rglob("*") if p.is_file() and ".run" not in p.parts and (p.suffix == ".go" or p.name in ("go.mod", "go.sum")))
+    manifest = {}
+    for p in files:
+        relative = p.relative_to(ROOT).as_posix()
+        manifest[relative] = hashlib.sha256(p.read_bytes()).hexdigest()
+        digest.update(relative.encode() + p.read_bytes())
+    base = ROOT / ".run" / "likebench"
+    variants = {}
+    for name, key in (("baseline", commit[:12]), ("candidate", digest.hexdigest()[:12])):
+        folder = base / f"{name}-{key}"
+        backend = folder / "backend"
+        if not backend.exists():
+            folder.mkdir(parents=True, exist_ok=True)
+            if name == "baseline":
+                archive = command(["git", "archive", commit, "backend"], cwd=ROOT)
+                with tarfile.open(fileobj=io.BytesIO(archive)) as tar:
+                    tar.extractall(folder, filter="data")
+            else:
+                shutil.copytree(ROOT / "backend", backend, ignore=shutil.ignore_patterns(".run"))
+        binary = folder / "bin"
+        binary.mkdir(exist_ok=True)
+        (binary / "config.yaml").write_text("""server:
+  port: 8080
+database:
+  host: mysql
+  port: 3306
+  user: root
+  password: benchmark-only
+  dbname: likebench
+redis:
+  host: redis
+  port: 6379
+  password: benchmark-only
+  db: 0
+rabbitmq:
+  host: rabbitmq
+  port: 5672
+  username: bench
+  password: benchmark-only
+""", encoding="utf-8")
+        if not (binary / "api").exists() or not (binary / "worker").exists():
+            print(f"Building {name} {key}", flush=True)
+            env = os.environ.copy()
+            env.update(GOENV="off", GOOS="linux", GOARCH="amd64", CGO_ENABLED="0")
+            for exe, package in (("api", "./cmd"), ("worker", "./cmd/worker")):
+                command(["go", "build", "-trimpath", "-o", str(binary / exe), package], cwd=backend, env=env)
+        variants[name] = binary
+    return variants, dict(baseline_commit=commit, candidate_source_sha256=digest.hexdigest(), candidate_manifest=manifest,
+                         compiler=command(["go", "version"], env={**os.environ, "GOENV": "off"}).decode().strip())
+
+
+def token(uid):
+    def enc(value):
+        return base64.urlsafe_b64encode(json.dumps(value, separators=(",", ":")).encode()).rstrip(b"=")
+    now = int(time.time())
+    body = enc(dict(alg="HS256", typ="JWT")) + b"." + enc(dict(account_id=uid, username=f"bench{uid}", iat=now, nbf=now-1, exp=now+3600))
+    return (body + b"." + base64.urlsafe_b64encode(hmac.new(SECRET, body, hashlib.sha256).digest()).rstrip(b"=")).decode()
+
+
+def seed(count, videos):
+    cache = redis.Redis(host="127.0.0.1", port=16389, password="benchmark-only", socket_timeout=2)
+    cache.flushdb()  # isolated service belonging exclusively to PROJECT
+    tokens = {uid: token(uid) for uid in range(1, count+2)}
+    with pymysql.connect(**DB) as db:
+        with db.cursor() as cursor:
+            cursor.executemany("INSERT INTO accounts(id,username,password,token) VALUES(%s,%s,'unused',%s)", [(uid, f"bench{uid}", t) for uid,t in tokens.items()])
+            cursor.executemany("INSERT INTO videos(id,author_id,username,title,play_url,cover_url,create_time,likes_count,popularity) VALUES(%s,9000000,'author','bench','/bench.mp4','/cover.jpg',NOW(3),0,0)", [(i,) for i in range(1,videos+1)])
+    pipe = cache.pipeline(transaction=False)
+    for uid,t in tokens.items():
+        pipe.set(f"v1:account:{uid}", t, ex=3600)
+    pipe.execute()
+    # Warm identical authenticated read requests; no measured like writes yet.
+    for vid in range(1,videos+1):
+        response = requests.post(URL+"/video/getDetail", json={"id":vid}, timeout=10)
+        response.raise_for_status()
+    return tokens, cache
+
+
+def snapshot():
+    digests = query("SELECT DIGEST, DIGEST_TEXT, COUNT_STAR, SUM_ROWS_AFFECTED FROM performance_schema.events_statements_summary_by_digest WHERE SCHEMA_NAME='likebench' AND DIGEST IS NOT NULL")
+    tables = query("SELECT OBJECT_NAME,COUNT_INSERT,COUNT_UPDATE,COUNT_DELETE,COUNT_WRITE FROM performance_schema.table_io_waits_summary_by_table WHERE OBJECT_SCHEMA='likebench'")
+    return dict(digests={r["DIGEST"]:r for r in digests}, tables={r["OBJECT_NAME"]:r for r in tables})
+
+
+def delta(before, after):
+    statements = []
+    for digest,row in after["digests"].items():
+        text = row["DIGEST_TEXT"]
+        if not text.upper().startswith(("INSERT ", "UPDATE ", "DELETE ", "REPLACE ")):
+            continue
+        old = before["digests"].get(digest,{})
+        n = int(row["COUNT_STAR"])-int(old.get("COUNT_STAR",0))
+        if n:
+            statements.append(dict(sql=text, statements=n, rows_affected=int(row["SUM_ROWS_AFFECTED"])-int(old.get("SUM_ROWS_AFFECTED",0))))
+    tables = {}
+    for name,row in after["tables"].items():
+        old = before["tables"].get(name,{})
+        tables[name] = {k:int(row[k])-int(old.get(k,0)) for k in ("COUNT_INSERT","COUNT_UPDATE","COUNT_DELETE","COUNT_WRITE")}
+    # go-sql-driver's COM_STMT_EXECUTE has no digest text on this MySQL build.
+    # Table I/O instrumentation includes those writes. Report row operations,
+    # never present missing statement digests as zero SQL writes.
+    return dict(video_row_updates=tables.get("videos",{}).get("COUNT_UPDATE",0),
+                total_row_write_operations=sum(t["COUNT_WRITE"] for t in tables.values()),
+                text_protocol_statements_only=statements, tables=tables)
+
+
+def send(uid, vid, jwt, due):
+    if not hasattr(local, "session"):
+        local.session = requests.Session()
+        local.session.trust_env = False
+    started = time.monotonic()
+    try:
+        r = local.session.post(URL+"/like/like", json={"video_id":vid}, headers={"Authorization":"Bearer "+jwt}, timeout=15)
+        status, error = r.status_code, "" if r.status_code==200 else r.text[:180]
+    except Exception as exc:
+        status, error = 0, str(exc)
+    ended = time.monotonic()
+    return dict(uid=uid,video_id=vid,status=status,error=error,latency_ms=(ended-started)*1000,
+                scheduled_latency_ms=(ended-due)*1000,dispatch_lag_ms=(started-due)*1000,ended=ended)
+
+
+def percentile(values, p):
+    values = sorted(values)
+    return round(values[max(0,math.ceil(p*len(values))-1)],3) if values else None
+
+
+def settled(expected, candidate):
+    rows = query("SELECT v.id,v.likes_count,COALESCE(l.n,0) AS relations FROM videos v LEFT JOIN (SELECT video_id,COUNT(*) n FROM likes GROUP BY video_id) l ON l.video_id=v.id ORDER BY v.id")
+    pending = int(query("SELECT COUNT(*) n FROM like_count_events WHERE flushed_at IS NULL")[0]["n"]) if candidate else 0
+    valid = pending==0 and all(int(r["relations"])==expected.get(r["id"],0) and int(r["likes_count"])==int(r["relations"]) for r in rows)
+    return valid, dict(pending_events=pending,videos=rows)
+
+
+def run_cell(name, binary, rate, seconds, distribution, repetition, out):
+    compose("stop", "api", "worker")
+    # No app connections remain. All data being reset lives in the isolated DB.
+    query("DROP DATABASE likebench")
+    query("CREATE DATABASE likebench")
+    cache = redis.Redis(host="127.0.0.1",port=16389,password="benchmark-only")
+    cache.flushdb()
+    # Purge all queues after stopping consumers; only this benchmark broker.
+    queues = requests.get("http://127.0.0.1:15689/api/queues/%2F", auth=("bench","benchmark-only"), timeout=10).json()
+    for q in queues:
+        from urllib.parse import quote
+        requests.delete("http://127.0.0.1:15689/api/queues/%2F/"+quote(q["name"],safe="")+"/contents", auth=("bench","benchmark-only"), timeout=10).raise_for_status()
+    compose("up","-d","--force-recreate","api",binary=binary)
+    wait_for(lambda: requests.get(URL+"/healthz",timeout=2).status_code==200)
+    compose("up","-d","--force-recreate","worker",binary=binary)
+    # Consumers register after process startup. Readiness is not /healthz alone.
+    wait_for(lambda: any(q["name"]=="like.events" and q.get("consumers",0)>0 for q in requests.get("http://127.0.0.1:15689/api/queues/%2F", auth=("bench","benchmark-only"),timeout=3).json()))
+    total = int(rate*seconds)
+    video_count = 1 if distribution=="hot" else 64
+    tokens,cache = seed(total+32,video_count)
+    before = snapshot()
+    start = time.monotonic()+.2
+    with concurrent.futures.ThreadPoolExecutor(max_workers=64) as pool:
+        futures=[]
+        for i in range(total):
+            due=start+i/rate
+            wait=due-time.monotonic()
+            if wait>0: time.sleep(wait)
+            futures.append(pool.submit(send,i+1,i%video_count+1,tokens[i+1],due))
+        responses=[f.result() for f in futures]
+    stop=time.monotonic()
+    expected=Counter(r["video_id"] for r in responses if r["status"]==200)
+    poll=[]
+    stable=0
+    while time.monotonic()-stop<60:
+        valid,state=settled(expected,name=="candidate")
+        poll.append(dict(after_stop_s=round(time.monotonic()-stop,3),**state))
+        stable=stable+1 if valid else 0
+        if stable>=2: break
+        time.sleep(.2)
+    convergence=poll[-1]["after_stop_s"] if stable>=2 else None
+    # Let notification writes and MQ consumers finish before the final I/O snapshot.
+    wait_for(lambda: all(q.get("messages",0)==0 for q in requests.get("http://127.0.0.1:15689/api/queues/%2F", auth=("bench","benchmark-only"),timeout=3).json()),seconds=60)
+    wait_for(lambda: int(query("SELECT COUNT(*) n FROM notifications")[0]["n"]) >= sum(expected.values()),seconds=60)
+    after=snapshot()
+    counter_bytes=sum(cache.memory_usage(k) or 0 for k in cache.scan_iter("v1:like:count:v1:*"))
+    success=[r for r in responses if r["status"]==200]
+    elapsed=max(seconds,max(r["ended"] for r in responses)-start)
+    # Distinct users, same video: simultaneous duplicate HTTP requests must not
+    # create duplicate relationships or counter deltas (outside measured I/O).
+    extra_uid=total+1
+    with concurrent.futures.ThreadPoolExecutor(max_workers=8) as pool:
+        duplicates=list(pool.map(lambda _:send(extra_uid,1,tokens[extra_uid],time.monotonic()),range(8)))
+    duplicate_expected=expected.copy()
+    if any(r["status"]==200 for r in duplicates): duplicate_expected[1]+=1
+    wait_for(lambda:settled(duplicate_expected,name=="candidate")[0],seconds=30)
+    valid,duplicate_state=settled(duplicate_expected,name=="candidate")
+    raw_name=f"{repetition}-{distribution}-{rate}-{name}"
+    (out/(raw_name+".json")).write_text(json.dumps(dict(responses=responses,convergence=poll,duplicate_responses=duplicates,duplicate_state=duplicate_state),indent=2),encoding="utf-8")
+    result=dict(variant=name,distribution=distribution,requested_rps=rate,seconds=seconds,repetition=repetition,
+                requests=total,statuses=dict(Counter(str(r["status"]) for r in responses)),successful=len(success),
+                successful_rps=round(len(success)/elapsed,3),request_wall_s=round(elapsed,3),
+                p95_ms=percentile([r["latency_ms"] for r in success],.95),p99_ms=percentile([r["latency_ms"] for r in success],.99),
+                scheduled_p95_ms=percentile([r["scheduled_latency_ms"] for r in responses],.95),
+                dispatch_p99_ms=percentile([r["dispatch_lag_ms"] for r in responses],.99),
+                convergence_s=convergence,consistent=stable>=2,duplicate_consistent=valid,
+                redis_count_bytes=counter_bytes,
+                **delta(before,after))
+    print(json.dumps({k:v for k,v in result.items() if k not in ("text_protocol_statements_only","tables")}),flush=True)
+    return result
+
+
+def main():
+    parser=argparse.ArgumentParser()
+    parser.add_argument("--rates",nargs="+",type=int,default=[50,150,300])
+    parser.add_argument("--seconds",type=float,default=6)
+    parser.add_argument("--repeats",type=int,default=2)
+    parser.add_argument("--label",default="ab")
+    args=parser.parse_args()
+    out=HERE/"results"/(datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")+"-"+args.label)
+    out.mkdir(parents=True)
+    variants,meta=sources()
+    meta.update(arguments=vars(args),utc=datetime.now(timezone.utc).isoformat(),
+                docker=command(["docker","info","--format","{{.NCPU}} CPUs; {{.MemTotal}} bytes"]).decode().strip(),
+                ambient_containers=command(["docker","stats","--no-stream","--format","{{.Name}} {{.MemUsage}} {{.CPUPerc}}"]).decode())
+    compose("up","-d","--wait","mysql","redis","rabbitmq")
+    wait_for(lambda:query("CREATE DATABASE IF NOT EXISTS likebench") is not None)
+    wait_for(lambda:query("SELECT 1"))
+    query("UPDATE performance_schema.setup_consumers SET ENABLED='NO' WHERE NAME='events_statements_history_long'")
+    meta["mysql_version"]=query("SELECT VERSION() version")[0]["version"]
+    (out/"metadata.json").write_text(json.dumps(meta,indent=2),encoding="utf-8")
+    results=[]
+    try:
+        for repetition in range(1,args.repeats+1):
+            for distribution in ("hot","spread"):
+                for rate in args.rates:
+                    order=("baseline","candidate") if repetition%2 else ("candidate","baseline")
+                    for name in order:
+                        print(f"Running {repetition}/{args.repeats}: {distribution} {rate} rps {name}",flush=True)
+                        results.append(run_cell(name,variants[name],rate,args.seconds,distribution,repetition,out))
+                        (out/"summary.json").write_text(json.dumps(results,indent=2),encoding="utf-8")
+    finally:
+        compose("stop","api","worker")
+    print(f"Results: {out}",flush=True)
+
+
+if __name__=="__main__":
+    main()

@@ -1,0 +1,74 @@
+services:
+  mysql:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: benchmark-only
+      MYSQL_DATABASE: likebench
+    command: ["--performance-schema=ON", "--innodb-buffer-pool-size=256M"]
+    ports: ["127.0.0.1:13317:3306"]
+    mem_limit: 1g
+    cpus: 2
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -uroot -pbenchmark-only --silent"]
+      interval: 2s
+      timeout: 2s
+      retries: 45
+  redis:
+    image: redis:7-alpine
+    command: ["redis-server", "--appendonly", "yes", "--requirepass", "benchmark-only"]
+    ports: ["127.0.0.1:16389:6379"]
+    mem_limit: 256m
+    cpus: 1
+  rabbitmq:
+    image: rabbitmq:3-management
+    environment:
+      RABBITMQ_DEFAULT_USER: bench
+      RABBITMQ_DEFAULT_PASS: benchmark-only
+      RABBITMQ_SERVER_ADDITIONAL_ERL_ARGS: "+S 2:2"
+    ports: ["127.0.0.1:15689:15672"]
+    mem_limit: 512m
+    cpus: 1
+    healthcheck:
+      test: ["CMD", "rabbitmq-diagnostics", "-q", "ping"]
+      interval: 3s
+      timeout: 3s
+      retries: 40
+  api:
+    image: alpine:3.21
+    profiles: [app]
+    working_dir: /app
+    command: ["/app/api"]
+    volumes:
+      - ${BENCH_BIN_DIR}:/app:ro
+    environment: &app_env
+      CONFIG_PATH: /app/config.yaml
+      JWT_SECRET: benchmark-only-secret
+      MYSQL_HOST: mysql
+      MYSQL_PASSWORD: benchmark-only
+      MYSQL_DATABASE: likebench
+      REDIS_HOST: redis
+      REDIS_PASSWORD: benchmark-only
+      RABBITMQ_HOST: rabbitmq
+      RABBITMQ_USER: bench
+      RABBITMQ_PASS: benchmark-only
+      GIN_MODE: release
+      GOMAXPROCS: "1"
+    ports: ["127.0.0.1:18089:8080"]
+    mem_limit: 384m
+    cpus: 1
+    logging:
+      driver: json-file
+      options: {max-size: "5m", max-file: "1"}
+  worker:
+    image: alpine:3.21
+    profiles: [app]
+    working_dir: /app
+    command: ["/app/worker"]
+    volumes:
+      - ${BENCH_BIN_DIR}:/app:ro
+    environment: *app_env
+    mem_limit: 384m
+    cpus: 1
+    logging:
+      driver: json-file
+      options: {max-size: "5m", max-file: "1"}

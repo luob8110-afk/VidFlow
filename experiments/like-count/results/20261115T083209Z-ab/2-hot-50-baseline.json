@@ -1,0 +1,3120 @@
+{
+  "responses": [
+    {
+      "uid": 1,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 6.274800020037219,
+      "scheduled_latency_ms": 6.891299999551848,
+      "dispatch_lag_ms": 0.6164999795146286,
+      "ended": 138564.4960836
+    },
+    {
+      "uid": 2,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 3.451399999903515,
+      "scheduled_latency_ms": 4.185700003290549,
+      "dispatch_lag_ms": 0.7343000033870339,
+      "ended": 138564.513378
+    },
+    {
+      "uid": 3,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.5525999953970313,
+      "scheduled_latency_ms": 2.9303999908734113,
+      "dispatch_lag_ms": 0.37779999547638,
+      "ended": 138564.5321227
+    },
+    {
+      "uid": 4,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.3933999764267355,
+      "scheduled_latency_ms": 2.7148999797645956,
+      "dispatch_lag_ms": 0.3215000033378601,
+      "ended": 138564.5519072
+    },
+    {
+      "uid": 5,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.3677999852225184,
+      "scheduled_latency_ms": 2.5556999898981303,
+      "dispatch_lag_ms": 0.18790000467561185,
+      "ended": 138564.571748
+    },
+    {
+      "uid": 6,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.220299997134134,
+      "scheduled_latency_ms": 2.700499986531213,
+      "dispatch_lag_ms": 0.48019998939707875,
+      "ended": 138564.5918928
+    },
+    {
+      "uid": 7,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.1259999775793403,
+      "scheduled_latency_ms": 2.367399982176721,
+      "dispatch_lag_ms": 0.24140000459738076,
+      "ended": 138564.6115597
+    },
+    {
+      "uid": 8,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.642300009028986,
+      "scheduled_latency_ms": 2.8531999851111323,
+      "dispatch_lag_ms": 0.21089997608214617,
+      "ended": 138564.6320455
+    },
+    {
+      "uid": 9,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.3327999806497246,
+      "scheduled_latency_ms": 2.5046999799087644,
+      "dispatch_lag_ms": 0.17189999925903976,
+      "ended": 138564.651697
+    },
+    {
+      "uid": 10,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.1049999922979623,
+      "scheduled_latency_ms": 2.4793999909888953,
+      "dispatch_lag_ms": 0.374399998690933,
+      "ended": 138564.6716717
+    },
+    {
+      "uid": 11,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.1281999943312258,
+      "scheduled_latency_ms": 2.271099976496771,
+      "dispatch_lag_ms": 0.14289998216554523,
+      "ended": 138564.6914634
+    },
+    {
+      "uid": 12,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 3.4302000130992383,
+      "scheduled_latency_ms": 3.8255999970715493,
+      "dispatch_lag_ms": 0.395399983972311,
+      "ended": 138564.7130179
+    },
+    {
+      "uid": 13,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.4591000110376626,
+      "scheduled_latency_ms": 2.8239999955985695,
+      "dispatch_lag_ms": 0.3648999845609069,
+      "ended": 138564.7320163
+    },
+    {
+      "uid": 14,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.1794000058434904,
+      "scheduled_latency_ms": 2.586099988548085,
+      "dispatch_lag_ms": 0.40669998270459473,
+      "ended": 138564.7517784
+    },
+    {
+      "uid": 15,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.42540001636371,
+      "scheduled_latency_ms": 2.9845999961253256,
+      "dispatch_lag_ms": 0.5591999797616154,
+      "ended": 138564.7721769
+    },
+    {
+      "uid": 16,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.1763999830000103,
+      "scheduled_latency_ms": 2.575899998191744,
+      "dispatch_lag_ms": 0.39950001519173384,
+      "ended": 138564.7917682
+    },
+    {
+      "uid": 17,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.130900014890358,
+      "scheduled_latency_ms": 2.3911999887786806,
+      "dispatch_lag_ms": 0.2602999738883227,
+      "ended": 138564.8115835
+    },
+    {
+      "uid": 18,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.9932000034023076,
+      "scheduled_latency_ms": 3.2325999927707016,
+      "dispatch_lag_ms": 0.23939998936839402,
+      "ended": 138564.8324249
+    },
+    {
+      "uid": 19,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.685000014025718,
+      "scheduled_latency_ms": 3.132000012556091,
+      "dispatch_lag_ms": 0.446999998530373,
+      "ended": 138564.8523243
+    },
+    {
+      "uid": 20,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.0597999973688275,
+      "scheduled_latency_ms": 2.39129998954013,
+      "dispatch_lag_ms": 0.33149999217130244,
+      "ended": 138564.8715836
+    },
+    {
+      "uid": 21,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.130300010321662,
+      "scheduled_latency_ms": 2.575599995907396,
+      "dispatch_lag_ms": 0.44529998558573425,
+      "ended": 138564.8917679
+    },
+    {
+      "uid": 22,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.144300000509247,
+      "scheduled_latency_ms": 2.685099985683337,
+      "dispatch_lag_ms": 0.5407999851740897,
+      "ended": 138564.9118774
+    },
+    {
+      "uid": 23,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.1243999944999814,
+      "scheduled_latency_ms": 2.722999983234331,
+      "dispatch_lag_ms": 0.5985999887343496,
+      "ended": 138564.9319153
+    },
+    {
+      "uid": 24,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 1.9743999873753637,
+      "scheduled_latency_ms": 2.4489999923389405,
+      "dispatch_lag_ms": 0.4746000049635768,
+      "ended": 138564.9516413
+    },
+    {
+      "uid": 25,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.250900026410818,
+      "scheduled_latency_ms": 2.8541999927256256,
+      "dispatch_lag_ms": 0.6032999663148075,
+      "ended": 138564.9720465
+    },
+    {
+      "uid": 26,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.332500007469207,
+      "scheduled_latency_ms": 2.6452000020071864,
+      "dispatch_lag_ms": 0.31269999453797936,
+      "ended": 138564.9918375
+    },
+    {
+      "uid": 27,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.1527000062633306,
+      "scheduled_latency_ms": 2.675199997611344,
+      "dispatch_lag_ms": 0.5224999913480133,
+      "ended": 138565.0118675
+    },
+    {
+      "uid": 28,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.3216000117827207,
+      "scheduled_latency_ms": 2.914099983172491,
+      "dispatch_lag_ms": 0.5924999713897705,
+      "ended": 138565.0321064
+    },
+    {
+      "uid": 29,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.308199997060001,
+      "scheduled_latency_ms": 2.546499978052452,
+      "dispatch_lag_ms": 0.2382999809924513,
+      "ended": 138565.0517388
+    },
+    {
+      "uid": 30,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.373199997236952,
+      "scheduled_latency_ms": 2.8358999988995492,
+      "dispatch_lag_ms": 0.46270000166259706,
+      "ended": 138565.0720282
+    },
+    {
+      "uid": 31,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.332800009753555,
+      "scheduled_latency_ms": 2.532599988626316,
+      "dispatch_lag_ms": 0.19979997887276113,
+      "ended": 138565.0917249
+    },
+    {
+      "uid": 32,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.374199975747615,
+      "scheduled_latency_ms": 2.5659999810159206,
+      "dispatch_lag_ms": 0.19180000526830554,
+      "ended": 138565.1117583
+    },
+    {
+      "uid": 33,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.2723000147379935,
+      "scheduled_latency_ms": 2.8024999774061143,
+      "dispatch_lag_ms": 0.5301999626681209,
+      "ended": 138565.1319948
+    },
+    {
+      "uid": 34,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.7313999889884144,
+      "scheduled_latency_ms": 3.0983999895397574,
+      "dispatch_lag_ms": 0.36700000055134296,
+      "ended": 138565.1522907
+    },
+    {
+      "uid": 35,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.386999985901639,
+      "scheduled_latency_ms": 2.597799990326166,
+      "dispatch_lag_ms": 0.2108000044245273,
+      "ended": 138565.1717901
+    },
+    {
+      "uid": 36,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.18829998630099,
+      "scheduled_latency_ms": 2.54979997407645,
+      "dispatch_lag_ms": 0.3614999877754599,
+      "ended": 138565.1917421
+    },
+    {
+      "uid": 37,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 1.9832999969366938,
+      "scheduled_latency_ms": 2.5215999921783805,
+      "dispatch_lag_ms": 0.5382999952416867,
+      "ended": 138565.2117139
+    },
+    {
+      "uid": 38,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.046700014034286,
+      "scheduled_latency_ms": 2.439500007312745,
+      "dispatch_lag_ms": 0.3927999932784587,
+      "ended": 138565.2316318
+    },
+    {
+      "uid": 39,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.1146000071894377,
+      "scheduled_latency_ms": 2.5132999871857464,
+      "dispatch_lag_ms": 0.3986999799963087,
+      "ended": 138565.2517056
+    },
+    {
+      "uid": 40,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.425799990305677,
+      "scheduled_latency_ms": 2.682299993466586,
+      "dispatch_lag_ms": 0.2565000031609088,
+      "ended": 138565.2718746
+    },
+    {
+      "uid": 41,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.790600003208965,
+      "scheduled_latency_ms": 3.226500004529953,
+      "dispatch_lag_ms": 0.43590000132098794,
+      "ended": 138565.2924188
+    },
+    {
+      "uid": 42,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.6066999998874962,
+      "scheduled_latency_ms": 3.0097999842837453,
+      "dispatch_lag_ms": 0.40309998439624906,
+      "ended": 138565.3122021
+    },
+    {
+      "uid": 43,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.163900004234165,
+      "scheduled_latency_ms": 2.484800003003329,
+      "dispatch_lag_ms": 0.3208999987691641,
+      "ended": 138565.3316771
+    },
+    {
+      "uid": 44,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.849000011337921,
+      "scheduled_latency_ms": 3.294800000730902,
+      "dispatch_lag_ms": 0.44579998939298093,
+      "ended": 138565.3524871
+    },
+    {
+      "uid": 45,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.3197999980766326,
+      "scheduled_latency_ms": 2.4889999767765403,
+      "dispatch_lag_ms": 0.16919997869990766,
+      "ended": 138565.3716813
+    },
+    {
+      "uid": 46,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.219699992565438,
+      "scheduled_latency_ms": 2.602099993964657,
+      "dispatch_lag_ms": 0.38240000139921904,
+      "ended": 138565.3917944
+    },
+    {
+      "uid": 47,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 1.9082000071648508,
+      "scheduled_latency_ms": 2.5078999751713127,
+      "dispatch_lag_ms": 0.5996999680064619,
+      "ended": 138565.4117002
+    },
+    {
+      "uid": 48,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.412200003163889,
+      "scheduled_latency_ms": 2.565799979493022,
+      "dispatch_lag_ms": 0.15359997632913291,
+      "ended": 138565.4317581
+    },
+    {
+      "uid": 49,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.206300006946549,
+      "scheduled_latency_ms": 2.5255999935325235,
+      "dispatch_lag_ms": 0.3192999865859747,
+      "ended": 138565.4517179
+    },
+    {
+      "uid": 50,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.339900005608797,
+      "scheduled_latency_ms": 2.687099971808493,
+      "dispatch_lag_ms": 0.34719996619969606,
+      "ended": 138565.4718794
+    },
+    {
+      "uid": 51,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.5134000170510262,
+      "scheduled_latency_ms": 2.950599999167025,
+      "dispatch_lag_ms": 0.43719998211599886,
+      "ended": 138565.4921429
+    },
+    {
+      "uid": 52,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.957000018795952,
+      "scheduled_latency_ms": 3.491400013444945,
+      "dispatch_lag_ms": 0.534399994648993,
+      "ended": 138565.5126837
+    },
+    {
+      "uid": 53,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.2558000055141747,
+      "scheduled_latency_ms": 2.771899977233261,
+      "dispatch_lag_ms": 0.5160999717190862,
+      "ended": 138565.5319642
+    },
+    {
+      "uid": 54,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.4428000033367425,
+      "scheduled_latency_ms": 2.654699987033382,
+      "dispatch_lag_ms": 0.21189998369663954,
+      "ended": 138565.551847
+    },
+    {
+      "uid": 55,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.3431000008713454,
+      "scheduled_latency_ms": 2.7660999912768602,
+      "dispatch_lag_ms": 0.42299999040551484,
+      "ended": 138565.5719584
+    },
+    {
+      "uid": 56,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.3372000141534954,
+      "scheduled_latency_ms": 2.669699984835461,
+      "dispatch_lag_ms": 0.33249997068196535,
+      "ended": 138565.591862
+    },
+    {
+      "uid": 57,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.3310999968089163,
+      "scheduled_latency_ms": 2.588100003777072,
+      "dispatch_lag_ms": 0.2570000069681555,
+      "ended": 138565.6117804
+    },
+    {
+      "uid": 58,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.1563000045716763,
+      "scheduled_latency_ms": 2.5530999701004475,
+      "dispatch_lag_ms": 0.3967999655287713,
+      "ended": 138565.6317454
+    },
+    {
+      "uid": 59,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.4056000111158937,
+      "scheduled_latency_ms": 2.9381999920587987,
+      "dispatch_lag_ms": 0.532599980942905,
+      "ended": 138565.6521305
+    },
+    {
+      "uid": 60,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.2634999768342823,
+      "scheduled_latency_ms": 2.669999987119809,
+      "dispatch_lag_ms": 0.4065000102855265,
+      "ended": 138565.6718623
+    },
+    {
+      "uid": 61,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.312199998414144,
+      "scheduled_latency_ms": 2.6678999711293727,
+      "dispatch_lag_ms": 0.3556999727152288,
+      "ended": 138565.6918602
+    },
+    {
+      "uid": 62,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.186099998652935,
+      "scheduled_latency_ms": 2.6757000014185905,
+      "dispatch_lag_ms": 0.4896000027656555,
+      "ended": 138565.711868
+    },
+    {
+      "uid": 63,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.4692000006325543,
+      "scheduled_latency_ms": 2.599600004032254,
+      "dispatch_lag_ms": 0.13040000339969993,
+      "ended": 138565.7317919
+    },
+    {
+      "uid": 64,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.8803999884985387,
+      "scheduled_latency_ms": 3.3762999810278416,
+      "dispatch_lag_ms": 0.49589999252930284,
+      "ended": 138565.7525686
+    },
+    {
+      "uid": 65,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.326999994693324,
+      "scheduled_latency_ms": 2.678099990589544,
+      "dispatch_lag_ms": 0.3510999958962202,
+      "ended": 138565.7718704
+    },
+    {
+      "uid": 66,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.325400011613965,
+      "scheduled_latency_ms": 2.5612000026740134,
+      "dispatch_lag_ms": 0.23579999106004834,
+      "ended": 138565.7917535
+    },
+    {
+      "uid": 67,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 1.7262000183109194,
+      "scheduled_latency_ms": 1.9632999901659787,
+      "dispatch_lag_ms": 0.23709997185505927,
+      "ended": 138565.8111556
+    },
+    {
+      "uid": 68,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.6048000145237893,
+      "scheduled_latency_ms": 2.9275999986566603,
+      "dispatch_lag_ms": 0.32279998413287103,
+      "ended": 138565.8321199
+    },
+    {
+      "uid": 69,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.360100013902411,
+      "scheduled_latency_ms": 2.9664000030606985,
+      "dispatch_lag_ms": 0.6062999891582876,
+      "ended": 138565.8521587
+    },
+    {
+      "uid": 70,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.3573999933432788,
+      "scheduled_latency_ms": 2.893799974117428,
+      "dispatch_lag_ms": 0.5363999807741493,
+      "ended": 138565.8720861
+    },
+    {
+      "uid": 71,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.436100010527298,
+      "scheduled_latency_ms": 2.871700009563938,
+      "dispatch_lag_ms": 0.43559999903663993,
+      "ended": 138565.892064
+    },
+    {
+      "uid": 72,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.1948000066913664,
+      "scheduled_latency_ms": 2.584599977126345,
+      "dispatch_lag_ms": 0.3897999704349786,
+      "ended": 138565.9117769
+    },
+    {
+      "uid": 73,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.677600015886128,
+      "scheduled_latency_ms": 3.122599999187514,
+      "dispatch_lag_ms": 0.44499998330138624,
+      "ended": 138565.9323149
+    },
+    {
+      "uid": 74,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.4228999973274767,
+      "scheduled_latency_ms": 2.940400008810684,
+      "dispatch_lag_ms": 0.5175000114832073,
+      "ended": 138565.9521327
+    },
+    {
+      "uid": 75,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.0630000217352062,
+      "scheduled_latency_ms": 2.230499987490475,
+      "dispatch_lag_ms": 0.16749996575526893,
+      "ended": 138565.9714228
+    },
+    {
+      "uid": 76,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.304199995705858,
+      "scheduled_latency_ms": 2.4575999996159226,
+      "dispatch_lag_ms": 0.1534000039100647,
+      "ended": 138565.9916499
+    },
+    {
+      "uid": 77,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 1.9397000141907483,
+      "scheduled_latency_ms": 2.1308000141289085,
+      "dispatch_lag_ms": 0.19109999993816018,
+      "ended": 138566.0113231
+    },
+    {
+      "uid": 78,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.4526000197511166,
+      "scheduled_latency_ms": 2.6710999954957515,
+      "dispatch_lag_ms": 0.21849997574463487,
+      "ended": 138566.0318634
+    },
+    {
+      "uid": 79,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.2896000009495765,
+      "scheduled_latency_ms": 2.909799979534,
+      "dispatch_lag_ms": 0.6201999785844237,
+      "ended": 138566.0521021
+    },
+    {
+      "uid": 80,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.2775999968871474,
+      "scheduled_latency_ms": 2.487899997504428,
+      "dispatch_lag_ms": 0.2103000006172806,
+      "ended": 138566.0716802
+    },
+    {
+      "uid": 81,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.268899988848716,
+      "scheduled_latency_ms": 2.538099972298369,
+      "dispatch_lag_ms": 0.2691999834496528,
+      "ended": 138566.0917304
+    },
+    {
+      "uid": 82,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.3458999930880964,
+      "scheduled_latency_ms": 2.529699995648116,
+      "dispatch_lag_ms": 0.1838000025600195,
+      "ended": 138566.111722
+    },
+    {
+      "uid": 83,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.5345000030938536,
+      "scheduled_latency_ms": 2.9539999668486416,
+      "dispatch_lag_ms": 0.41949996375478804,
+      "ended": 138566.1321463
+    },
+    {
+      "uid": 84,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.7387999871280044,
+      "scheduled_latency_ms": 2.9183999868109822,
+      "dispatch_lag_ms": 0.1795999996829778,
+      "ended": 138566.1521107
+    },
+    {
+      "uid": 85,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.1898999984841794,
+      "scheduled_latency_ms": 2.5766000035218894,
+      "dispatch_lag_ms": 0.38670000503771007,
+      "ended": 138566.1717689
+    },
+    {
+      "uid": 86,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.2225000138860196,
+      "scheduled_latency_ms": 2.765099983662367,
+      "dispatch_lag_ms": 0.5425999697763473,
+      "ended": 138566.1919574
+    },
+    {
+      "uid": 87,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.5677999947220087,
+      "scheduled_latency_ms": 2.903199987486005,
+      "dispatch_lag_ms": 0.3353999927639961,
+      "ended": 138566.2120955
+    },
+    {
+      "uid": 88,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.223999996203929,
+      "scheduled_latency_ms": 2.4333999899681658,
+      "dispatch_lag_ms": 0.20939999376423657,
+      "ended": 138566.2316257
+    },
+    {
+      "uid": 89,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.2218000085558742,
+      "scheduled_latency_ms": 2.5846999778877944,
+      "dispatch_lag_ms": 0.36289996933192015,
+      "ended": 138566.251777
+    },
+    {
+      "uid": 90,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.2552000009454787,
+      "scheduled_latency_ms": 2.7735999901778996,
+      "dispatch_lag_ms": 0.5183999892324209,
+      "ended": 138566.2719659
+    },
+    {
+      "uid": 91,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.580599975772202,
+      "scheduled_latency_ms": 3.2510999881196767,
+      "dispatch_lag_ms": 0.6705000123474747,
+      "ended": 138566.2924434
+    },
+    {
+      "uid": 92,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.606599999126047,
+      "scheduled_latency_ms": 3.1285999866668135,
+      "dispatch_lag_ms": 0.5219999875407666,
+      "ended": 138566.3123209
+    },
+    {
+      "uid": 93,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.147099992725998,
+      "scheduled_latency_ms": 2.7541999879758805,
+      "dispatch_lag_ms": 0.6070999952498823,
+      "ended": 138566.3319465
+    },
+    {
+      "uid": 94,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.439000003505498,
+      "scheduled_latency_ms": 2.6855000178329647,
+      "dispatch_lag_ms": 0.2465000143274665,
+      "ended": 138566.3518778
+    },
+    {
+      "uid": 95,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.740500000072643,
+      "scheduled_latency_ms": 2.9813999717589468,
+      "dispatch_lag_ms": 0.24089997168630362,
+      "ended": 138566.3721737
+    },
+    {
+      "uid": 96,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 3.4918999881483614,
+      "scheduled_latency_ms": 4.030999989481643,
+      "dispatch_lag_ms": 0.5391000013332814,
+      "ended": 138566.3932233
+    },
+    {
+      "uid": 97,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.0178999984636903,
+      "scheduled_latency_ms": 2.5761999713722616,
+      "dispatch_lag_ms": 0.5582999729085714,
+      "ended": 138566.4117685
+    },
+    {
+      "uid": 98,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.4630000116303563,
+      "scheduled_latency_ms": 2.9918999935034662,
+      "dispatch_lag_ms": 0.5288999818731099,
+      "ended": 138566.4321842
+    },
+    {
+      "uid": 99,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.6014000177383423,
+      "scheduled_latency_ms": 2.859200001694262,
+      "dispatch_lag_ms": 0.25779998395591974,
+      "ended": 138566.4520515
+    },
+    {
+      "uid": 100,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.25349998800084,
+      "scheduled_latency_ms": 2.5542999792378396,
+      "dispatch_lag_ms": 0.30079999123699963,
+      "ended": 138566.4717466
+    },
+    {
+      "uid": 101,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.39869998767972,
+      "scheduled_latency_ms": 2.7882999856956303,
+      "dispatch_lag_ms": 0.3895999980159104,
+      "ended": 138566.4919806
+    },
+    {
+      "uid": 102,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.0517999946605414,
+      "scheduled_latency_ms": 2.4677999899722636,
+      "dispatch_lag_ms": 0.41599999531172216,
+      "ended": 138566.5116601
+    },
+    {
+      "uid": 103,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.074799995170906,
+      "scheduled_latency_ms": 2.5881999754346907,
+      "dispatch_lag_ms": 0.5133999802637845,
+      "ended": 138566.5317805
+    },
+    {
+      "uid": 104,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.805399999488145,
+      "scheduled_latency_ms": 3.344400000059977,
+      "dispatch_lag_ms": 0.5390000005718321,
+      "ended": 138566.5525367
+    },
+    {
+      "uid": 105,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.363800012972206,
+      "scheduled_latency_ms": 2.7771000168286264,
+      "dispatch_lag_ms": 0.4133000038564205,
+      "ended": 138566.5719694
+    },
+    {
+      "uid": 106,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.439500007312745,
+      "scheduled_latency_ms": 2.8357999981381,
+      "dispatch_lag_ms": 0.39629999082535505,
+      "ended": 138566.5920281
+    },
+    {
+      "uid": 107,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.192299987655133,
+      "scheduled_latency_ms": 2.6388999831397086,
+      "dispatch_lag_ms": 0.44659999548457563,
+      "ended": 138566.6118312
+    },
+    {
+      "uid": 108,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.367999986745417,
+      "scheduled_latency_ms": 2.9504999693017453,
+      "dispatch_lag_ms": 0.5824999825563282,
+      "ended": 138566.6321428
+    },
+    {
+      "uid": 109,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.607899979921058,
+      "scheduled_latency_ms": 3.0852999771013856,
+      "dispatch_lag_ms": 0.4773999971803278,
+      "ended": 138566.6522776
+    },
+    {
+      "uid": 110,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 3.0858000100124627,
+      "scheduled_latency_ms": 3.548000007867813,
+      "dispatch_lag_ms": 0.4621999978553504,
+      "ended": 138566.6727403
+    },
+    {
+      "uid": 111,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.2194999910425395,
+      "scheduled_latency_ms": 2.545499970437959,
+      "dispatch_lag_ms": 0.32599997939541936,
+      "ended": 138566.6917378
+    },
+    {
+      "uid": 112,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.686299994820729,
+      "scheduled_latency_ms": 3.140699991490692,
+      "dispatch_lag_ms": 0.454399996669963,
+      "ended": 138566.712333
+    },
+    {
+      "uid": 113,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.528799988795072,
+      "scheduled_latency_ms": 3.128799988189712,
+      "dispatch_lag_ms": 0.5999999993946403,
+      "ended": 138566.7323211
+    },
+    {
+      "uid": 114,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.425100014079362,
+      "scheduled_latency_ms": 2.566699986346066,
+      "dispatch_lag_ms": 0.14159997226670384,
+      "ended": 138566.751759
+    },
+    {
+      "uid": 115,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.4923000019043684,
+      "scheduled_latency_ms": 2.6695999840740114,
+      "dispatch_lag_ms": 0.17729998216964304,
+      "ended": 138566.7718619
+    },
+    {
+      "uid": 116,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.3206000041682273,
+      "scheduled_latency_ms": 2.713699999731034,
+      "dispatch_lag_ms": 0.3930999955628067,
+      "ended": 138566.791906
+    },
+    {
+      "uid": 117,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.3194999957922846,
+      "scheduled_latency_ms": 2.6304999773856252,
+      "dispatch_lag_ms": 0.31099998159334064,
+      "ended": 138566.8118228
+    },
+    {
+      "uid": 118,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.4744000111240894,
+      "scheduled_latency_ms": 2.602299995487556,
+      "dispatch_lag_ms": 0.1278999843634665,
+      "ended": 138566.8317946
+    },
+    {
+      "uid": 119,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.798900008201599,
+      "scheduled_latency_ms": 3.2014000171329826,
+      "dispatch_lag_ms": 0.4025000089313835,
+      "ended": 138566.8523937
+    },
+    {
+      "uid": 120,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.986999985296279,
+      "scheduled_latency_ms": 3.2532999757677317,
+      "dispatch_lag_ms": 0.2662999904714525,
+      "ended": 138566.8724456
+    },
+    {
+      "uid": 121,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.4452999932691455,
+      "scheduled_latency_ms": 3.129999997327104,
+      "dispatch_lag_ms": 0.6847000040579587,
+      "ended": 138566.8923223
+    },
+    {
+      "uid": 122,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.225899981567636,
+      "scheduled_latency_ms": 2.7788999723270535,
+      "dispatch_lag_ms": 0.5529999907594174,
+      "ended": 138566.9119712
+    },
+    {
+      "uid": 123,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.396500000031665,
+      "scheduled_latency_ms": 2.5089999835472554,
+      "dispatch_lag_ms": 0.11249998351559043,
+      "ended": 138566.9317013
+    },
+    {
+      "uid": 124,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.0032000029459596,
+      "scheduled_latency_ms": 2.451500011375174,
+      "dispatch_lag_ms": 0.44830000842921436,
+      "ended": 138566.9516438
+    },
+    {
+      "uid": 125,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.0946000004187226,
+      "scheduled_latency_ms": 2.7126999921165407,
+      "dispatch_lag_ms": 0.618099991697818,
+      "ended": 138566.971905
+    },
+    {
+      "uid": 126,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.2875999857205898,
+      "scheduled_latency_ms": 2.5169999862555414,
+      "dispatch_lag_ms": 0.2294000005349517,
+      "ended": 138566.9917093
+    },
+    {
+      "uid": 127,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.1670999994967133,
+      "scheduled_latency_ms": 2.5114000018220395,
+      "dispatch_lag_ms": 0.3443000023253262,
+      "ended": 138567.0117037
+    },
+    {
+      "uid": 128,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.410399989457801,
+      "scheduled_latency_ms": 2.7843999851029366,
+      "dispatch_lag_ms": 0.37399999564513564,
+      "ended": 138567.0319767
+    },
+    {
+      "uid": 129,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.3542999988421798,
+      "scheduled_latency_ms": 2.600499981781468,
+      "dispatch_lag_ms": 0.24619998293928802,
+      "ended": 138567.0517928
+    },
+    {
+      "uid": 130,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.666099986527115,
+      "scheduled_latency_ms": 2.840100001776591,
+      "dispatch_lag_ms": 0.17400001524947584,
+      "ended": 138567.0720324
+    },
+    {
+      "uid": 131,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.367399982176721,
+      "scheduled_latency_ms": 3.146099974401295,
+      "dispatch_lag_ms": 0.7786999922245741,
+      "ended": 138567.0923384
+    },
+    {
+      "uid": 132,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.1306999842636287,
+      "scheduled_latency_ms": 2.3225999902933836,
+      "dispatch_lag_ms": 0.19190000602975488,
+      "ended": 138567.1115149
+    },
+    {
+      "uid": 133,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.606299996841699,
+      "scheduled_latency_ms": 3.0440999835263938,
+      "dispatch_lag_ms": 0.4377999866846949,
+      "ended": 138567.1322364
+    },
+    {
+      "uid": 134,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 3.5889999999199063,
+      "scheduled_latency_ms": 3.983399976277724,
+      "dispatch_lag_ms": 0.39439997635781765,
+      "ended": 138567.1531757
+    },
+    {
+      "uid": 135,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 3.5592000058386475,
+      "scheduled_latency_ms": 4.1692999948281795,
+      "dispatch_lag_ms": 0.610099988989532,
+      "ended": 138567.1733616
+    },
+    {
+      "uid": 136,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.627299982123077,
+      "scheduled_latency_ms": 2.7976999699603766,
+      "dispatch_lag_ms": 0.1703999878372997,
+      "ended": 138567.19199
+    },
+    {
+      "uid": 137,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 1.9156000053044409,
+      "scheduled_latency_ms": 2.322999993339181,
+      "dispatch_lag_ms": 0.4073999880347401,
+      "ended": 138567.2115153
+    },
+    {
+      "uid": 138,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.282300003571436,
+      "scheduled_latency_ms": 2.5757999974302948,
+      "dispatch_lag_ms": 0.29349999385885894,
+      "ended": 138567.2317681
+    },
+    {
+      "uid": 139,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.37939998623915,
+      "scheduled_latency_ms": 2.721499971812591,
+      "dispatch_lag_ms": 0.3420999855734408,
+      "ended": 138567.2519138
+    },
+    {
+      "uid": 140,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.5228000013157725,
+      "scheduled_latency_ms": 3.1347000040113926,
+      "dispatch_lag_ms": 0.6119000026956201,
+      "ended": 138567.272327
+    },
+    {
+      "uid": 141,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.4591999826952815,
+      "scheduled_latency_ms": 2.6177999970968813,
+      "dispatch_lag_ms": 0.15860001440159976,
+      "ended": 138567.2918101
+    },
+    {
+      "uid": 142,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.6125000149477273,
+      "scheduled_latency_ms": 3.166599984979257,
+      "dispatch_lag_ms": 0.5540999700315297,
+      "ended": 138567.3123589
+    },
+    {
+      "uid": 143,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.162699995096773,
+      "scheduled_latency_ms": 2.630999981192872,
+      "dispatch_lag_ms": 0.468299986096099,
+      "ended": 138567.3318233
+    },
+    {
+      "uid": 144,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 1.9022000196855515,
+      "scheduled_latency_ms": 2.0351000130176544,
+      "dispatch_lag_ms": 0.1328999933321029,
+      "ended": 138567.3512274
+    },
+    {
+      "uid": 145,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.4272000009659678,
+      "scheduled_latency_ms": 2.6606999745126814,
+      "dispatch_lag_ms": 0.2334999735467136,
+      "ended": 138567.371853
+    },
+    {
+      "uid": 146,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 3.05060000391677,
+      "scheduled_latency_ms": 3.4601000079419464,
+      "dispatch_lag_ms": 0.40950000402517617,
+      "ended": 138567.3926524
+    },
+    {
+      "uid": 147,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.3751000117044896,
+      "scheduled_latency_ms": 2.62389998533763,
+      "dispatch_lag_ms": 0.24879997363314033,
+      "ended": 138567.4118162
+    },
+    {
+      "uid": 148,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.5499000039417297,
+      "scheduled_latency_ms": 3.1052999838721007,
+      "dispatch_lag_ms": 0.555399979930371,
+      "ended": 138567.4322976
+    },
+    {
+      "uid": 149,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.3541000264231116,
+      "scheduled_latency_ms": 2.730500011239201,
+      "dispatch_lag_ms": 0.3763999848160893,
+      "ended": 138567.4519228
+    },
+    {
+      "uid": 150,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.2329000057652593,
+      "scheduled_latency_ms": 2.7080999861937016,
+      "dispatch_lag_ms": 0.47519998042844236,
+      "ended": 138567.4719004
+    },
+    {
+      "uid": 151,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.0179999992251396,
+      "scheduled_latency_ms": 2.143399993656203,
+      "dispatch_lag_ms": 0.12539999443106353,
+      "ended": 138567.4913357
+    },
+    {
+      "uid": 152,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.1115999843459576,
+      "scheduled_latency_ms": 2.7199999894946814,
+      "dispatch_lag_ms": 0.6084000051487237,
+      "ended": 138567.5119123
+    },
+    {
+      "uid": 153,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 1.9764000026043504,
+      "scheduled_latency_ms": 2.591699972981587,
+      "dispatch_lag_ms": 0.6152999703772366,
+      "ended": 138567.531784
+    },
+    {
+      "uid": 154,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.069299982395023,
+      "scheduled_latency_ms": 2.3745999787934124,
+      "dispatch_lag_ms": 0.30529999639838934,
+      "ended": 138567.5515669
+    },
+    {
+      "uid": 155,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.067900000838563,
+      "scheduled_latency_ms": 2.2501999919768423,
+      "dispatch_lag_ms": 0.18229999113827944,
+      "ended": 138567.5714425
+    },
+    {
+      "uid": 156,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.5788999919313937,
+      "scheduled_latency_ms": 3.0348999716807157,
+      "dispatch_lag_ms": 0.45599997974932194,
+      "ended": 138567.5922272
+    },
+    {
+      "uid": 157,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 1.9497000030241907,
+      "scheduled_latency_ms": 2.078999998047948,
+      "dispatch_lag_ms": 0.12929999502375722,
+      "ended": 138567.6112713
+    },
+    {
+      "uid": 158,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.769999991869554,
+      "scheduled_latency_ms": 3.064799966523424,
+      "dispatch_lag_ms": 0.29479997465386987,
+      "ended": 138567.6322571
+    },
+    {
+      "uid": 159,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.790699974866584,
+      "scheduled_latency_ms": 3.0502999725285918,
+      "dispatch_lag_ms": 0.2595999976620078,
+      "ended": 138567.6522426
+    },
+    {
+      "uid": 160,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.4532000243198127,
+      "scheduled_latency_ms": 2.566000010119751,
+      "dispatch_lag_ms": 0.11279998579993844,
+      "ended": 138567.6717583
+    },
+    {
+      "uid": 161,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.531599981011823,
+      "scheduled_latency_ms": 2.9655999678652734,
+      "dispatch_lag_ms": 0.43399998685345054,
+      "ended": 138567.6921579
+    },
+    {
+      "uid": 162,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.660099999047816,
+      "scheduled_latency_ms": 2.765399985946715,
+      "dispatch_lag_ms": 0.10529998689889908,
+      "ended": 138567.7119577
+    },
+    {
+      "uid": 163,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.8156000189483166,
+      "scheduled_latency_ms": 2.9971000039950013,
+      "dispatch_lag_ms": 0.18149998504668474,
+      "ended": 138567.7321894
+    },
+    {
+      "uid": 164,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.4302999954670668,
+      "scheduled_latency_ms": 3.1812999804969877,
+      "dispatch_lag_ms": 0.7509999850299209,
+      "ended": 138567.7523736
+    },
+    {
+      "uid": 165,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.2619999945163727,
+      "scheduled_latency_ms": 2.5622999819461256,
+      "dispatch_lag_ms": 0.30029998742975295,
+      "ended": 138567.7717546
+    },
+    {
+      "uid": 166,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.684899984160438,
+      "scheduled_latency_ms": 3.2828999974299222,
+      "dispatch_lag_ms": 0.598000013269484,
+      "ended": 138567.7924752
+    },
+    {
+      "uid": 167,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.3236999986693263,
+      "scheduled_latency_ms": 2.6951999752782285,
+      "dispatch_lag_ms": 0.3714999766089022,
+      "ended": 138567.8118875
+    },
+    {
+      "uid": 168,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.507199998944998,
+      "scheduled_latency_ms": 2.9759999888483435,
+      "dispatch_lag_ms": 0.4687999899033457,
+      "ended": 138567.8321683
+    },
+    {
+      "uid": 169,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.3612999939359725,
+      "scheduled_latency_ms": 3.081600007135421,
+      "dispatch_lag_ms": 0.7203000131994486,
+      "ended": 138567.8522739
+    },
+    {
+      "uid": 170,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.4315999762620777,
+      "scheduled_latency_ms": 2.5726999738253653,
+      "dispatch_lag_ms": 0.14109999756328762,
+      "ended": 138567.871765
+    },
+    {
+      "uid": 171,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.2017000010237098,
+      "scheduled_latency_ms": 2.319599996553734,
+      "dispatch_lag_ms": 0.11789999553002417,
+      "ended": 138567.8915119
+    },
+    {
+      "uid": 172,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.287200011778623,
+      "scheduled_latency_ms": 2.8753999795299023,
+      "dispatch_lag_ms": 0.5881999677512795,
+      "ended": 138567.9120677
+    },
+    {
+      "uid": 173,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.6151000056415796,
+      "scheduled_latency_ms": 2.9747999797109514,
+      "dispatch_lag_ms": 0.3596999740693718,
+      "ended": 138567.9321671
+    },
+    {
+      "uid": 174,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.161299984436482,
+      "scheduled_latency_ms": 2.609199989819899,
+      "dispatch_lag_ms": 0.447900005383417,
+      "ended": 138567.9518015
+    },
+    {
+      "uid": 175,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.4953999964054674,
+      "scheduled_latency_ms": 2.988799969898537,
+      "dispatch_lag_ms": 0.4933999734930694,
+      "ended": 138567.9721811
+    },
+    {
+      "uid": 176,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.4778999795671552,
+      "scheduled_latency_ms": 3.0621999758295715,
+      "dispatch_lag_ms": 0.5842999962624162,
+      "ended": 138567.9922545
+    },
+    {
+      "uid": 177,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.244800009066239,
+      "scheduled_latency_ms": 2.546000003349036,
+      "dispatch_lag_ms": 0.301199994282797,
+      "ended": 138568.0117383
+    },
+    {
+      "uid": 178,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.3298000160139054,
+      "scheduled_latency_ms": 2.623599983053282,
+      "dispatch_lag_ms": 0.2937999670393765,
+      "ended": 138568.0318159
+    },
+    {
+      "uid": 179,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.3154999944381416,
+      "scheduled_latency_ms": 2.7225999801885337,
+      "dispatch_lag_ms": 0.4070999857503921,
+      "ended": 138568.0519149
+    },
+    {
+      "uid": 180,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.3963999992702156,
+      "scheduled_latency_ms": 2.6596999960020185,
+      "dispatch_lag_ms": 0.2632999967318028,
+      "ended": 138568.071852
+    },
+    {
+      "uid": 181,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.1661999926436692,
+      "scheduled_latency_ms": 2.603899978566915,
+      "dispatch_lag_ms": 0.43769998592324555,
+      "ended": 138568.0917962
+    },
+    {
+      "uid": 182,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.3548000026494265,
+      "scheduled_latency_ms": 2.6097999943885952,
+      "dispatch_lag_ms": 0.25499999173916876,
+      "ended": 138568.1118021
+    },
+    {
+      "uid": 183,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.5935999874491245,
+      "scheduled_latency_ms": 2.779299975372851,
+      "dispatch_lag_ms": 0.18569998792372644,
+      "ended": 138568.1319716
+    },
+    {
+      "uid": 184,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.546300005633384,
+      "scheduled_latency_ms": 3.0206999799702317,
+      "dispatch_lag_ms": 0.47439997433684766,
+      "ended": 138568.152213
+    },
+    {
+      "uid": 185,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.1047000191174448,
+      "scheduled_latency_ms": 2.469700004439801,
+      "dispatch_lag_ms": 0.3649999853223562,
+      "ended": 138568.171662
+    },
+    {
+      "uid": 186,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.6596000243443996,
+      "scheduled_latency_ms": 3.385299991350621,
+      "dispatch_lag_ms": 0.7256999670062214,
+      "ended": 138568.1925776
+    },
+    {
+      "uid": 187,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.4551999813411385,
+      "scheduled_latency_ms": 3.0735999753233045,
+      "dispatch_lag_ms": 0.618399993982166,
+      "ended": 138568.2122659
+    },
+    {
+      "uid": 188,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.1542999893426895,
+      "scheduled_latency_ms": 2.510899998014793,
+      "dispatch_lag_ms": 0.3566000086721033,
+      "ended": 138568.2317032
+    },
+    {
+      "uid": 189,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.285700000356883,
+      "scheduled_latency_ms": 2.74089997401461,
+      "dispatch_lag_ms": 0.45519997365772724,
+      "ended": 138568.2519332
+    },
+    {
+      "uid": 190,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.073400013614446,
+      "scheduled_latency_ms": 2.667299995664507,
+      "dispatch_lag_ms": 0.5938999820500612,
+      "ended": 138568.2718596
+    },
+    {
+      "uid": 191,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.3019000072963536,
+      "scheduled_latency_ms": 2.513100014766678,
+      "dispatch_lag_ms": 0.21120000747032464,
+      "ended": 138568.2917054
+    },
+    {
+      "uid": 192,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.4806000001262873,
+      "scheduled_latency_ms": 2.751499996520579,
+      "dispatch_lag_ms": 0.2708999963942915,
+      "ended": 138568.3119438
+    },
+    {
+      "uid": 193,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.5006000068970025,
+      "scheduled_latency_ms": 2.7714000025298446,
+      "dispatch_lag_ms": 0.2707999956328422,
+      "ended": 138568.3319637
+    },
+    {
+      "uid": 194,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.3050000017974526,
+      "scheduled_latency_ms": 2.8030000103171915,
+      "dispatch_lag_ms": 0.4980000085197389,
+      "ended": 138568.3519953
+    },
+    {
+      "uid": 195,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.7784999983850867,
+      "scheduled_latency_ms": 2.9566999874077737,
+      "dispatch_lag_ms": 0.17819998902268708,
+      "ended": 138568.372149
+    },
+    {
+      "uid": 196,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.1893999946769327,
+      "scheduled_latency_ms": 2.5824999902397394,
+      "dispatch_lag_ms": 0.3930999955628067,
+      "ended": 138568.3917748
+    },
+    {
+      "uid": 197,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.0462000102270395,
+      "scheduled_latency_ms": 2.1385999862104654,
+      "dispatch_lag_ms": 0.09239997598342597,
+      "ended": 138568.4113309
+    },
+    {
+      "uid": 198,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.3228999925777316,
+      "scheduled_latency_ms": 2.6695999840740114,
+      "dispatch_lag_ms": 0.34669999149627984,
+      "ended": 138568.4318619
+    },
+    {
+      "uid": 199,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.3908000148367137,
+      "scheduled_latency_ms": 2.7227000100538135,
+      "dispatch_lag_ms": 0.3318999952170998,
+      "ended": 138568.451915
+    },
+    {
+      "uid": 200,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.1567000076174736,
+      "scheduled_latency_ms": 2.610999974422157,
+      "dispatch_lag_ms": 0.4542999668046832,
+      "ended": 138568.4718033
+    },
+    {
+      "uid": 201,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.286300004925579,
+      "scheduled_latency_ms": 2.651299990247935,
+      "dispatch_lag_ms": 0.3649999853223562,
+      "ended": 138568.4918436
+    },
+    {
+      "uid": 202,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.514899999368936,
+      "scheduled_latency_ms": 3.111500001978129,
+      "dispatch_lag_ms": 0.5966000026091933,
+      "ended": 138568.5123038
+    },
+    {
+      "uid": 203,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.261799992993474,
+      "scheduled_latency_ms": 2.836299972841516,
+      "dispatch_lag_ms": 0.5744999798480421,
+      "ended": 138568.5320286
+    },
+    {
+      "uid": 204,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.317700011190027,
+      "scheduled_latency_ms": 2.6365999947302043,
+      "dispatch_lag_ms": 0.31889998354017735,
+      "ended": 138568.5518289
+    },
+    {
+      "uid": 205,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.4671000137459487,
+      "scheduled_latency_ms": 3.101500013144687,
+      "dispatch_lag_ms": 0.6343999993987381,
+      "ended": 138568.5722938
+    },
+    {
+      "uid": 206,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.161400014301762,
+      "scheduled_latency_ms": 2.6937999937217683,
+      "dispatch_lag_ms": 0.5323999794200063,
+      "ended": 138568.5918861
+    },
+    {
+      "uid": 207,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.2638000082224607,
+      "scheduled_latency_ms": 3.04320000577718,
+      "dispatch_lag_ms": 0.7793999975547194,
+      "ended": 138568.6122355
+    },
+    {
+      "uid": 208,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.994399983435869,
+      "scheduled_latency_ms": 3.401999972993508,
+      "dispatch_lag_ms": 0.40759998955763876,
+      "ended": 138568.6325943
+    },
+    {
+      "uid": 209,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.675199997611344,
+      "scheduled_latency_ms": 3.22239997331053,
+      "dispatch_lag_ms": 0.5471999756991863,
+      "ended": 138568.6524147
+    },
+    {
+      "uid": 210,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.5009999808389693,
+      "scheduled_latency_ms": 3.106299991486594,
+      "dispatch_lag_ms": 0.6053000106476247,
+      "ended": 138568.6722986
+    },
+    {
+      "uid": 211,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.273799997055903,
+      "scheduled_latency_ms": 2.5114999734796584,
+      "dispatch_lag_ms": 0.2376999764237553,
+      "ended": 138568.6917038
+    },
+    {
+      "uid": 212,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.030799980275333,
+      "scheduled_latency_ms": 2.4892999790608883,
+      "dispatch_lag_ms": 0.45849999878555536,
+      "ended": 138568.7116816
+    },
+    {
+      "uid": 213,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.270400000270456,
+      "scheduled_latency_ms": 2.6830999995581806,
+      "dispatch_lag_ms": 0.4126999992877245,
+      "ended": 138568.7318754
+    },
+    {
+      "uid": 214,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 1.9220999965909868,
+      "scheduled_latency_ms": 2.3588999756611884,
+      "dispatch_lag_ms": 0.4367999790702015,
+      "ended": 138568.7515512
+    },
+    {
+      "uid": 215,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.175600006012246,
+      "scheduled_latency_ms": 2.793699997710064,
+      "dispatch_lag_ms": 0.618099991697818,
+      "ended": 138568.771986
+    },
+    {
+      "uid": 216,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.4575999996159226,
+      "scheduled_latency_ms": 3.0515000107698143,
+      "dispatch_lag_ms": 0.5939000111538917,
+      "ended": 138568.7922438
+    },
+    {
+      "uid": 217,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.4960999726317823,
+      "scheduled_latency_ms": 2.816599968355149,
+      "dispatch_lag_ms": 0.32049999572336674,
+      "ended": 138568.8120089
+    },
+    {
+      "uid": 218,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.3916000209283084,
+      "scheduled_latency_ms": 2.714600006584078,
+      "dispatch_lag_ms": 0.3229999856557697,
+      "ended": 138568.8319069
+    },
+    {
+      "uid": 219,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.230000012787059,
+      "scheduled_latency_ms": 2.469400002155453,
+      "dispatch_lag_ms": 0.23939998936839402,
+      "ended": 138568.8516617
+    },
+    {
+      "uid": 220,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.1092999959364533,
+      "scheduled_latency_ms": 2.607699978398159,
+      "dispatch_lag_ms": 0.4983999824617058,
+      "ended": 138568.8718
+    },
+    {
+      "uid": 221,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.3947000154294074,
+      "scheduled_latency_ms": 2.5695000076666474,
+      "dispatch_lag_ms": 0.17479999223724008,
+      "ended": 138568.8917618
+    },
+    {
+      "uid": 222,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.2452000121120363,
+      "scheduled_latency_ms": 2.528899989556521,
+      "dispatch_lag_ms": 0.28369997744448483,
+      "ended": 138568.9117212
+    },
+    {
+      "uid": 223,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.24459997843951,
+      "scheduled_latency_ms": 2.557799976784736,
+      "dispatch_lag_ms": 0.31319999834522605,
+      "ended": 138568.9317501
+    },
+    {
+      "uid": 224,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.4021000135689974,
+      "scheduled_latency_ms": 2.920400002039969,
+      "dispatch_lag_ms": 0.5182999884709716,
+      "ended": 138568.9521127
+    },
+    {
+      "uid": 225,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.3679000150877982,
+      "scheduled_latency_ms": 3.0214999860618263,
+      "dispatch_lag_ms": 0.6535999709740281,
+      "ended": 138568.9722138
+    },
+    {
+      "uid": 226,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.148600004147738,
+      "scheduled_latency_ms": 2.3914999910630286,
+      "dispatch_lag_ms": 0.24289998691529036,
+      "ended": 138568.9915838
+    },
+    {
+      "uid": 227,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.44609999936074,
+      "scheduled_latency_ms": 2.693999995244667,
+      "dispatch_lag_ms": 0.24789999588392675,
+      "ended": 138569.0118863
+    },
+    {
+      "uid": 228,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.3813000007066876,
+      "scheduled_latency_ms": 3.002599987667054,
+      "dispatch_lag_ms": 0.6212999869603664,
+      "ended": 138569.0321949
+    },
+    {
+      "uid": 229,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.227699995273724,
+      "scheduled_latency_ms": 2.8230999887455255,
+      "dispatch_lag_ms": 0.5953999934718013,
+      "ended": 138569.0520154
+    },
+    {
+      "uid": 230,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.2721999848727137,
+      "scheduled_latency_ms": 2.510699996491894,
+      "dispatch_lag_ms": 0.23850001161918044,
+      "ended": 138569.071703
+    },
+    {
+      "uid": 231,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.7968999929726124,
+      "scheduled_latency_ms": 3.3480999700259417,
+      "dispatch_lag_ms": 0.5511999770533293,
+      "ended": 138569.0925404
+    },
+    {
+      "uid": 232,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.440700016450137,
+      "scheduled_latency_ms": 2.7256000030320138,
+      "dispatch_lag_ms": 0.2848999865818769,
+      "ended": 138569.1119179
+    },
+    {
+      "uid": 233,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.5781999866012484,
+      "scheduled_latency_ms": 2.773599961074069,
+      "dispatch_lag_ms": 0.19539997447282076,
+      "ended": 138569.1319659
+    },
+    {
+      "uid": 234,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 3.0861999839544296,
+      "scheduled_latency_ms": 3.7426999770104885,
+      "dispatch_lag_ms": 0.6564999930560589,
+      "ended": 138569.152935
+    },
+    {
+      "uid": 235,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.44909999310039,
+      "scheduled_latency_ms": 2.714000002015382,
+      "dispatch_lag_ms": 0.2649000089149922,
+      "ended": 138569.1719063
+    },
+    {
+      "uid": 236,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.5305000017397106,
+      "scheduled_latency_ms": 3.084799973294139,
+      "dispatch_lag_ms": 0.5542999715544283,
+      "ended": 138569.1922771
+    },
+    {
+      "uid": 237,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 1.975699997274205,
+      "scheduled_latency_ms": 2.448799990816042,
+      "dispatch_lag_ms": 0.47309999354183674,
+      "ended": 138569.2116411
+    },
+    {
+      "uid": 238,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.286400005687028,
+      "scheduled_latency_ms": 2.545099996495992,
+      "dispatch_lag_ms": 0.2586999908089638,
+      "ended": 138569.2317374
+    },
+    {
+      "uid": 239,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.6033000031020492,
+      "scheduled_latency_ms": 2.9187999898567796,
+      "dispatch_lag_ms": 0.31549998675473034,
+      "ended": 138569.2521111
+    },
+    {
+      "uid": 240,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.5692999770399183,
+      "scheduled_latency_ms": 3.0354999762494117,
+      "dispatch_lag_ms": 0.4661999992094934,
+      "ended": 138569.2722278
+    },
+    {
+      "uid": 241,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.426999999443069,
+      "scheduled_latency_ms": 3.1223999976646155,
+      "dispatch_lag_ms": 0.6953999982215464,
+      "ended": 138569.2923147
+    },
+    {
+      "uid": 242,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.3570999910589308,
+      "scheduled_latency_ms": 2.450999978464097,
+      "dispatch_lag_ms": 0.09389998740516603,
+      "ended": 138569.3116433
+    },
+    {
+      "uid": 243,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.2363000025507063,
+      "scheduled_latency_ms": 2.5671999901533127,
+      "dispatch_lag_ms": 0.3308999876026064,
+      "ended": 138569.3317595
+    },
+    {
+      "uid": 244,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.292599994689226,
+      "scheduled_latency_ms": 2.6368999970145524,
+      "dispatch_lag_ms": 0.3443000023253262,
+      "ended": 138569.3518292
+    },
+    {
+      "uid": 245,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.483299991581589,
+      "scheduled_latency_ms": 2.9055999766569585,
+      "dispatch_lag_ms": 0.4222999850753695,
+      "ended": 138569.3720979
+    },
+    {
+      "uid": 246,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.2157000203151256,
+      "scheduled_latency_ms": 2.821700007189065,
+      "dispatch_lag_ms": 0.6059999868739396,
+      "ended": 138569.392014
+    },
+    {
+      "uid": 247,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.0508000161498785,
+      "scheduled_latency_ms": 2.3376999888569117,
+      "dispatch_lag_ms": 0.28689997270703316,
+      "ended": 138569.41153
+    },
+    {
+      "uid": 248,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.6073000044561923,
+      "scheduled_latency_ms": 2.8286000015214086,
+      "dispatch_lag_ms": 0.2212999970652163,
+      "ended": 138569.4320209
+    },
+    {
+      "uid": 249,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.530900004785508,
+      "scheduled_latency_ms": 2.993600006448105,
+      "dispatch_lag_ms": 0.46270000166259706,
+      "ended": 138569.4521859
+    },
+    {
+      "uid": 250,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.2561999794561416,
+      "scheduled_latency_ms": 2.472399966791272,
+      "dispatch_lag_ms": 0.21619998733513057,
+      "ended": 138569.4716647
+    },
+    {
+      "uid": 251,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.502099989214912,
+      "scheduled_latency_ms": 2.9492999892681837,
+      "dispatch_lag_ms": 0.44720000005327165,
+      "ended": 138569.4921416
+    },
+    {
+      "uid": 252,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 1.9597999926190823,
+      "scheduled_latency_ms": 2.0898999937344342,
+      "dispatch_lag_ms": 0.13010000111535192,
+      "ended": 138569.5112822
+    },
+    {
+      "uid": 253,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.76909998501651,
+      "scheduled_latency_ms": 3.309999970952049,
+      "dispatch_lag_ms": 0.540899985935539,
+      "ended": 138569.5325023
+    },
+    {
+      "uid": 254,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 3.174299985403195,
+      "scheduled_latency_ms": 3.368399979081005,
+      "dispatch_lag_ms": 0.19409999367780983,
+      "ended": 138569.5525607
+    },
+    {
+      "uid": 255,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.426999999443069,
+      "scheduled_latency_ms": 2.7740999939851463,
+      "dispatch_lag_ms": 0.3470999945420772,
+      "ended": 138569.5719664
+    },
+    {
+      "uid": 256,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.1967999928165227,
+      "scheduled_latency_ms": 2.5078999751713127,
+      "dispatch_lag_ms": 0.31109998235479,
+      "ended": 138569.5917002
+    },
+    {
+      "uid": 257,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 3.101200010860339,
+      "scheduled_latency_ms": 3.4487000084482133,
+      "dispatch_lag_ms": 0.34749999758787453,
+      "ended": 138569.612641
+    },
+    {
+      "uid": 258,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.8383000171743333,
+      "scheduled_latency_ms": 3.0866999877616763,
+      "dispatch_lag_ms": 0.24839997058734298,
+      "ended": 138569.632279
+    },
+    {
+      "uid": 259,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 3.2853000157047063,
+      "scheduled_latency_ms": 3.767399990465492,
+      "dispatch_lag_ms": 0.4820999747607857,
+      "ended": 138569.6529597
+    },
+    {
+      "uid": 260,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.9924000264145434,
+      "scheduled_latency_ms": 3.2844000088516623,
+      "dispatch_lag_ms": 0.2919999824371189,
+      "ended": 138569.6724767
+    },
+    {
+      "uid": 261,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.999199990881607,
+      "scheduled_latency_ms": 3.59579996438697,
+      "dispatch_lag_ms": 0.5965999735053629,
+      "ended": 138569.6927881
+    },
+    {
+      "uid": 262,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.775800006929785,
+      "scheduled_latency_ms": 3.129299991996959,
+      "dispatch_lag_ms": 0.35349998506717384,
+      "ended": 138569.7123216
+    },
+    {
+      "uid": 263,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 3.3361999958287925,
+      "scheduled_latency_ms": 3.863099991576746,
+      "dispatch_lag_ms": 0.5268999957479537,
+      "ended": 138569.7330554
+    },
+    {
+      "uid": 264,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 3.657499997643754,
+      "scheduled_latency_ms": 4.137299983995035,
+      "dispatch_lag_ms": 0.4797999863512814,
+      "ended": 138569.7533296
+    },
+    {
+      "uid": 265,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 3.767900023376569,
+      "scheduled_latency_ms": 4.28480000118725,
+      "dispatch_lag_ms": 0.5168999778106809,
+      "ended": 138569.7734771
+    },
+    {
+      "uid": 266,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 3.3306999830529094,
+      "scheduled_latency_ms": 3.798999998252839,
+      "dispatch_lag_ms": 0.4683000151999295,
+      "ended": 138569.7929913
+    },
+    {
+      "uid": 267,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 3.0858000100124627,
+      "scheduled_latency_ms": 3.556699986802414,
+      "dispatch_lag_ms": 0.4708999767899513,
+      "ended": 138569.812749
+    },
+    {
+      "uid": 268,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 3.7376999971456826,
+      "scheduled_latency_ms": 4.2384999978821725,
+      "dispatch_lag_ms": 0.5008000007364899,
+      "ended": 138569.8334308
+    },
+    {
+      "uid": 269,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 3.291100001661107,
+      "scheduled_latency_ms": 3.9180000021588057,
+      "dispatch_lag_ms": 0.6269000004976988,
+      "ended": 138569.8531103
+    },
+    {
+      "uid": 270,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 3.066500008571893,
+      "scheduled_latency_ms": 3.3033999789040536,
+      "dispatch_lag_ms": 0.2368999703321606,
+      "ended": 138569.8724957
+    },
+    {
+      "uid": 271,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 3.2325000211130828,
+      "scheduled_latency_ms": 3.5358000022824854,
+      "dispatch_lag_ms": 0.3032999811694026,
+      "ended": 138569.8927281
+    },
+    {
+      "uid": 272,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.7301000081934035,
+      "scheduled_latency_ms": 3.2469999860040843,
+      "dispatch_lag_ms": 0.5168999778106809,
+      "ended": 138569.9124393
+    },
+    {
+      "uid": 273,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 3.313700028229505,
+      "scheduled_latency_ms": 3.7727000017184764,
+      "dispatch_lag_ms": 0.4589999734889716,
+      "ended": 138569.932965
+    },
+    {
+      "uid": 274,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 3.5500999947544187,
+      "scheduled_latency_ms": 4.598600004101172,
+      "dispatch_lag_ms": 1.0485000093467534,
+      "ended": 138569.9537909
+    },
+    {
+      "uid": 275,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 3.6820000095758587,
+      "scheduled_latency_ms": 4.027599992696196,
+      "dispatch_lag_ms": 0.34559998312033713,
+      "ended": 138569.9732199
+    },
+    {
+      "uid": 276,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.6799000042956322,
+      "scheduled_latency_ms": 3.1956000020727515,
+      "dispatch_lag_ms": 0.5156999977771193,
+      "ended": 138569.9923879
+    },
+    {
+      "uid": 277,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.445999998599291,
+      "scheduled_latency_ms": 2.973299997393042,
+      "dispatch_lag_ms": 0.527299998793751,
+      "ended": 138570.0121656
+    },
+    {
+      "uid": 278,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.527099975850433,
+      "scheduled_latency_ms": 2.774699969450012,
+      "dispatch_lag_ms": 0.24759999359957874,
+      "ended": 138570.031967
+    },
+    {
+      "uid": 279,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.4807000008877367,
+      "scheduled_latency_ms": 2.928400004748255,
+      "dispatch_lag_ms": 0.44770000386051834,
+      "ended": 138570.0521207
+    },
+    {
+      "uid": 280,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.2452999837696552,
+      "scheduled_latency_ms": 2.578399988124147,
+      "dispatch_lag_ms": 0.33310000435449183,
+      "ended": 138570.0717707
+    },
+    {
+      "uid": 281,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.230399986729026,
+      "scheduled_latency_ms": 2.5813999818637967,
+      "dispatch_lag_ms": 0.35099999513477087,
+      "ended": 138570.0917737
+    },
+    {
+      "uid": 282,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.16749997343868,
+      "scheduled_latency_ms": 2.6575999800115824,
+      "dispatch_lag_ms": 0.4901000065729022,
+      "ended": 138570.1118499
+    },
+    {
+      "uid": 283,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.046700014034286,
+      "scheduled_latency_ms": 2.183999982662499,
+      "dispatch_lag_ms": 0.1372999686282128,
+      "ended": 138570.1313763
+    },
+    {
+      "uid": 284,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.039399987552315,
+      "scheduled_latency_ms": 2.367099979892373,
+      "dispatch_lag_ms": 0.3276999923400581,
+      "ended": 138570.1515594
+    },
+    {
+      "uid": 285,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.6504000124987215,
+      "scheduled_latency_ms": 3.1766000029165298,
+      "dispatch_lag_ms": 0.5261999904178083,
+      "ended": 138570.1723689
+    },
+    {
+      "uid": 286,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.57360000978224,
+      "scheduled_latency_ms": 3.0400999821722507,
+      "dispatch_lag_ms": 0.46649997239001095,
+      "ended": 138570.1922324
+    },
+    {
+      "uid": 287,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.17500000144355,
+      "scheduled_latency_ms": 2.7680999774020165,
+      "dispatch_lag_ms": 0.5930999759584665,
+      "ended": 138570.2119604
+    },
+    {
+      "uid": 288,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.2065000084694475,
+      "scheduled_latency_ms": 2.4158000014722347,
+      "dispatch_lag_ms": 0.20929999300278723,
+      "ended": 138570.2316081
+    },
+    {
+      "uid": 289,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.2883000201545656,
+      "scheduled_latency_ms": 2.5178999931085855,
+      "dispatch_lag_ms": 0.2295999729540199,
+      "ended": 138570.2517102
+    },
+    {
+      "uid": 290,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 1.9258999964222312,
+      "scheduled_latency_ms": 2.4609999964013696,
+      "dispatch_lag_ms": 0.5350999999791384,
+      "ended": 138570.2716533
+    },
+    {
+      "uid": 291,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.4458999978378415,
+      "scheduled_latency_ms": 2.7578999870456755,
+      "dispatch_lag_ms": 0.311999989207834,
+      "ended": 138570.2919502
+    },
+    {
+      "uid": 292,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.532799990149215,
+      "scheduled_latency_ms": 2.9708999791182578,
+      "dispatch_lag_ms": 0.4380999889690429,
+      "ended": 138570.3121632
+    },
+    {
+      "uid": 293,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.504400006728247,
+      "scheduled_latency_ms": 2.7864000003319234,
+      "dispatch_lag_ms": 0.28199999360367656,
+      "ended": 138570.3319787
+    },
+    {
+      "uid": 294,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 3.347999998368323,
+      "scheduled_latency_ms": 3.958499990403652,
+      "dispatch_lag_ms": 0.6104999920353293,
+      "ended": 138570.3531508
+    },
+    {
+      "uid": 295,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.6659999857656658,
+      "scheduled_latency_ms": 3.080599970417097,
+      "dispatch_lag_ms": 0.41459998465143144,
+      "ended": 138570.3722729
+    },
+    {
+      "uid": 296,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.3933000047691166,
+      "scheduled_latency_ms": 2.593399985926226,
+      "dispatch_lag_ms": 0.20009998115710914,
+      "ended": 138570.3917857
+    },
+    {
+      "uid": 297,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.525099989725277,
+      "scheduled_latency_ms": 3.0842999694868922,
+      "dispatch_lag_ms": 0.5591999797616154,
+      "ended": 138570.4122766
+    },
+    {
+      "uid": 298,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 3.1676999933551997,
+      "scheduled_latency_ms": 3.7961999769322574,
+      "dispatch_lag_ms": 0.6284999835770577,
+      "ended": 138570.4329885
+    },
+    {
+      "uid": 299,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 3.792000003159046,
+      "scheduled_latency_ms": 4.3812000076286495,
+      "dispatch_lag_ms": 0.5892000044696033,
+      "ended": 138570.4535735
+    },
+    {
+      "uid": 300,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 2.615299978060648,
+      "scheduled_latency_ms": 3.3667999668978155,
+      "dispatch_lag_ms": 0.7514999888371676,
+      "ended": 138570.4725591
+    }
+  ],
+  "convergence": [
+    {
+      "after_stop_s": 0.039,
+      "pending_events": 0,
+      "videos": [
+        {
+          "id": 1,
+          "likes_count": 300,
+          "relations": 300
+        }
+      ]
+    },
+    {
+      "after_stop_s": 0.27,
+      "pending_events": 0,
+      "videos": [
+        {
+          "id": 1,
+          "likes_count": 300,
+          "relations": 300
+        }
+      ]
+    }
+  ],
+  "duplicate_responses": [
+    {
+      "uid": 301,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 5.970700003672391,
+      "scheduled_latency_ms": 6.021599983796477,
+      "dispatch_lag_ms": 0.05089998012408614,
+      "ended": 138570.8957916
+    },
+    {
+      "uid": 301,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 5.102299997815862,
+      "scheduled_latency_ms": 5.144299997482449,
+      "dispatch_lag_ms": 0.04199999966658652,
+      "ended": 138570.8954699
+    },
+    {
+      "uid": 301,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 6.07160001527518,
+      "scheduled_latency_ms": 6.136400013929233,
+      "dispatch_lag_ms": 0.06479999865405262,
+      "ended": 138570.8971274
+    },
+    {
+      "uid": 301,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 4.629300005035475,
+      "scheduled_latency_ms": 4.6654000179842114,
+      "dispatch_lag_ms": 0.03610001294873655,
+      "ended": 138570.8963056
+    },
+    {
+      "uid": 301,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 4.410900000948459,
+      "scheduled_latency_ms": 4.4479000207502395,
+      "dispatch_lag_ms": 0.03700001980178058,
+      "ended": 138570.8966696
+    },
+    {
+      "uid": 301,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 3.8773999840486795,
+      "scheduled_latency_ms": 3.9133999962359667,
+      "dispatch_lag_ms": 0.03600001218728721,
+      "ended": 138570.896957
+    },
+    {
+      "uid": 301,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 3.7845999759156257,
+      "scheduled_latency_ms": 3.8218999980017543,
+      "dispatch_lag_ms": 0.03730002208612859,
+      "ended": 138570.8974882
+    },
+    {
+      "uid": 301,
+      "video_id": 1,
+      "status": 200,
+      "error": "",
+      "latency_ms": 3.8644000014755875,
+      "scheduled_latency_ms": 3.911300009349361,
+      "dispatch_lag_ms": 0.046900007873773575,
+      "ended": 138570.8981741
+    }
+  ],
+  "duplicate_state": {
+    "pending_events": 0,
+    "videos": [
+      {
+        "id": 1,
+        "likes_count": 301,
+        "relations": 301
+      }
+    ]
+  }
+}
