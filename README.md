@@ -6,7 +6,7 @@
 
 `Go / Gin` · `MySQL` · `Redis / Lua` · `RabbitMQ` · `Elasticsearch` · `S3` · `FFmpeg` · `Vue 3` · `Docker Compose`
 
-[快速运行](#快速运行) · [视频生产与发布](handbook/media-pipeline.md) · [全站搜索](handbook/video-search.md) · [架构与一致性设计](handbook/architecture.md) · [压测证据](experiments/like-count/results/20261115T083209Z-ab/REPORT.md) · [项目讲解与简历参考](handbook/interview.md) · [接口文档](handbook/api.md)
+[快速运行](#快速运行) · [视频生产与发布](handbook/media-pipeline.md) · [全站搜索](handbook/video-search.md) · [架构与一致性设计](handbook/architecture.md) · [压测证据](experiments/like-count/results/20261115T083209Z-ab/REPORT.md) · [接口文档](handbook/api.md)
 
 ## 工程问题
 
@@ -111,4 +111,4 @@ docker compose up -d --build
 
 ## 来源与改造范围
 
-项目基于 [LeoninCS/feedsystem_video_go](https://github.com/LeoninCS/feedsystem_video_go) 二次开发，基础账号、上传和社交功能继承自上游。VidFlow 的专项改造集中在关注流刷新/分页、点赞计数恢复与批处理，以及对照测试和实验记录。[具体贡献与讲解材料](handbook/interview.md)列出代码入口和表述口径。上游作者的后续项目见 [GCFeed](https://github.com/LeoninCS/GCFeed)。
+基础账号、上传和社交功能继承自上游。VidFlow 增加了媒体资产处理和全站搜索，并改进了关注流分页与点赞计数。[上游项目](https://github.com/LeoninCS/feedsystem_video_go) · [上游作者的后续项目](https://github.com/LeoninCS/GCFeed) · [VidFlow 架构与代码入口](handbook/architecture.md)

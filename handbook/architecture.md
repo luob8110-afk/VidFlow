@@ -1,6 +1,6 @@
 # 架构与一致性设计
 
-[项目首页](../README.md) · [代码讲解与简历参考](interview.md) · [运行与验证](development.md)
+[项目首页](../README.md) · [运行与验证](development.md)
 
 VidFlow 使用模块化单体 API 和独立业务 Worker。MySQL 持久化作品和业务关系，Redis 提供缓存、时间线和展示计数，RabbitMQ 分发事件，Elasticsearch 支持全站搜索。点赞计数通过 MySQL 增量日志驱动批处理。
 
