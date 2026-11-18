@@ -16,6 +16,7 @@ type Video struct {
 }
 
 type PublishVideoRequest struct {
+	AssetID     string `json:"asset_id"`
 	Title       string `json:"title"`
 	Description string `json:"description"`
 	PlayURL     string `json:"play_url"`

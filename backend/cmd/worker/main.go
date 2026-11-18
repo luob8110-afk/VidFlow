@@ -4,6 +4,7 @@ import (
 	"context"
 	"feedsystem_video_go/internal/config"
 	"feedsystem_video_go/internal/db"
+	"feedsystem_video_go/internal/media"
 	mqrabbit "feedsystem_video_go/internal/middleware/rabbitmq"
 	rediscache "feedsystem_video_go/internal/middleware/redis"
 	"feedsystem_video_go/internal/observability"
@@ -12,6 +13,7 @@ import (
 	"feedsystem_video_go/internal/worker"
 	"log"
 	"os"
+	"os/exec"
 	"os/signal"
 	"strconv"
 	"syscall"
@@ -174,6 +176,21 @@ func main() {
 
 	ctx, stop := signal.NotifyContext(context.Background(), os.Interrupt, syscall.SIGTERM)
 	defer stop()
+	mediaStorage, err := media.OpenStorage(cfg.Media)
+	if err != nil {
+		log.Fatalf("media storage configuration: %v", err)
+	}
+	if mediaStorage != nil {
+		for _, name := range []string{"ffmpeg", "ffprobe"} {
+			if _, err := exec.LookPath(name); err != nil {
+				log.Fatalf("media processing requires %s: %v", name, err)
+			}
+		}
+		if err := sqlDB.AutoMigrate(&media.Asset{}); err != nil {
+			log.Fatalf("media asset migration: %v", err)
+		}
+		go media.NewService(sqlDB, mediaStorage).Run(ctx, cfg.RabbitMQ)
+	}
 
 	pprofServer, err := observability.NewPprofServer(
 		"Worker",

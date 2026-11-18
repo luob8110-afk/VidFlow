@@ -5,6 +5,7 @@ import (
 	"feedsystem_video_go/internal/config"
 	"feedsystem_video_go/internal/db"
 	apphttp "feedsystem_video_go/internal/http"
+	"feedsystem_video_go/internal/media"
 	rabbitmq "feedsystem_video_go/internal/middleware/rabbitmq"
 	rediscache "feedsystem_video_go/internal/middleware/redis"
 	"feedsystem_video_go/internal/observability"
@@ -90,9 +91,24 @@ func main() {
 	}
 
 	// 设置路由
-	r := apphttp.SetRouter(sqlDB, cache, rmq)
+	mediaStorage, err := media.OpenStorage(cfg.Media)
+	if err != nil {
+		log.Fatalf("media storage configuration: %v", err)
+	}
+	if mediaStorage != nil {
+		if err := initMediaBucket(mediaStorage); err != nil {
+			log.Fatalf("media storage bucket: %v", err)
+		}
+	}
+	r := apphttp.SetRouter(sqlDB, cache, rmq, mediaStorage)
 	log.Printf("Server is running on port %d", cfg.Server.Port)
 	if err := r.Run(":" + strconv.Itoa(cfg.Server.Port)); err != nil {
 		log.Fatalf("Failed to run server: %v", err)
 	}
+}
+
+func initMediaBucket(storage *media.Storage) error {
+	ctx, cancel := context.WithTimeout(context.Background(), 20*time.Second)
+	defer cancel()
+	return storage.EnsureBucket(ctx)
 }

@@ -1,9 +1,46 @@
-import { postForm, postJson } from './client'
+import { deleteJson, getJson, postForm, postJson } from './client'
 import { normalizeVideoList } from './normalize'
 import type { Video } from './types'
 
-export function publishVideo(input: { title: string; description: string; play_url: string; cover_url: string }) {
-  return postJson<Video>('/video/publish', input, { authRequired: true })
+type Publication = { title: string; description: string } &
+  ({ asset_id: string } | { play_url: string; cover_url: string })
+
+export function publishVideo(input: Publication, signal?: AbortSignal) {
+  return postJson<Video>('/video/publish', input, { authRequired: true, signal })
+}
+
+export type MediaAsset = {
+  asset_id: string
+  status: 'uploading' | 'queued' | 'processing' | 'ready' | 'failed' | 'published' | 'expired'
+  part_size: number
+  part_count: number
+  uploaded_parts: number[]
+  video_id?: number
+  failure?: string
+}
+
+export function mediaConfig(signal: AbortSignal) {
+  return getJson<{ enabled: boolean }>('/video/assets/config', { signal })
+}
+
+export function initAsset(input: { draft_id: string; size: number; sha256: string }, signal: AbortSignal) {
+  return postJson<MediaAsset>('/video/assets', input, { authRequired: true, signal })
+}
+
+export function signPart(id: string, part: number, signal: AbortSignal) {
+  return postJson<{ url: string }>(`/video/assets/${id}/parts/${part}`, {}, { authRequired: true, signal })
+}
+
+export function completeAsset(id: string, signal: AbortSignal) {
+  return postJson<MediaAsset>(`/video/assets/${id}/complete`, {}, { authRequired: true, signal })
+}
+
+export function assetStatus(id: string, signal: AbortSignal) {
+  return getJson<MediaAsset>(`/video/assets/${id}`, { authRequired: true, signal })
+}
+
+export function discardAsset(id: string, signal: AbortSignal) {
+  return deleteJson<null>(`/video/assets/${id}`, { authRequired: true, signal })
 }
 
 export type UploadResponse = { url: string; play_url?: string; cover_url?: string }

@@ -46,7 +46,21 @@ async function tryRefresh(): Promise<string | null> {
   return refreshPromise
 }
 
-export async function postJson<T>(path: string, body: unknown, options?: { authRequired?: boolean; signal?: AbortSignal }): Promise<T> {
+type RequestOptions = { authRequired?: boolean; signal?: AbortSignal }
+
+export function postJson<T>(path: string, body: unknown, options?: RequestOptions): Promise<T> {
+  return requestJson<T>('POST', path, body ?? {}, options)
+}
+
+export function getJson<T>(path: string, options?: RequestOptions): Promise<T> {
+  return requestJson<T>('GET', path, undefined, options)
+}
+
+export function deleteJson<T>(path: string, options?: RequestOptions): Promise<T> {
+  return requestJson<T>('DELETE', path, undefined, options)
+}
+
+async function requestJson<T>(method: string, path: string, body: unknown, options?: RequestOptions): Promise<T> {
   const auth = useAuthStore()
   const token = auth.token
 
@@ -54,15 +68,14 @@ export async function postJson<T>(path: string, body: unknown, options?: { authR
     throw new ApiError('需要先登录（缺少 token）', 401)
   }
 
-  const headers: Record<string, string> = { 'Content-Type': 'application/json' }
+  const headers: Record<string, string> = {}
+  if (body !== undefined) headers['Content-Type'] = 'application/json'
   if (token) headers.Authorization = `Bearer ${token}`
 
-  const res = await fetch(`${API_BASE}${path}`, {
-    method: 'POST',
-    headers,
-    body: JSON.stringify(body ?? {}),
-    signal: options?.signal,
+  const send = () => fetch(`${API_BASE}${path}`, {
+    method, headers, body: body === undefined ? undefined : JSON.stringify(body), signal: options?.signal,
   })
+  const res = await send()
 
   if (res.status === 401 && path !== '/account/refresh') {
     options?.signal?.throwIfAborted()
@@ -70,10 +83,7 @@ export async function postJson<T>(path: string, body: unknown, options?: { authR
     options?.signal?.throwIfAborted()
     if (newToken) {
       headers.Authorization = `Bearer ${newToken}`
-      const retryRes = await fetch(`${API_BASE}${path}`, {
-        method: 'POST', headers, body: JSON.stringify(body ?? {}),
-        signal: options?.signal,
-      })
+      const retryRes = await send()
       return handleResponse<T>(retryRes, path)
     }
   }

@@ -4,6 +4,7 @@ import (
 	"context"
 	"feedsystem_video_go/internal/account"
 	"feedsystem_video_go/internal/feed"
+	"feedsystem_video_go/internal/media"
 	"feedsystem_video_go/internal/message"
 	"feedsystem_video_go/internal/middleware/jwt"
 	"feedsystem_video_go/internal/middleware/rabbitmq"
@@ -19,7 +20,7 @@ import (
 	"gorm.io/gorm"
 )
 
-func SetRouter(db *gorm.DB, cache *rediscache.Client, rmq *rabbitmq.RabbitMQ) *gin.Engine {
+func SetRouter(db *gorm.DB, cache *rediscache.Client, rmq *rabbitmq.RabbitMQ, mediaStorage *media.Storage) *gin.Engine {
 	r := gin.Default()
 	if err := r.SetTrustedProxies(nil); err != nil {
 		log.Printf("SetTrustedProxies failed: %v", err)
@@ -65,7 +66,7 @@ func SetRouter(db *gorm.DB, cache *rediscache.Client, rmq *rabbitmq.RabbitMQ) *g
 		popularityMQ = nil
 	}
 	videoService := video.NewVideoService(videoRepository, cache, popularityMQ)
-	videoHandler := video.NewVideoHandler(videoService, accountService)
+	videoHandler := video.NewVideoHandler(videoService, accountService, mediaStorage != nil)
 	chunkHandler := video.NewChunkUploadHandler(cache)
 	videoGroup := r.Group("/video")
 	{
@@ -75,14 +76,19 @@ func SetRouter(db *gorm.DB, cache *rediscache.Client, rmq *rabbitmq.RabbitMQ) *g
 	protectedVideoGroup := videoGroup.Group("")
 	protectedVideoGroup.Use(jwt.JWTAuth(accountRepository, cache))
 	{
-		protectedVideoGroup.POST("/uploadVideo", videoHandler.UploadVideo)
-		protectedVideoGroup.POST("/uploadCover", videoHandler.UploadCover)
 		protectedVideoGroup.POST("/publish", videoHandler.PublishVideo)
-		protectedVideoGroup.POST("/chunk/init", chunkHandler.InitChunkUpload)
-		protectedVideoGroup.POST("/chunk/upload", chunkHandler.UploadChunk)
-		protectedVideoGroup.POST("/chunk/status", chunkHandler.ChunkStatus)
-		protectedVideoGroup.POST("/chunk/complete", chunkHandler.CompleteChunkUpload)
+		if mediaStorage != nil {
+			media.NewService(db, mediaStorage).Register(r, protectedVideoGroup)
+		} else {
+			protectedVideoGroup.POST("/uploadVideo", videoHandler.UploadVideo)
+			protectedVideoGroup.POST("/uploadCover", videoHandler.UploadCover)
+			protectedVideoGroup.POST("/chunk/init", chunkHandler.InitChunkUpload)
+			protectedVideoGroup.POST("/chunk/upload", chunkHandler.UploadChunk)
+			protectedVideoGroup.POST("/chunk/status", chunkHandler.ChunkStatus)
+			protectedVideoGroup.POST("/chunk/complete", chunkHandler.CompleteChunkUpload)
+		}
 	}
+	videoGroup.GET("/assets/config", func(c *gin.Context) { c.JSON(200, gin.H{"enabled": mediaStorage != nil}) })
 	// like
 	likeMQ, err := rabbitmq.NewLikeMQ(rmq)
 	if err != nil {

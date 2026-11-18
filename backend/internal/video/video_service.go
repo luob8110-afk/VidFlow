@@ -7,8 +7,10 @@ import (
 	"strconv"
 	"strings"
 	"time"
+	"unicode/utf8"
 
 	"feedsystem_video_go/internal/apierror"
+	"feedsystem_video_go/internal/media"
 	"feedsystem_video_go/internal/middleware/rabbitmq"
 	rediscache "feedsystem_video_go/internal/middleware/redis"
 
@@ -44,37 +46,64 @@ func (vs *VideoService) Publish(ctx context.Context, video *Video) error {
 		return errors.New("cover url is required")
 	}
 
-	//事务保证视频写入库和消息写入本地消息表的一致性
-	err := vs.repo.db.WithContext(ctx).Transaction(func(tx *gorm.DB) error {
-		if err := tx.Create(video).Error; err != nil {
-			return err
-		}
-
-		msg := OutboxMsg{
-			VideoID:    video.ID,
-			EventType:  "video_published",
-			Status:     "pending",
-			CreateTime: video.CreateTime,
-		}
-
-		if err := tx.Create(&msg).Error; err != nil {
-			return err
-		}
-
-		tags := ExtractTags(video.Title + " " + video.Description)
-		for _, tagName := range tags {
-			var tag Tag
-			if err := tx.Where("name = ?", tagName).FirstOrCreate(&tag, Tag{Name: tagName}).Error; err != nil {
-				return err
-			}
-			if err := tx.Create(&VideoTag{VideoID: video.ID, TagID: tag.ID}).Error; err != nil {
-				return err
-			}
-		}
-		return nil
+	return vs.repo.db.WithContext(ctx).Transaction(func(tx *gorm.DB) error {
+		return insertPublishedVideo(tx, video)
 	})
-	return err
+}
 
+func (vs *VideoService) PublishAsset(ctx context.Context, assetID string, video *Video) error {
+	if video == nil {
+		return media.ErrInvalid
+	}
+	video.Title = strings.TrimSpace(video.Title)
+	video.Description = strings.TrimSpace(video.Description)
+	if video.Title == "" || utf8.RuneCountInString(video.Title) > 255 || utf8.RuneCountInString(video.Description) > 255 {
+		return media.ErrInvalid
+	}
+	return vs.repo.db.WithContext(ctx).Transaction(func(tx *gorm.DB) error {
+		a, err := media.LoadOwned(tx, video.AuthorID, assetID, true)
+		if err != nil {
+			return err
+		}
+		if a.Status == media.Published && a.PublishedVideoID != nil {
+			return tx.First(video, *a.PublishedVideoID).Error
+		}
+		if a.Status != media.Ready || a.OutputToken == "" {
+			return media.ErrConflict
+		}
+		if a.ExpiresAtMillis <= time.Now().UnixMilli() {
+			return media.ErrExpired
+		}
+		video.PlayURL = media.PlaybackPath(a.ID, "play.mp4")
+		video.CoverURL = media.PlaybackPath(a.ID, "cover.jpg")
+		if err := insertPublishedVideo(tx, video); err != nil {
+			return err
+		}
+		return tx.Model(&a).Updates(map[string]any{
+			"status": media.Published, "published_video_id": video.ID,
+		}).Error
+	})
+}
+
+func insertPublishedVideo(tx *gorm.DB, video *Video) error {
+	if err := tx.Create(video).Error; err != nil {
+		return err
+	}
+	msg := OutboxMsg{VideoID: video.ID, EventType: "video_published",
+		Status: "pending", CreateTime: video.CreateTime}
+	if err := tx.Create(&msg).Error; err != nil {
+		return err
+	}
+	for _, tagName := range ExtractTags(video.Title + " " + video.Description) {
+		var tag Tag
+		if err := tx.Where("name = ?", tagName).FirstOrCreate(&tag, Tag{Name: tagName}).Error; err != nil {
+			return err
+		}
+		if err := tx.Create(&VideoTag{VideoID: video.ID, TagID: tag.ID}).Error; err != nil {
+			return err
+		}
+	}
+	return nil
 }
 
 func (vs *VideoService) Delete(ctx context.Context, id uint, authorID uint) error {

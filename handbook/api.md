@@ -22,7 +22,13 @@
 ### 视频 `/video`
 | 方法 | 路径 | 鉴权 | 说明 |
 |------|------|------|------|
-| POST | `/publish` | JWT | 发布视频（自动提取 #话题） |
+| POST | `/publish` | JWT | 发布视频（自动提取 #话题），媒体模式下要求 `asset_id` |
+| GET | `/assets/config` | 否 | 返回对象存储模式是否启用 |
+| POST | `/assets` | JWT | 使用 `draft_id`、`size`、`sha256` 创建或恢复上传，返回已确认分片 |
+| POST | `/assets/:id/parts/:part` | JWT | 签发指定分片的 PUT URL，编号从 1 开始 |
+| POST | `/assets/:id/complete` | JWT | 幂等完成上传并排队 |
+| GET | `/assets/:id` | JWT | 查询资产状态与处理结果 |
+| DELETE | `/assets/:id` | JWT | 放弃上传中、失败或尚未发布的资产 |
 | POST | `/uploadVideo` | JWT | 上传视频文件（mp4，≤200MB） |
 | POST | `/uploadCover` | JWT | 上传封面（jpg/png/webp，≤10MB） |
 | POST | `/chunk/init` | JWT | 初始化分片上传（文件 MD5、大小、分片数） |
@@ -31,6 +37,8 @@
 | POST | `/chunk/complete` | JWT | 合并分片并返回 play_url |
 | POST | `/listByAuthorID` | 否 | 按作者查视频 |
 | POST | `/getDetail` | 否 | 视频详情缓存 |
+
+对象存储模式下，原本地上传与 `/chunk/*` 接口由媒体资产接口替代。播放产物通过 `GET /media/:id/play.mp4` 和 `GET /media/:id/cover.jpg` 跳转到对象存储，仅对已发布视频签发。完整流程见[视频生产与发布](media-pipeline.md)。
 
 ### 点赞 `/like`
 | 方法 | 路径 | 鉴权 | 说明 |

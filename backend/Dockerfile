@@ -52,5 +52,8 @@ EXPOSE 8080
 ENTRYPOINT ["/app/api"]
 
 FROM base AS worker
+USER root
+RUN apk add --no-cache ffmpeg
+USER app
 COPY --from=worker-build /out/worker /app/worker
 ENTRYPOINT ["/app/worker"]

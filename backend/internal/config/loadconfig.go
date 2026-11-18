@@ -14,6 +14,7 @@ type Config struct {
 	Database            DatabaseConfig      `yaml:"database"`
 	Redis               RedisConfig         `yaml:"redis"`
 	RabbitMQ            RabbitMQConfig      `yaml:"rabbitmq"`
+	Media               MediaConfig         `yaml:"media"`
 	ObservabilityConfig ObservabilityConfig `yaml:"observability"`
 }
 
@@ -43,6 +44,14 @@ type RabbitMQConfig struct {
 	Password string `yaml:"password"`
 }
 
+type MediaConfig struct {
+	Endpoint       string `yaml:"endpoint"`
+	PublicEndpoint string `yaml:"public_endpoint"`
+	AccessKey      string `yaml:"access_key"`
+	SecretKey      string `yaml:"secret_key"`
+	Bucket         string `yaml:"bucket"`
+}
+
 type ObservabilityConfig struct {
 	Pprof PprofConfig `yaml:"pprof"`
 }
@@ -70,6 +79,15 @@ func Load(filename string) (Config, error) {
 func ApplyEnvOverrides(cfg *Config) {
 	if cfg == nil {
 		return
+	}
+	for name, target := range map[string]*string{
+		"MEDIA_S3_ENDPOINT": &cfg.Media.Endpoint, "MEDIA_S3_PUBLIC_ENDPOINT": &cfg.Media.PublicEndpoint,
+		"MEDIA_S3_ACCESS_KEY": &cfg.Media.AccessKey, "MEDIA_S3_SECRET_KEY": &cfg.Media.SecretKey,
+		"MEDIA_S3_BUCKET": &cfg.Media.Bucket,
+	} {
+		if value := os.Getenv(name); value != "" {
+			*target = value
+		}
 	}
 	if v := os.Getenv("SERVER_PORT"); v != "" {
 		if port, err := strconv.Atoi(v); err == nil {

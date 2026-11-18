@@ -1,17 +1,18 @@
 # VidFlow
 
-**面向热点互动计数与稳定分页的短视频 Feed 后端。**
+**Go 短视频后端，覆盖视频生产、Feed 分发与互动。**
 
-基于 Go + Vue 3 的短视频工程项目，提供发布、浏览、点赞、评论、关注、私信与通知的业务闭环。围绕关注流刷新、分页边界和点赞计数做专项改造，保留源码、回归测试与可复现的前后对照实验。
+基于 Go + Vue 3 的短视频工程项目。原视频分片直传对象存储，后台生成播放文件和封面，通过资产状态控制发布。项目还提供浏览、点赞、评论、关注、私信与通知，并保留关注流与计数改造的回归测试和对照实验。
 
-`Go` · `Gin` · `GORM` · `MySQL` · `Redis / Lua` · `RabbitMQ` · `Vue 3` · `Docker Compose`
+`Go / Gin` · `MySQL` · `Redis / Lua` · `RabbitMQ` · `S3` · `FFmpeg` · `Vue 3` · `Docker Compose`
 
-[快速运行](#快速运行) · [架构与一致性设计](handbook/architecture.md) · [压测证据](experiments/like-count/results/20261115T083209Z-ab/REPORT.md) · [项目讲解与简历参考](handbook/interview.md) · [接口文档](handbook/api.md)
+[快速运行](#快速运行) · [视频生产与发布](handbook/media-pipeline.md) · [架构与一致性设计](handbook/architecture.md) · [压测证据](experiments/like-count/results/20261115T083209Z-ab/REPORT.md) · [项目讲解与简历参考](handbook/interview.md) · [接口文档](handbook/api.md)
 
-## 三个工程问题
+## 工程问题
 
 | 问题 | 实现与取舍 | 验证入口 |
 |---|---|---|
+| 上传中断，或 Worker 在生成产物后退出 | 分片状态从对象存储恢复；媒体资产状态、RabbitMQ 投递确认和处理租约支持重试 | [媒体链路与故障验证](handbook/media-pipeline.md) |
 | 同时间作品跨页遗漏；刷新后旧响应覆盖新列表 | 时间＋ID 复合游标；版本化缓存校验读写；前端请求取消与序号隔离 | [发布、刷新、10/10/6 连续分页验收](experiments/feed-following/03-combined-flow-results.md) |
 | 热门视频每次点赞都更新同一数据库行 | 关系与恢复日志同事务；Redis 优先计数；按视频聚合增量，计数和完成标记同事务提交 | [计数实现](backend/internal/video/like_count.go) · [故障与幂等测试](backend/internal/video/like_count_test.go) |
 | 优化收益缺少可核对的数据 | 隔离 A/B、固定请求率、热点/分散分布、交替执行两版；同时统计延迟、视频行更新和全库写入 | [24 轮压测与原始记录](experiments/like-count/README.md) |
@@ -47,6 +48,9 @@ flowchart LR
     Q -->|评论 / 关注 / 热度消费| W
     Q -->|通知消费与 SSE| API
     API -->|媒体静态路径| FS[本地媒体文件]
+    UI -->|分片直传 / 播放| S3[对象存储]
+    W -->|读取原视频 / 保存封面和转码产物| S3
+    Q -->|媒体任务| W
 ```
 
 采用模块化单体与独立业务 Worker。**计数批处理直接读取数据库增量日志**；RabbitMQ 承载通知、评论、关注、热度等事件。通知和时间线的部分消费者目前仍在 API 进程中。[详细时序、恢复机制与扩容边界 →](handbook/architecture.md)
@@ -55,12 +59,12 @@ flowchart LR
 
 | 模块 | 当前能力 |
 |---|---|
-| 视频 | 普通/分片上传、单片 MD5、断点续传会话、封面、发布、作者作品与话题标签 |
+| 视频 | S3 分片直传、断点续传、整文件 SHA-256 校验、异步转码与封面、资产状态校验后发布 |
 | Feed | 最新流、关注流、点赞榜、窗口热榜、话题流；热索引/历史查询分层与实体缓存 |
 | 互动 | 点赞/取消、评论、关注/取关、用户主页统计、私信及通知记录/SSE |
 | 工程 | JWT 与双 Token、账号限流、Docker Compose、API/Worker、pprof、CI 与自动化测试 |
 
-推荐标签页当前使用最新流。媒体存储为本地文件；对象存储、转码、多码率、ES 和用户画像尚未实现。关系分片及复合主键布局是独立实验方案，业务关系表尚未迁移。分片上传仍需补整文件校验、并发进度更新和合并幂等，这些缺口及验收标准列在[后续工作](handbook/architecture.md#4-当前能力与下一步)。
+推荐标签页当前使用最新流。媒体产物为一份 H.264 MP4 和 JPEG 封面。关系分片及复合主键布局是独立实验方案，业务关系表沿用现有结构。
 
 ## 快速运行
 
@@ -75,8 +79,9 @@ docker compose up -d --build
 | 页面 | http://localhost:5173 |
 | API | http://localhost:8080 |
 | RabbitMQ 管理台 | http://localhost:15672 |
+| 本地对象存储 | http://localhost:8333 |
 
-注册两个账号，发布作品并建立关注关系；在关注页主动刷新查看新作品，连续翻页；对同一个点赞按钮再次点击取消。接口重试、刷新失败和迟到响应使用自动化测试复现。
+注册两个账号，选择文件上传，等待处理完成后发布。建立关注关系后，在关注页主动刷新查看新作品，连续翻页。对同一个点赞按钮再次点击取消。媒体续传和故障恢复可以用[验证脚本](handbook/media-pipeline.md#验证)复现。
 
 本地默认凭据及环境变量见[运行文档](handbook/development.md)。从旧版升级需先排空旧点赞消息并一起更新 API 与 Worker；真实 MySQL 集成测试须配置独立测试库，未配置时会跳过。[运行、升级与测试 →](handbook/development.md)
 

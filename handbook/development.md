@@ -2,6 +2,8 @@
 
 [返回项目首页](../README.md) · [架构与一致性设计](architecture.md)
 
+Compose 默认启用 S3 兼容对象存储及 FFmpeg Worker。视频发布的配置和验收命令见[视频生产与发布](media-pipeline.md)。本机手动运行 Go 时，可继续使用原有本地上传，也可按该说明设置 `MEDIA_S3_ENDPOINT` 启用资产模式。
+
 ## Docker Compose 一键启动
 
 ```bash

@@ -13,6 +13,7 @@ import (
 
 	"feedsystem_video_go/internal/account"
 	"feedsystem_video_go/internal/apierror"
+	"feedsystem_video_go/internal/media"
 	"feedsystem_video_go/internal/middleware/jwt"
 
 	"github.com/gin-gonic/gin"
@@ -21,10 +22,11 @@ import (
 type VideoHandler struct {
 	service        *VideoService
 	accountService *account.AccountService
+	mediaEnabled   bool
 }
 
-func NewVideoHandler(service *VideoService, accountService *account.AccountService) *VideoHandler {
-	return &VideoHandler{service: service, accountService: accountService}
+func NewVideoHandler(service *VideoService, accountService *account.AccountService, mediaEnabled bool) *VideoHandler {
+	return &VideoHandler{service: service, accountService: accountService, mediaEnabled: mediaEnabled}
 }
 
 func (vh *VideoHandler) PublishVideo(c *gin.Context) {
@@ -52,6 +54,18 @@ func (vh *VideoHandler) PublishVideo(c *gin.Context) {
 		PlayURL:     req.PlayURL,
 		CoverURL:    req.CoverURL,
 		CreateTime:  time.Now(),
+	}
+	if vh.mediaEnabled {
+		if err := vh.service.PublishAsset(c.Request.Context(), req.AssetID, video); err != nil {
+			media.WritePublishError(c, err)
+			return
+		}
+		c.JSON(http.StatusOK, video)
+		return
+	}
+	if req.AssetID != "" {
+		media.WritePublishError(c, media.ErrUnavailable)
+		return
 	}
 	if err := vh.service.Publish(c.Request.Context(), video); err != nil {
 		c.JSON(apierror.ClassifyHTTPStatus(err), gin.H{"error": err.Error()})

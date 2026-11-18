@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onUnmounted, reactive, ref, watch } from 'vue'
+import { computed, onMounted, onUnmounted, reactive, ref, watch } from 'vue'
 import { RouterLink, useRouter } from 'vue-router'
 
 import AppShell from '../components/AppShell.vue'
@@ -17,6 +17,12 @@ const toast = useToastStore()
 const busy = ref(false)
 const stage = ref('')
 const published = ref<Video | null>(null)
+const mediaEnabled = ref<boolean | null>(null)
+const asset = ref<videoApi.MediaAsset | null>(null)
+const uploadError = ref('')
+const page = new AbortController()
+const canPublish = computed(() => asset.value?.status === 'ready')
+let draftKey = ''
 
 const videoInput = ref<HTMLInputElement | null>(null)
 const coverInput = ref<HTMLInputElement | null>(null)
@@ -61,13 +67,24 @@ watch(
 )
 
 onUnmounted(() => {
+  page.abort()
   setPreviewVideo(null)
   setPreviewCover(null)
+})
+
+onMounted(async () => {
+  try {
+    mediaEnabled.value = (await videoApi.mediaConfig(page.signal)).enabled
+  } catch (err) {
+    if (!page.signal.aborted) uploadError.value = err instanceof Error ? err.message : String(err)
+  }
 })
 
 function pickVideo(e: Event) {
   const input = e.target as HTMLInputElement
   publishForm.video = input.files?.[0] ?? null
+  asset.value = null
+  uploadError.value = ''
 }
 
 function pickCover(e: Event) {
@@ -85,6 +102,8 @@ function openCoverPicker() {
 
 function clearVideo() {
   publishForm.video = null
+  asset.value = null
+  draftKey = ''
   if (videoInput.value) videoInput.value.value = ''
 }
 
@@ -122,6 +141,109 @@ async function computeChunkMD5(blob: Blob): Promise<string> {
 const CHUNK_SIZE = 5 << 20 // 5 MB
 const MAX_CONCURRENT = 3
 const MAX_RETRIES = 3
+
+function makeDraftID() {
+  return Array.from(crypto.getRandomValues(new Uint8Array(16)), b => b.toString(16).padStart(2, '0')).join('')
+}
+
+async function prepareAsset(file: File) {
+  if (file.size <= 0 || file.size > 200 * 1024 * 1024) throw new Error('请选择不超过 200 MiB 的视频')
+  if (!crypto.subtle) throw new Error('请通过 HTTPS 或 localhost 打开页面再上传')
+  const signal = page.signal
+  stage.value = '计算文件校验值'
+  const digest = await crypto.subtle.digest('SHA-256', await file.arrayBuffer())
+  const sha256 = Array.from(new Uint8Array(digest), b => b.toString(16).padStart(2, '0')).join('')
+  signal.throwIfAborted()
+  draftKey = `vidflow:media:${auth.claims?.account_id}:${sha256}`
+  let draftID = localStorage.getItem(draftKey) || makeDraftID()
+  localStorage.setItem(draftKey, draftID)
+  const init = () => videoApi.initAsset({ draft_id: draftID, size: file.size, sha256 }, signal)
+  let view = await init()
+  if (view.status === 'expired') {
+    draftID = makeDraftID()
+    localStorage.setItem(draftKey, draftID)
+    view = await init()
+  }
+  asset.value = view
+  if (view.status === 'uploading') {
+    stage.value = '上传视频'
+    await sendAssetParts(file, view, signal)
+    stage.value = '确认上传'
+    view = await videoApi.completeAsset(view.asset_id, signal)
+    asset.value = view
+  }
+  stage.value = '处理视频'
+  const deadline = Date.now() + 8 * 60 * 1000
+  while (view.status === 'queued' || view.status === 'processing') {
+    if (Date.now() >= deadline) throw new Error('视频仍在处理中，可以稍后继续')
+    await new Promise<void>(resolve => window.setTimeout(resolve, 1500))
+    signal.throwIfAborted()
+    view = await videoApi.assetStatus(view.asset_id, signal)
+    asset.value = view
+  }
+  if (view.status === 'published') {
+    if (view.video_id) published.value = await videoApi.getDetail(view.video_id)
+    localStorage.removeItem(draftKey)
+    clearVideo()
+    return
+  }
+  if (view.status !== 'ready') throw new Error(view.failure || '视频处理未完成')
+}
+
+async function sendAssetParts(file: File, view: videoApi.MediaAsset, signal: AbortSignal) {
+  const uploaded = new Set(view.uploaded_parts)
+  const pending = Array.from({ length: view.part_count }, (_, i) => i + 1)
+  const part = (number: number) => file.slice((number - 1) * view.part_size, number * view.part_size)
+  uploadProgress.totalBytes = file.size
+  uploadProgress.uploadedBytes = pending.filter(n => uploaded.has(n)).reduce((sum, n) => sum + part(n).size, 0)
+  uploadProgress.percent = Math.round(uploadProgress.uploadedBytes / file.size * 100)
+  const batch = new AbortController()
+  const uploadSignal = AbortSignal.any([signal, batch.signal])
+  let next = 0
+  async function transfer() {
+    while (next < pending.length) {
+      const n = pending[next++]!
+      if (uploaded.has(n)) continue
+      const body = part(n)
+      for (let attempt = 1; ; attempt++) {
+        uploadSignal.throwIfAborted()
+        try {
+          const { url } = await videoApi.signPart(view.asset_id, n, uploadSignal)
+          const response = await fetch(url, { method: 'PUT', body, signal: uploadSignal })
+          if (!response.ok) throw new Error(`分片上传失败（${response.status}）`)
+          break
+        } catch (err) {
+          if (uploadSignal.aborted || attempt === MAX_RETRIES) throw err
+        }
+      }
+      uploadProgress.uploadedBytes += body.size
+      uploadProgress.percent = Math.round(uploadProgress.uploadedBytes / file.size * 100)
+    }
+  }
+  const transfers = Array.from({ length: MAX_CONCURRENT }, () => transfer())
+  try {
+    await Promise.all(transfers)
+  } catch (err) {
+    batch.abort()
+    await Promise.allSettled(transfers)
+    throw err
+  }
+}
+
+async function resetAsset() {
+  if (!asset.value || busy.value) return
+  busy.value = true
+  try {
+    await videoApi.discardAsset(asset.value.asset_id, page.signal)
+    if (draftKey) localStorage.removeItem(draftKey)
+    asset.value = null
+    uploadError.value = ''
+  } catch (err) {
+    if (!page.signal.aborted) uploadError.value = err instanceof Error ? err.message : String(err)
+  } finally {
+    busy.value = false
+  }
+}
 
 async function uploadVideoChunked(file: File): Promise<videoApi.UploadResponse> {
   const totalChunks = Math.ceil(file.size / CHUNK_SIZE)
@@ -220,7 +342,7 @@ async function uploadVideoChunked(file: File): Promise<videoApi.UploadResponse> 
 }
 
 async function onPublish() {
-  if (busy.value) return
+  if (busy.value || mediaEnabled.value === null) return
   if (!auth.isLoggedIn) {
     toast.error('请先登录')
     await router.push('/account')
@@ -229,15 +351,15 @@ async function onPublish() {
 
   const title = publishForm.title.trim()
   const description = publishForm.description.trim()
-  if (!title) {
-    toast.error('请输入 title')
+  if ((!mediaEnabled.value || canPublish.value) && !title) {
+    toast.error('请输入视频标题')
     return
   }
   if (!publishForm.video) {
     toast.error('请选择视频文件（.mp4）')
     return
   }
-  if (!publishForm.cover) {
+  if (!mediaEnabled.value && !publishForm.cover) {
     toast.error('请选择封面图片（jpg/png/webp）')
     return
   }
@@ -245,8 +367,23 @@ async function onPublish() {
   busy.value = true
   stage.value = ''
   published.value = null
+  uploadError.value = ''
   resetProgress()
   try {
+    if (mediaEnabled.value) {
+      if (!canPublish.value || !asset.value) {
+        await prepareAsset(publishForm.video!)
+        return
+      }
+      stage.value = '发布视频'
+      published.value = await videoApi.publishVideo({ title, description, asset_id: asset.value.asset_id }, page.signal)
+      if (draftKey) localStorage.removeItem(draftKey)
+      toast.success('已发布')
+      publishForm.title = ''
+      publishForm.description = ''
+      clearVideo()
+      return
+    }
     const videoRes = await uploadVideoChunked(publishForm.video!)
 
     stage.value = '上传封面'
@@ -270,8 +407,10 @@ async function onPublish() {
     clearVideo()
     clearCover()
   } catch (e) {
-    const msg = e instanceof ApiError ? e.message : String(e)
-    toast.error(msg)
+    if (!page.signal.aborted) {
+      uploadError.value = e instanceof ApiError ? e.message : String(e)
+      toast.error(uploadError.value)
+    }
   } finally {
     busy.value = false
     stage.value = ''
@@ -288,21 +427,22 @@ async function onPublish() {
           <p class="title" style="margin: 0">发布视频</p>
           <div v-if="busy" class="pill">进行中：{{ stage || '…' }}</div>
         </div>
-        <p class="subtle" style="margin-top: 10px">选择视频文件与封面图片，上传到本机后自动生成 URL，再写入 `/video/publish`。</p>
+        <p class="subtle" style="margin-top: 10px" v-if="mediaEnabled">选择视频后上传。封面和播放版本生成后即可发布。</p>
+        <p class="subtle" style="margin-top: 10px" v-else-if="mediaEnabled === false">选择视频及封面后发布。</p>
 
         <div class="grid form-grid" style="margin-top: 16px">
           <div>
-            <label>title</label>
-            <input v-model.trim="publishForm.title" class="big-input" :disabled="busy" />
+            <label for="publish-title">标题</label>
+            <input id="publish-title" v-model.trim="publishForm.title" class="big-input" :disabled="busy" maxlength="255" />
           </div>
           <div>
-            <label>description</label>
-            <textarea v-model.trim="publishForm.description" class="big-input" :disabled="busy" />
+            <label for="publish-description">简介</label>
+            <textarea id="publish-description" v-model.trim="publishForm.description" class="big-input" :disabled="busy" maxlength="255" />
           </div>
           <div class="grid two">
             <div>
-              <label>video (.mp4)</label>
-              <input ref="videoInput" class="file-native" type="file" accept="video/mp4" :disabled="busy" @change="pickVideo" />
+              <label>视频</label>
+              <input ref="videoInput" class="file-native" type="file" :accept="mediaEnabled ? '.mp4,.mov,.webm,.mkv' : 'video/mp4'" :disabled="busy" @change="pickVideo" />
               <div class="file-box">
                 <button type="button" :disabled="busy" @click="openVideoPicker">选择视频</button>
                 <div class="file-name" :class="publishForm.video ? '' : 'muted'">
@@ -314,7 +454,7 @@ async function onPublish() {
                 已选择：{{ publishForm.video.name }}（{{ Math.ceil(publishForm.video.size / 1024 / 1024) }} MB）
               </div>
             </div>
-            <div>
+            <div v-if="mediaEnabled === false">
               <label>cover (jpg/png/webp)</label>
               <input
                 ref="coverInput"
@@ -358,8 +498,13 @@ async function onPublish() {
             </div>
           </div>
 
+          <p v-if="canPublish" class="subtle" role="status">视频处理完成，可以发布。</p>
+          <p v-if="uploadError" class="subtle" role="alert">{{ uploadError }}</p>
           <div class="row" style="justify-content: flex-end; margin-top: 8px">
-            <button class="primary big-btn" type="button" :disabled="busy" @click="onPublish">发布</button>
+            <button v-if="asset?.status === 'failed'" type="button" :disabled="busy" @click="resetAsset">放弃并重新上传</button>
+            <button v-else class="primary big-btn" type="button" :disabled="busy || mediaEnabled === null || !publishForm.video" @click="onPublish">
+              {{ mediaEnabled && !canPublish ? (asset ? '继续处理' : '上传视频') : '发布' }}
+            </button>
           </div>
         </div>
 
