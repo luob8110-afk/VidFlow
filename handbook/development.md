@@ -17,6 +17,8 @@ docker compose up -d --build
 
 Docker Compose 会读取 `.env`，缺省使用 `feedsystem-dev-secret-key`。生产环境请修改 `JWT_SECRET`。
 
+Compose 同时启动 Elasticsearch 和搜索索引 Worker。首次启动会回填 MySQL 已发布视频。Elasticsearch 默认只在容器网络可访问，发布和 Feed 可在搜索引擎故障期间继续使用。[本地搜索与验证](video-search.md)
+
 ## 脚本启动
 
 ```bash

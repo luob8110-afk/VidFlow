@@ -89,7 +89,7 @@ func insertPublishedVideo(tx *gorm.DB, video *Video) error {
 	if err := tx.Create(video).Error; err != nil {
 		return err
 	}
-	msg := OutboxMsg{VideoID: video.ID, EventType: "video_published",
+	msg := OutboxMsg{VideoID: video.ID, EventType: EventPublished,
 		Status: "pending", CreateTime: video.CreateTime}
 	if err := tx.Create(&msg).Error; err != nil {
 		return err

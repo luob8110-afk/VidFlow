@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue'
-import { useRoute, useRouter } from 'vue-router'
+import { useRouter } from 'vue-router'
 
 import AppShell from '../components/AppShell.vue'
 import CommentDrawer from '../components/CommentDrawer.vue'
@@ -14,7 +14,6 @@ import type { TabKey } from '../composables/useVideoFeed'
 import { useVideoPlayer } from '../composables/useVideoPlayer'
 import { useLikeFollow } from '../composables/useLikeFollow'
 
-const route = useRoute()
 const router = useRouter()
 const auth = useAuthStore()
 const social = useSocialStore()
@@ -37,16 +36,11 @@ const drawerOpen = ref(false)
 function openComments(item: FeedVideoItem) { drawerVideo.value = item; drawerOpen.value = true }
 function closeDrawer() { drawerOpen.value = false; drawerVideo.value = null }
 
-const q = computed(() => (typeof route.query.q === 'string' ? route.query.q.trim().toLowerCase() : ''))
-const filteredItems = computed(() => {
-  const items = currentState.value.items
-  if (!q.value) return items
-  return items.filter((v) => v.title.toLowerCase().includes(q.value) || v.author.username.toLowerCase().includes(q.value))
-})
-const activeItem = computed(() => filteredItems.value[activeIndex.value] ?? null)
+const items = computed(() => currentState.value.items)
+const activeItem = computed(() => items.value[activeIndex.value] ?? null)
 const visibleRange = computed(() => {
   const idx = activeIndex.value
-  const len = filteredItems.value.length
+  const len = items.value.length
   return { start: Math.max(0, idx - 1), end: Math.min(len - 1, idx + 1) }
 })
 const myAccountId = computed(() => auth.claims?.account_id ?? 0)
@@ -88,14 +82,7 @@ async function selectTab(key: TabKey) {
   await playActive(activeItem.value?.id)
 }
 
-watch(() => q.value, async () => {
-  activeIndex.value = 0
-  if (scroller.value) scroller.value.scrollTop = 0
-  await nextTick()
-  await playActive(activeItem.value?.id)
-})
-
-watch(() => filteredItems.value.length, (len) => {
+watch(() => items.value.length, (len) => {
   if (len === 0) activeIndex.value = 0
   else if (activeIndex.value > len - 1) activeIndex.value = len - 1
 })
@@ -108,8 +95,8 @@ async function onKeydown(e: KeyboardEvent) {
   const t = e.target as HTMLElement | null
   if (t && (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA')) return
   if (drawerOpen.value) return
-  if (e.key === 'ArrowDown') { e.preventDefault(); scrollToIndex(activeIndex.value + 1, filteredItems.value.length) }
-  else if (e.key === 'ArrowUp') { e.preventDefault(); scrollToIndex(activeIndex.value - 1, filteredItems.value.length) }
+  if (e.key === 'ArrowDown') { e.preventDefault(); scrollToIndex(activeIndex.value + 1, items.value.length) }
+  else if (e.key === 'ArrowUp') { e.preventDefault(); scrollToIndex(activeIndex.value - 1, items.value.length) }
   else if (e.key === ' ') { e.preventDefault(); togglePlayPause(activeItem.value?.id) }
   else if (e.key.toLowerCase() === 'm') { e.preventDefault(); toggleMute() }
   else if (e.key.toLowerCase() === 'c') { if (activeItem.value) { e.preventDefault(); openComments(activeItem.value) } }
@@ -145,10 +132,10 @@ onBeforeUnmount(() => {
       <div ref="scroller" class="scroller" @scroll="onScroll">
         <div v-if="currentState.loading && currentState.items.length === 0" class="center-hint">加载中…</div>
         <div v-else-if="currentState.error && currentState.items.length === 0" class="center-hint bad">{{ currentState.error }}</div>
-        <div v-else-if="filteredItems.length === 0" class="center-hint">没有匹配内容</div>
+        <div v-else-if="items.length === 0" class="center-hint">暂无视频</div>
 
         <section
-          v-for="(item, idx) in filteredItems"
+          v-for="(item, idx) in items"
           :key="`${tab}-${item.id}`"
           class="slide"
           :class="{ active: idx === activeIndex }"

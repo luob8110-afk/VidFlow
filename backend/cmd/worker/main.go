@@ -8,6 +8,7 @@ import (
 	mqrabbit "feedsystem_video_go/internal/middleware/rabbitmq"
 	rediscache "feedsystem_video_go/internal/middleware/redis"
 	"feedsystem_video_go/internal/observability"
+	"feedsystem_video_go/internal/search"
 	"feedsystem_video_go/internal/social"
 	"feedsystem_video_go/internal/video"
 	"feedsystem_video_go/internal/worker"
@@ -176,6 +177,13 @@ func main() {
 
 	ctx, stop := signal.NotifyContext(context.Background(), os.Interrupt, syscall.SIGTERM)
 	defer stop()
+	searchIndex, err := search.Open(cfg.Search)
+	if err != nil {
+		log.Fatalf("search configuration: %v", err)
+	}
+	if searchIndex != nil {
+		go search.RunIndexer(ctx, sqlDB, searchIndex, cfg.RabbitMQ)
+	}
 	mediaStorage, err := media.OpenStorage(cfg.Media)
 	if err != nil {
 		log.Fatalf("media storage configuration: %v", err)

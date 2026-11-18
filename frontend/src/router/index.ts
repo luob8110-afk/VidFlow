@@ -18,6 +18,7 @@ const router = createRouter({
     { path: '/', name: 'home', component: HomeView },
     { path: '/feed', redirect: '/' },
     { path: '/hot', name: 'hot', component: HotView },
+    { path: '/search', name: 'search', component: () => import('../views/SearchView.vue') },
     { path: '/video', name: 'video', component: VideoView, meta: { requiresAuth: true } },
     { path: '/video/:id', name: 'video-detail', component: VideoDetailView, props: true },
     { path: '/account', name: 'account', component: AccountView },
@@ -31,6 +32,10 @@ const router = createRouter({
 })
 
 router.beforeEach((to, _from, next) => {
+  if (to.name === 'home' && typeof to.query.q === 'string' && to.query.q.trim()) {
+    next({ name: 'search', query: { q: to.query.q }, replace: true })
+    return
+  }
   const auth = useAuthStore()
   if (to.meta.requiresAuth && !auth.isLoggedIn) {
     next({ path: '/account', query: { redirect: to.fullPath } })

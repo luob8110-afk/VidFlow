@@ -10,6 +10,7 @@ import (
 	"feedsystem_video_go/internal/middleware/rabbitmq"
 	"feedsystem_video_go/internal/middleware/ratelimit"
 	rediscache "feedsystem_video_go/internal/middleware/redis"
+	"feedsystem_video_go/internal/search"
 	"feedsystem_video_go/internal/social"
 	"feedsystem_video_go/internal/video"
 	"feedsystem_video_go/internal/worker"
@@ -20,7 +21,7 @@ import (
 	"gorm.io/gorm"
 )
 
-func SetRouter(db *gorm.DB, cache *rediscache.Client, rmq *rabbitmq.RabbitMQ, mediaStorage *media.Storage) *gin.Engine {
+func SetRouter(db *gorm.DB, cache *rediscache.Client, rmq *rabbitmq.RabbitMQ, mediaStorage *media.Storage, searchIndex *search.Elasticsearch, cursorSecret string) *gin.Engine {
 	r := gin.Default()
 	if err := r.SetTrustedProxies(nil); err != nil {
 		log.Printf("SetTrustedProxies failed: %v", err)
@@ -29,6 +30,7 @@ func SetRouter(db *gorm.DB, cache *rediscache.Client, rmq *rabbitmq.RabbitMQ, me
 		c.JSON(200, gin.H{"status": "ok"})
 	})
 	r.Static("/static", "./.run/uploads")
+	search.Register(r, db, searchIndex, cursorSecret)
 	// rate_limit
 	loginLimiter := ratelimit.Limit(cache, "account_login", 10, time.Minute, ratelimit.KeyByIP)
 	registerLimiter := ratelimit.Limit(cache, "account_register", 5, time.Hour, ratelimit.KeyByIP)
@@ -201,14 +203,6 @@ func SetRouter(db *gorm.DB, cache *rediscache.Client, rmq *rabbitmq.RabbitMQ, me
 		protectedMessageGroup.POST("/list", messageHandler.List)
 	}
 	//worker
-	timelineMQ, err := rabbitmq.NewTimelineMQ(rmq)
-	if err != nil {
-		log.Printf("timelineMQ init failed (mq disabled): %v", err)
-		timelineMQ = nil
-	}
-	worker.StartOutboxPoller(db, timelineMQ)
-	worker.StartConsumer(timelineMQ, "video.timeline.update.queue", cache, rmq)
-
 	// SSE notification
 	if rmq != nil {
 		if notifCh, err := rmq.NewChannel(); err == nil {

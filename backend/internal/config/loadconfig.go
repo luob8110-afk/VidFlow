@@ -15,6 +15,7 @@ type Config struct {
 	Redis               RedisConfig         `yaml:"redis"`
 	RabbitMQ            RabbitMQConfig      `yaml:"rabbitmq"`
 	Media               MediaConfig         `yaml:"media"`
+	Search              SearchConfig        `yaml:"search"`
 	ObservabilityConfig ObservabilityConfig `yaml:"observability"`
 }
 
@@ -52,6 +53,11 @@ type MediaConfig struct {
 	Bucket         string `yaml:"bucket"`
 }
 
+type SearchConfig struct {
+	Endpoint string `yaml:"endpoint"`
+	APIKey   string `yaml:"-"`
+}
+
 type ObservabilityConfig struct {
 	Pprof PprofConfig `yaml:"pprof"`
 }
@@ -84,6 +90,7 @@ func ApplyEnvOverrides(cfg *Config) {
 		"MEDIA_S3_ENDPOINT": &cfg.Media.Endpoint, "MEDIA_S3_PUBLIC_ENDPOINT": &cfg.Media.PublicEndpoint,
 		"MEDIA_S3_ACCESS_KEY": &cfg.Media.AccessKey, "MEDIA_S3_SECRET_KEY": &cfg.Media.SecretKey,
 		"MEDIA_S3_BUCKET": &cfg.Media.Bucket,
+		"SEARCH_ES_URL":   &cfg.Search.Endpoint, "SEARCH_ES_API_KEY": &cfg.Search.APIKey,
 	} {
 		if value := os.Getenv(name); value != "" {
 			*target = value

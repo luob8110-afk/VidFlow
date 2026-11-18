@@ -9,6 +9,8 @@ import (
 	rabbitmq "feedsystem_video_go/internal/middleware/rabbitmq"
 	rediscache "feedsystem_video_go/internal/middleware/redis"
 	"feedsystem_video_go/internal/observability"
+	"feedsystem_video_go/internal/search"
+	"feedsystem_video_go/internal/worker"
 	"log"
 	"os"
 	"strconv"
@@ -100,7 +102,17 @@ func main() {
 			log.Fatalf("media storage bucket: %v", err)
 		}
 	}
-	r := apphttp.SetRouter(sqlDB, cache, rmq, mediaStorage)
+	searchIndex, err := search.Open(cfg.Search)
+	if err != nil {
+		log.Fatalf("search configuration: %v", err)
+	}
+	ctx, cancel := context.WithCancel(context.Background())
+	defer cancel()
+	go worker.RunPublicationRelay(ctx, sqlDB, cfg.RabbitMQ, searchIndex != nil)
+	if cache != nil {
+		go worker.RunTimelineConsumer(ctx, cfg.RabbitMQ, cache)
+	}
+	r := apphttp.SetRouter(sqlDB, cache, rmq, mediaStorage, searchIndex, os.Getenv("JWT_SECRET"))
 	log.Printf("Server is running on port %d", cfg.Server.Port)
 	if err := r.Run(":" + strconv.Itoa(cfg.Server.Port)); err != nil {
 		log.Fatalf("Failed to run server: %v", err)

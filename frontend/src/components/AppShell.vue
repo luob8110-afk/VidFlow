@@ -39,7 +39,7 @@ const userLabel = computed(() => {
 
 async function onSearch() {
   const q = search.value.trim()
-  await router.push({ path: '/', query: q ? { q } : {} })
+  await router.push({ name: 'search', query: q ? { q } : {} })
 }
 
 async function goLogin() {
@@ -83,10 +83,10 @@ async function goSettings() {
           <div class="dy-tabs-hint">{{ route.name }}</div>
         </div>
 
-        <div class="dy-search">
-          <input v-model="search" class="dy-search-input" placeholder="搜索标题 / 作者（本地过滤）" @keydown.enter="onSearch" />
-          <button class="dy-btn dy-btn-primary" type="button" @click="onSearch">搜索</button>
-        </div>
+        <form class="dy-search" role="search" @submit.prevent="onSearch">
+          <input v-model="search" class="dy-search-input" type="search" aria-label="关键词" placeholder="搜索全站视频" maxlength="100" />
+          <button class="dy-btn dy-btn-primary" type="submit">搜索</button>
+        </form>
 
         <div class="dy-top-right">
           <RouterLink class="dy-btn dy-btn-ghost" to="/video">+ 发布视频</RouterLink>

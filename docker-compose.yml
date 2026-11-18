@@ -70,6 +70,16 @@ services:
       timeout: 3s
       retries: 20
 
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.19.25
+    restart: unless-stopped
+    environment:
+      discovery.type: single-node
+      xpack.security.enabled: "false"
+      ES_JAVA_OPTS: "-Xms512m -Xmx512m"
+    volumes:
+      - search_data:/usr/share/elasticsearch/data
+
   backend:
     build:
       context: .
@@ -83,6 +93,8 @@ services:
       MEDIA_S3_SECRET_KEY: ${MEDIA_S3_SECRET_KEY:-vidflow-local-media-secret}
       MEDIA_S3_BUCKET: ${MEDIA_S3_BUCKET:-vidflow-media}
       CONFIG_PATH: /app/configs/config.yaml
+      SEARCH_ES_URL: ${SEARCH_ES_URL-http://elasticsearch:9200}
+      SEARCH_ES_API_KEY: ${SEARCH_ES_API_KEY:-}
       JWT_SECRET: ${JWT_SECRET:-feedsystem-dev-secret-key}
       MYSQL_DATABASE: ${MYSQL_DATABASE:-feedsystem}
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-123456}
@@ -122,6 +134,8 @@ services:
       MEDIA_S3_SECRET_KEY: ${MEDIA_S3_SECRET_KEY:-vidflow-local-media-secret}
       MEDIA_S3_BUCKET: ${MEDIA_S3_BUCKET:-vidflow-media}
       CONFIG_PATH: /app/configs/config.yaml
+      SEARCH_ES_URL: ${SEARCH_ES_URL-http://elasticsearch:9200}
+      SEARCH_ES_API_KEY: ${SEARCH_ES_API_KEY:-}
       JWT_SECRET: ${JWT_SECRET:-feedsystem-dev-secret-key}
       MYSQL_DATABASE: ${MYSQL_DATABASE:-feedsystem}
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-123456}
@@ -168,3 +182,4 @@ volumes:
   rabbitmq_data:
   backend_uploads:
   media_objects:
+  search_data:

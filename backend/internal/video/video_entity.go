@@ -2,6 +2,8 @@ package video
 
 import "time"
 
+const EventPublished = "video_published"
+
 type Video struct {
 	ID          uint      `gorm:"primaryKey" json:"id"`
 	AuthorID    uint      `gorm:"index;not null" json:"author_id"`

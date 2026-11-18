@@ -1,18 +1,19 @@
 # VidFlow
 
-**Go 短视频后端，覆盖视频生产、Feed 分发与互动。**
+**Go 短视频后端，覆盖视频生产、搜索、Feed 分发与互动。**
 
 基于 Go + Vue 3 的短视频工程项目。原视频分片直传对象存储，后台生成播放文件和封面，通过资产状态控制发布。项目还提供浏览、点赞、评论、关注、私信与通知，并保留关注流与计数改造的回归测试和对照实验。
 
-`Go / Gin` · `MySQL` · `Redis / Lua` · `RabbitMQ` · `S3` · `FFmpeg` · `Vue 3` · `Docker Compose`
+`Go / Gin` · `MySQL` · `Redis / Lua` · `RabbitMQ` · `Elasticsearch` · `S3` · `FFmpeg` · `Vue 3` · `Docker Compose`
 
-[快速运行](#快速运行) · [视频生产与发布](handbook/media-pipeline.md) · [架构与一致性设计](handbook/architecture.md) · [压测证据](experiments/like-count/results/20261115T083209Z-ab/REPORT.md) · [项目讲解与简历参考](handbook/interview.md) · [接口文档](handbook/api.md)
+[快速运行](#快速运行) · [视频生产与发布](handbook/media-pipeline.md) · [全站搜索](handbook/video-search.md) · [架构与一致性设计](handbook/architecture.md) · [压测证据](experiments/like-count/results/20261115T083209Z-ab/REPORT.md) · [项目讲解与简历参考](handbook/interview.md) · [接口文档](handbook/api.md)
 
 ## 工程问题
 
 | 问题 | 实现与取舍 | 验证入口 |
 |---|---|---|
 | 上传中断，或 Worker 在生成产物后退出 | 分片状态从对象存储恢复；媒体资产状态、RabbitMQ 投递确认和处理租约支持重试 | [媒体链路与故障验证](handbook/media-pipeline.md) |
+| 用户需要查找未刷到的视频，索引服务可能短暂故障 | Elasticsearch 中文检索、独立索引队列、Outbox 投递确认、历史回填 | [搜索与故障验证](handbook/video-search.md) |
 | 同时间作品跨页遗漏；刷新后旧响应覆盖新列表 | 时间＋ID 复合游标；版本化缓存校验读写；前端请求取消与序号隔离 | [发布、刷新、10/10/6 连续分页验收](experiments/feed-following/03-combined-flow-results.md) |
 | 热门视频每次点赞都更新同一数据库行 | 关系与恢复日志同事务；Redis 优先计数；按视频聚合增量，计数和完成标记同事务提交 | [计数实现](backend/internal/video/like_count.go) · [故障与幂等测试](backend/internal/video/like_count_test.go) |
 | 优化收益缺少可核对的数据 | 隔离 A/B、固定请求率、热点/分散分布、交替执行两版；同时统计延迟、视频行更新和全库写入 | [24 轮压测与原始记录](experiments/like-count/README.md) |
@@ -45,6 +46,11 @@ flowchart LR
     W -->|合并总数与完成标记| DB
     W -->|计数事件幂等投影| R
     API -->|通知与热度等事件| Q[RabbitMQ]
+    DB -->|轮询发布 Outbox| API
+    API -->|确认投递发布事件| Q
+    Q -->|独立索引队列| W
+    W -->|按视频 ID 写入索引| ES[(Elasticsearch)]
+    API -->|全文检索| ES
     Q -->|评论 / 关注 / 热度消费| W
     Q -->|通知消费与 SSE| API
     API -->|媒体静态路径| FS[本地媒体文件]
@@ -60,6 +66,7 @@ flowchart LR
 | 模块 | 当前能力 |
 |---|---|
 | 视频 | S3 分片直传、断点续传、整文件 SHA-256 校验、异步转码与封面、资产状态校验后发布 |
+| 搜索 | 中文标题、简介和发布时作者名检索，话题、作者 ID 和日期筛选，快照游标分页、历史回填和重投 |
 | Feed | 最新流、关注流、点赞榜、窗口热榜、话题流；热索引/历史查询分层与实体缓存 |
 | 互动 | 点赞/取消、评论、关注/取关、用户主页统计、私信及通知记录/SSE |
 | 工程 | JWT 与双 Token、账号限流、Docker Compose、API/Worker、pprof、CI 与自动化测试 |
@@ -81,7 +88,7 @@ docker compose up -d --build
 | RabbitMQ 管理台 | http://localhost:15672 |
 | 本地对象存储 | http://localhost:8333 |
 
-注册两个账号，选择文件上传，等待处理完成后发布。建立关注关系后，在关注页主动刷新查看新作品，连续翻页。对同一个点赞按钮再次点击取消。媒体续传和故障恢复可以用[验证脚本](handbook/media-pipeline.md#验证)复现。
+注册账号，选择文件上传，等待处理完成后发布。可用访客窗口在顶部搜索标题关键词或按话题筛选，点击结果播放。建立关注关系后，在关注页主动刷新并连续翻页。对同一个点赞按钮再次点击取消。[媒体续传与恢复验证](handbook/media-pipeline.md#验证)
 
 本地默认凭据及环境变量见[运行文档](handbook/development.md)。从旧版升级需先排空旧点赞消息并一起更新 API 与 Worker；真实 MySQL 集成测试须配置独立测试库，未配置时会跳过。[运行、升级与测试 →](handbook/development.md)
 
