@@ -16,6 +16,8 @@ const router = createRouter({
   history: createWebHistory(),
   routes: [
     { path: '/', name: 'home', component: HomeView },
+    { path: '/following', name: 'following-feed', component: HomeView, props: { feedTab: 'following' } },
+    { path: '/likes', name: 'likes-feed', component: HomeView, props: { feedTab: 'hot' } },
     { path: '/feed', redirect: '/' },
     { path: '/hot', name: 'hot', component: HotView },
     { path: '/search', name: 'search', component: () => import('../views/SearchView.vue') },

@@ -393,6 +393,7 @@ onMounted(async () => {
   flex: 1;
   min-height: 0;
   display: grid;
+  grid-template-rows: minmax(0, 1fr);
   place-items: center;
   padding: 18px 14px;
 }
@@ -406,8 +407,8 @@ onMounted(async () => {
 }
 
 .stage {
-  width: min(980px, calc(100vw - 28px));
-  height: calc(100vh - 56px - 52px - 36px);
+  width: min(980px, 100%);
+  height: 100%;
   position: relative;
   border-radius: 18px;
   overflow: hidden;
@@ -666,10 +667,6 @@ onMounted(async () => {
 }
 
 @media (max-width: 900px) {
-  .stage {
-    width: calc(100vw - 28px);
-    height: calc(100vh - 56px - 52px - 36px);
-  }
   .drawer-backdrop {
     justify-items: center;
     align-items: end;

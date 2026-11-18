@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 
 const props = defineProps<{
   username: string
@@ -23,6 +23,7 @@ const initial = computed(() => {
 })
 
 const sizePx = computed(() => `${props.size ?? 40}px`)
+const failedSource = ref<string>()
 
 const bg = computed(() => {
   const seed = typeof props.id === 'number' ? String(props.id) : props.username
@@ -34,7 +35,8 @@ const bg = computed(() => {
 </script>
 
 <template>
-  <img v-if="src" :src="src" class="avatar" :style="{ width: sizePx, height: sizePx }" alt="" />
+  <img v-if="src && failedSource !== src" :key="src" :src="src" class="avatar"
+    :style="{ width: sizePx, height: sizePx }" alt="" @error="failedSource = src" />
   <div v-else class="avatar" :style="{ width: sizePx, height: sizePx, backgroundImage: bg }" aria-hidden="true">
     {{ initial }}
   </div>

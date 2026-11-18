@@ -25,8 +25,8 @@ export function changePassword(username: string, oldPassword: string, newPasswor
   })
 }
 
-export function findById(id: number) {
-  return postJson<Account>('/account/findByID', { id })
+export function findById(id: number, signal?: AbortSignal) {
+  return postJson<Account>('/account/findByID', { id }, { signal })
 }
 
 export function findByUsername(username: string) {
