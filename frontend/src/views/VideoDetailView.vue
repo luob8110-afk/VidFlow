@@ -4,6 +4,7 @@ import { useRoute, useRouter } from 'vue-router'
 
 import AppShell from '../components/AppShell.vue'
 import UserAvatar from '../components/UserAvatar.vue'
+import VideoTimeline from '../components/VideoTimeline.vue'
 import { ApiError } from '../api/client'
 import * as commentApi from '../api/comment'
 import * as likeApi from '../api/like'
@@ -268,12 +269,13 @@ onMounted(async () => {
         <div v-if="state.loading" class="center-hint">加载中…</div>
         <div v-else-if="state.error" class="center-hint bad">{{ state.error }}</div>
 
-        <div v-else-if="state.video" class="stage" @click="togglePlayPause">
+        <div v-else-if="state.video" class="stage">
           <video
             ref="videoEl"
             class="video"
             :src="state.video.play_url"
             :poster="state.video.cover_url"
+            @click="togglePlayPause"
             playsinline
             preload="metadata"
             loop
@@ -325,6 +327,7 @@ onMounted(async () => {
             <span class="chip mono">点击 暂停/播放</span>
             <span class="chip mono">双击 点赞</span>
           </div>
+          <VideoTimeline :video="videoEl" />
         </div>
       </div>
 
@@ -436,7 +439,7 @@ onMounted(async () => {
 .meta {
   position: absolute;
   left: 16px;
-  bottom: 18px;
+  bottom: 35px;
   max-width: min(620px, calc(100% - 96px));
 }
 
@@ -473,7 +476,7 @@ onMounted(async () => {
 .actions {
   position: absolute;
   right: 12px;
-  bottom: 18px;
+  bottom: 35px;
   display: grid;
   gap: 12px;
 }

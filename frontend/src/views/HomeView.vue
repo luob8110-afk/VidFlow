@@ -5,6 +5,7 @@ import { useRouter } from 'vue-router'
 import AppShell from '../components/AppShell.vue'
 import CommentDrawer from '../components/CommentDrawer.vue'
 import UserAvatar from '../components/UserAvatar.vue'
+import VideoTimeline from '../components/VideoTimeline.vue'
 import type { FeedVideoItem } from '../api/types'
 import { useAuthStore } from '../stores/auth'
 import { useSocialStore } from '../stores/social'
@@ -138,12 +139,13 @@ onBeforeUnmount(() => {
           class="slide"
           :class="{ active: idx === activeIndex }"
         >
-          <div v-if="idx >= visibleRange.start && idx <= visibleRange.end" class="stage" @click="togglePlayPause(activeItem?.id)" @dblclick.prevent="toggleLike(item)">
+          <div v-if="idx >= visibleRange.start && idx <= visibleRange.end" class="stage">
             <video
               class="video"
               :ref="(el) => setVideoRef(item.id, el as HTMLVideoElement | null)"
               :src="item.play_url"
               :poster="item.cover_url"
+              @click="togglePlayPause(activeItem?.id)" @dblclick.prevent="toggleLike(item)"
               playsinline preload="metadata" loop
             />
             <div class="grad" />
@@ -192,6 +194,7 @@ onBeforeUnmount(() => {
                 </RouterLink>
               </div>
             </div>
+            <VideoTimeline v-if="idx === activeIndex" :video="videoMap.get(item.id)" />
           </div>
         </section>
       </div>
@@ -214,13 +217,13 @@ onBeforeUnmount(() => {
 .stage { width: min(1240px, 100%); position: relative; border-radius: 18px; overflow: hidden; border: 1px solid rgba(255,255,255,0.12); background: rgba(0,0,0,0.35); box-shadow: 0 20px 60px rgba(0,0,0,0.55); }
 .video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; background: rgba(0,0,0,0.4); }
 .grad { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.68), rgba(0,0,0,0.12) 40%, rgba(0,0,0,0) 70%); pointer-events: none; }
-.meta { position: absolute; left: 16px; bottom: 18px; max-width: min(620px, calc(100% - 124px)); }
+.meta { position: absolute; left: 16px; bottom: 35px; max-width: min(620px, calc(100% - 124px)); }
 .author-link { display: inline-flex; align-items: center; gap: 10px; font-weight: 800; letter-spacing: 0.2px; margin-bottom: 6px; text-decoration: none; }
 .author-link:hover { text-decoration: none; }
 .author-name { text-shadow: 0 14px 30px rgba(0,0,0,0.55); }
 .title { font-size: 16px; font-weight: 700; margin-bottom: 6px; }
 .desc { color: rgba(255,255,255,0.74); font-size: 13px; line-height: 1.35; }
-.actions { position: absolute; right: 12px; bottom: 18px; display: grid; justify-items: end; gap: 12px; }
+.actions { position: absolute; right: 12px; bottom: 35px; display: grid; justify-items: end; gap: 12px; }
 .player-tools { display: flex; gap: 6px; }
 .player-tool {
   display: grid;
@@ -280,7 +283,7 @@ onBeforeUnmount(() => {
 .chip.danger { border-color: rgba(254,44,85,0.55); background: rgba(254,44,85,0.12); }
 
 @media (max-width: 620px), (max-height: 480px) {
-  .actions { right: 7px; bottom: 10px; gap: 6px; }
+  .actions { right: 7px; bottom: 30px; gap: 6px; }
   .act { width: 48px; padding: 6px 2px; border-radius: 11px; }
   .player-tool { width: 38px; height: 38px; }
 }
@@ -288,7 +291,7 @@ onBeforeUnmount(() => {
 @media (max-width: 620px) {
   .slide { padding: 8px; }
   .stage { border-radius: 12px; }
-  .meta { left: 10px; bottom: 10px; max-width: calc(100% - 106px); }
+  .meta { left: 10px; bottom: 30px; max-width: calc(100% - 106px); }
   .author-link { max-width: 100%; gap: 5px; }
   .author-name { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
   .title, .desc { overflow-wrap: anywhere; }

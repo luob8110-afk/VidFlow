@@ -1,11 +1,11 @@
-import { ref } from 'vue'
+import { ref, shallowReactive } from 'vue'
 import { useToastStore } from '../stores/toast'
 
 export function useVideoPlayer(scrollerRef: ReturnType<typeof ref<HTMLDivElement | null>>) {
   const toast = useToastStore()
   const muted = ref(true)
   const activeIndex = ref(0)
-  const videoMap = new Map<number, HTMLVideoElement>()
+  const videoMap = shallowReactive(new Map<number, HTMLVideoElement>())
 
   function getScrollerHeight() {
     return scrollerRef.value?.clientHeight ?? 0
