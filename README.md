@@ -8,6 +8,12 @@
 
 [快速运行](#快速运行) · [视频生产与发布](handbook/media-pipeline.md) · [全站搜索](handbook/video-search.md) · [架构与一致性设计](handbook/architecture.md) · [压测证据](experiments/like-count/results/20261115T083209Z-ab/REPORT.md) · [接口文档](handbook/api.md)
 
+## 界面预览
+
+![VidFlow 播放页，带全站搜索、频道导航和可拖动进度条](picture/vidflow-demo.png)
+
+画面使用演示视频、账号和互动数据。
+
 ## 工程问题
 
 | 问题 | 实现与取舍 | 验证入口 |
